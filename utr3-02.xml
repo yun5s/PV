@@ -1,0 +1,1282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MCCI_IN200100UV01 ITSVersion="XML_1.0" xsi:schemaLocation="urn:hl7-org:v3 multicacheschemas/MCCI_IN200100UV01.xsd" xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <id extension="batch number" root="sender-identifier-value"/><!-- M1.4: Batch Number -->
+  <creationTime value="20110101103045.123"/><!-- M1.7: Date of Transmission in the Batch -->
+  <responseModeCode code="D"/>
+  <interactionId extension="MCCI_IN200100UV01" root="2.16.840.1.113883.1.6"/>
+  <name code="cticsr" codeSystem="ich-type-of-message-in-batch-oid"/>
+  <!-- Message #1 -->
+  <PORR_IN049016UV>
+    <id extension="messageNumber" root="ich-senders-safety-report-identifier-oid"/>
+    <creationTime value="20110101103045.123"/><!-- M.2.r.7: Date of Message Transmission -->
+    <interactionId extension="MCCI_IN200100UV01" root="2.16.840.1.113883.1.6"/>
+    <processingCode code="P"/>
+    <processingModeCode code="T"/>
+    <acceptAckCode code="AL"/>
+    <receiver typeCode="RCV">
+      <device classCode="DEV" determinerCode="INSTANCE">
+        <id extension="message receiver id" root="ich-message-receiver-identifier-oid"/>
+      </device>
+    </receiver>
+    <sender typeCode="SND">
+      <device classCode="DEV" determinerCode="INSTANCE">
+        <id extension="message sender id" root="ich-message-sender-identifier-oid"/>
+      </device>
+    </sender>
+    <controlActProcess moodCode="EVN" classCode="CACT">
+      <code code="PORR_TE049016UV" codeSystem="2.16.840.1.113883.1.18"/>
+      <!-- HL7 Trigger Event ID -->
+      <effectiveTime value="20110101103054.123"/>
+      <!-- A1.3: Date of Creation -->
+      <subject typeCode="SUBJ">
+        <investigationEvent classCode="INVSTG" moodCode="EVN">
+          <id extension="case identifier" root="ich-senders-safety-report-identifier-oid"/>
+          <!-- A.1.0.1: Sender's (case) Safety Report Unique Identifier -->
+          <id extension="ww case identifier" root="ich-worldwide-case-identifier-oid"/>
+          <!-- A.1.10: Worldwide Unique Case Idntification number -->
+          <!-- Note, for Identifiers, if no OID can be designated, indicate by specifying NullFlavor ="UNK" -->
+          <code code="PAT_ADV_EVNT" codeSystem="2.16.840.1.113883.5.4"/>
+          <text>narrative</text>
+          <!-- B.5.1: Case Narrative Including Clinical Course, Therapeutic Measures, Outcome and Additional Relevant Information -->
+          <statusCode code="active"/>
+          <effectiveTime>
+            <low value="20110102103045"/>
+            <!-- A1.6: Date Report Was First Received from the Source -->
+          </effectiveTime>
+          <availabilityTime value="20110103103045"/>
+          <!-- A1.7: Date of Most Recent Information for this report -->
+          <reference typeCode="REFR">
+            <document classCode="DOC" moodCode="EVN">
+              <title>document held by sender</title>
+              <!-- A.1.8.1.r.1: Documents Held by Sender -->
+              <text mediaType="application/pdf" representation="B64">file content</text>
+              <!-- A.1.8.1.r.2: Included documents -->
+            </document>
+          </reference>
+          <reference typeCode="REFR">
+            <document classCode="DOC" moodCode="EVN">
+              <text mediaType="application/pdf" representation="B64">file content</text>
+              <!-- A.4.r.2: Included documents -->
+              <bibliographicDesignationText>literature reference</bibliographicDesignationText>
+              <!-- A.4.r.1: Literature Reference(s) -->
+            </document>
+          </reference>
+          <component typeCode="COMP">
+            <adverseEventAssessment classCode="INVSTG" moodCode="EVN">
+              <subject1 typeCode="SBJ">
+                <primaryRole classCode="INVSBJ">
+                  <player1 classCode="PSN" determinerCode="INSTANCE">
+                    <name nullFlavor="UNK"/>
+                    <!-- B.1.1:  Patient (name or initials) -->
+                    <administrativeGenderCode code="1" codeSystem="1.0.5218"/>
+                    <!-- B.1.5 Sex [1] Male [2]Femail -->
+                    <birthTime value="19660401"/>
+                    <!-- B.1.2.1: Date of Birth -->
+                    <deceasedTime value="2011"/>
+                    <!-- B.1.9.1: Date of Death -->
+                    <asIdentifiedEntity classCode="IDENT">
+                      <id extension="1234" root="ich-gp-medical-record-number-oid"/>
+                      <!-- B.1.1.1a: Patient Medical Record Number(s) and the Source(s) of the Record Number (GP Medical Record Number) -->
+                      <!-- Note, for Identifiers, if no OID can be designated, indicate by specifying NullFlavor ="UNK" -->
+                      <code code="gpmrn" codeSystem="ich-observation-code-oid"/>
+                    </asIdentifiedEntity>
+                    <asIdentifiedEntity classCode="IDENT">
+                      <id extension="3456" root="ich-specialist-record-number-oid"/>
+                      <!-- B.1.1.1b: Patient Medical Record Number(s) and the Source(s) of the Record Number (Specialist Record Number) -->
+                      <!-- Note, for Identifiers, if no OID can be designated, indicate by specifying NullFlavor ="UNK" -->
+                      <code code="specialistMrn" codeSystem="ich-observation-code-oid"/>
+                    </asIdentifiedEntity>
+                    <asIdentifiedEntity classCode="IDENT">
+                      <id nullFlavor="ASKU"/>
+                      <!-- B.1.1.1c: Patient Medical Record Number(s) and the Source(s) of the Record Number (Hospital Record Number) -->
+                      <!-- Note, for Identifiers, if no OID can be designated, indicate by specifying NullFlavor ="UNK" -->
+                      <code code="hospitalMrn" codeSystem="ich-observation-code-oid"/>
+                    </asIdentifiedEntity>
+                    <asIdentifiedEntity classCode="IDENT">
+                      <id extension="7890" root="ich-investigation-number-oid"/>
+                      <!-- B.1.1.1d: Patient Medical Record Number(s) and the Source(s) of the Record Number (Investigation Number) -->
+                      <!-- Note, for Identifiers, if no OID can be designated, indicate by specifying NullFlavor ="UNK" -->
+                      <code code="investigation" codeSystem="ich-observation-code-oid"/>
+                    </asIdentifiedEntity>
+                    <role classCode="PRS">
+                      <code code="PRN" codeSystem="2.16.840.1.113883.5.111"/>
+                      <associatedPerson determinerCode="INSTANCE" classCode="PSN">
+                        <name>initials</name>
+                        <!-- B.1.10.1:  Parent Indentification -->
+                        <administrativeGenderCode code="1" codeSystem="1.0.5218"/>
+                        <!-- B.1.10.6: Sex of Parent [1]Male [2]Female-->
+                        <birthTime value="1966"/>
+                        <!-- B.1.10.2.1: Date of Birth of Parent -->
+                      </associatedPerson>
+                      <subjectOf2 typeCode="SBJ">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="age" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="PQ" value="45" unit="a"/>
+                          <!-- B.1.10.2.2a: Age of Parent (age value) -->
+                          <!-- B.1.10.2.2b: Age of Parent (age unit) -->
+                        </observation>
+                      </subjectOf2>
+                      <subjectOf2 typeCode="SBJ">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="bodyweight" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="PQ" unit="kg" value="102.75"/>
+                          <!-- B.1.10.4: Body Weight (kg) of Parent-->
+                        </observation>
+                      </subjectOf2>
+                      <subjectOf2 typeCode="SBJ">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="height" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="PQ" unit="cm" value="170"/>
+                          <!-- B.1.10.5: Height (cm) of Parent-->
+                        </observation>
+                      </subjectOf2>
+                    </role>
+                  </player1>
+                  <subjectOf1 typeCode="SBJ">
+                    <researchStudy classCode="CLNTRL" moodCode="EVN">
+                      <id extension="study nbr" root="oidSponsorStudyNumber"/>
+                      <!-- A.5.3: Sponsor Study Number -->
+                      <!-- Note, for Identifiers, if no OID can be designated, indicate by specifying NullFlavor ="UNK" -->
+                      <code code="1" codeSystem="ich-study-type-oid"/>
+                      <!-- A.5.4: Study Type Where Reaction(s) / Event(s) Were Observed [1] Clinical trials [2] Individual patient use [3] Other studies-->
+                      <title>study name</title>
+                      <!-- A.5.2: Study Name -->
+                      <authorization typeCode="AUTH">
+                        <studyRegistration classCode="ACT" moodCode="EVN">
+                          <id extension="registration nbr" root="oidStudyRegistrationNumber"/>
+                          <!-- A.5.1.r.1: Study Registration Number -->
+                          <!-- Note, for Identifiers, if no OID can be designated, indicate by specifying NullFlavor ="UNK" -->
+                          <author typeCode="AUT">
+                            <territorialAuthority classCode="TERR">
+                              <governingPlace classCode="COUNTRY" determinerCode="INSTANCE">
+                                <code code="US" codeSystem="1.0.3166.1.2.2"/>
+                                <!-- A.5.1.r.2: Study Registration Country -->
+                              </governingPlace>
+                            </territorialAuthority>
+                          </author>
+                        </studyRegistration>
+                      </authorization>
+                    </researchStudy>
+                  </subjectOf1>
+                  <subjectOf2 typeCode="SBJ">
+                    <observation moodCode="EVN" classCode="OBS">
+                      <code code="age" codeSystem="ich-observation-code-oid"/>
+                      <value xsi:type="PQ" value="45" unit="a"/>
+                      <!-- B.1.2.2a: Age at Time of Onset of Reaction / Event (value) -->
+                      <!-- B.1.2.2b: Age at Time of Onset of Reaction / Event (unit) -->
+                      <!-- Please note that all unit codes are UCUM.  In particular, since there was
+											  discussion on this earlier, "decade" is represented as '10a" within UCUM. -->
+                    </observation>
+                  </subjectOf2>
+                  <subjectOf2 typeCode="SBJ">
+                    <observation moodCode="EVN" classCode="OBS">
+                      <code code="gestationPeriod" codeSystem="ich-observation-code-oid"/>
+                      <value xsi:type="PQ" value="60" unit="d"/>
+                      <!-- B.1.2.2.1a: Gestation Period When Reaction / Event Was Observed in the Fetus (value) -->
+                      <!-- B.1.2.2.1b: Gestation Period When Reaction / Event Was Observed in the Fetus (unit) -->
+                      <!-- The unit, as always with a physical quantity, must be a UCUM value.  
+									  If gestation period is expressed in trimesters, this is handled as a period of 3 months -> "3mo" -->
+                    </observation>
+                  </subjectOf2>
+                  <subjectOf2 typeCode="SBJ">
+                    <observation moodCode="EVN" classCode="OBS">
+                      <code code="ageGroup" codeSystem="ich-observation-code-oid"/>
+                      <value xsi:type="CE" code="1" codeSystem="ich-patient-age-group-oid"/>
+                      <!-- B.1.2.3: Patient Age Group [0]Fetus [1]Neonate [2]Infant [3]Child [4]Adolescent [5]Adult [6]Elderly -->
+                    </observation>
+                  </subjectOf2>
+                  <subjectOf2 typeCode="SBJ">
+                    <observation moodCode="EVN" classCode="OBS">
+                      <code code="bodyweight" codeSystem="ich-observation-code-oid"/>
+                      <value xsi:type="PQ" unit="kg" value="65"/>
+                      <!-- B.1.3: Body Weight (kg) -->
+                    </observation>
+                  </subjectOf2>
+                  <subjectOf2 typeCode="SBJ">
+                    <observation moodCode="EVN" classCode="OBS">
+                      <code code="height" codeSystem="ich-observation-code-oid"/>
+                      <value xsi:type="PQ" unit="cm" value="170"/>
+                      <!-- B.1.4: Height (cm) -->
+                    </observation>
+                  </subjectOf2>
+                  <subjectOf2 typeCode="SBJ">
+                    <observation moodCode="EVN" classCode="OBS">
+                      <code code="lastMenstrualPeriodDate" codeSystem="ich-observation-code-oid"/>
+                      <value xsi:type="TS" value="2010"/>
+                      <!-- B.1.6: Last Menstrual Period Date -->
+                    </observation>
+                  </subjectOf2>
+                  <subjectOf2 typeCode="SBJ">
+                    <organizer>
+                      <code code="relevantMedicalHistoryAndConcurrentConditions" codeSystem="ich-observation-code-oid"/>
+                      <component typeCode="COMP">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="12345678" codeSystem="2.16.840.1.113883.6.163" codeSystemVersion="11.0"/>
+                          <!-- B.1.7.1.r.a.1: MedDRA Version for Medical History -->
+                          <!-- B.1.7.1.r.a.2: Structured Medical History Information (disease, surgical procedure, etc.) -->
+                          <effectiveTime xsi:type="IVL_TS">
+                            <low value="2010"/>
+                            <!-- B.1.7.1.r.c: Start Date -->
+                            <high value="2011"/>
+                            <!-- B.1.7.1.r.f: End Date -->
+                            <!-- If Continuing, note the associated observation below. -->
+                          </effectiveTime>
+                          <outboundRelationship2 typeCode="COMP">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="comment" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="ED">comments</value>
+                              <!-- B.1.7.1.r.g: Comments -->
+                            </observation>
+                          </outboundRelationship2>
+                          <!--B.1.7.1.r.h (Family History of the disease/surgical procedure) is in the message because it is true, if false the following snippet would not appear -->
+                          <outboundRelationship2 typeCode="EXPL">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="10157-6" codeSystem="2.16.840.1.113883.6.12"/>
+                              <!-- B.1.7.1.r.h Family History -->
+                            </observation>
+                          </outboundRelationship2>
+                          <inboundRelationship typeCode="REFR">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="continuing" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="BL" value="false"/>
+                              <!-- B.1.7.1.r.d: Continuing -->
+                            </observation>
+                          </inboundRelationship>
+                        </observation>
+                      </component>
+                      <component typeCode="COMP">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="historyAndConcurrentConditionText" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="ED">medical history text</value>
+                          <!-- B.1.7.2: Text for Relevant medical History and Concurrent Conditions (not including reaction / event) -->
+                        </observation>
+                      </component>
+                      <component typeCode="COMP">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="concommitantTherapy" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" value="true"/>
+                          <!-- B.1.7.3:  Concomitant therapies-->
+                        </observation>
+                      </component>
+                    </organizer>
+                  </subjectOf2>
+                  <subjectOf2 typeCode="SBJ">
+                    <organizer>
+                      <code code="drugHistory" codeSystem="ich-observation-code-oid"/>
+                      <component typeCode="COMP">
+                        <substanceAdministration moodCode="EVN" classCode="SBADM">
+                          <effectiveTime xsi:type="IVL_TS">
+                            <low value="2010"/>
+                            <!-- B.1.8.r.c: Start Date -->
+                            <high value="2011"/>
+                            <!-- B.1.8.r.e: End Date -->
+                          </effectiveTime>
+                          <consumable>
+                            <instanceOfKind classCode="INST">
+                              <kindOfProduct classCode="MMAT" determinerCode="KIND">
+                                <name>drug name</name>
+                                <!-- B.1.8.r.a0: Name of Drug as Reported -->
+                              </kindOfProduct>
+                            </instanceOfKind>
+                          </consumable>
+                          <outboundRelationship2 typeCode="RSON">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="indication" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="CE" code="12345678" codeSystem="2.16.840.1.113883.6.163" codeSystemVersion="11.0"/>
+                              <!-- B.1.8.r.f.1: MedDRA Version for Indication -->
+                              <!-- B.1.8.r.f.2: Indication -->
+                            </observation>
+                          </outboundRelationship2>
+                          <outboundRelationship2 typeCode="CAUS">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="reaction" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="CE" code="87654321" codeSystem="2.16.840.1.113883.6.163" codeSystemVersion="11.1"/>
+                              <!-- B.1.8.r.g.1: MedDRA Version for Reaction -->
+                              <!-- B.1.8.r.g.2: Reaction -->
+                            </observation>
+                          </outboundRelationship2>
+                        </substanceAdministration>
+                      </component>
+                    </organizer>
+                  </subjectOf2>
+                  <subjectOf2 typeCode="SBJ">
+                    <observation moodCode="EVN" classCode="OBS">
+                      <code code="reportedCauseOfDeath" codeSystem="ich-observation-code-oid"/>
+                      <value xsi:type="CE">
+                        <originalText>reported cause of death</originalText>
+                        <!-- B.1.9.2.r.b2: Reported Cause(s) of Death -->
+                      </value>
+                    </observation>
+                  </subjectOf2>
+                  <subjectOf2 typeCode="SBJ">
+                    <observation moodCode="EVN" classCode="OBS">
+                      <code code="autopsy" codeSystem="ich-observation-code-oid"/>
+                      <value xsi:type="BL" value="true"/>
+                      <!-- B.1.9.3  Was autopsy done -->
+                      <outboundRelationship2 typeCode="DRIV">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="causeOfDeath" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="CE" code="12345678" codeSystemVersion="11.0"/>
+                            <!-- B.1.9.4.r.a: MedDRA Version for Autopsy-determined Cause(s) of Death -->
+                            <!-- B.1.9.4.r.b1 Autopsy-determined Cause(s) of Death -->
+                        </observation>
+                      </outboundRelationship2>
+                    </observation>
+                  </subjectOf2>
+                  <subjectOf2 typeCode="SBJ">
+                    <observation moodCode="EVN" classCode="OBS">
+                      <id extension="1" root="oidInternalReferencesToReaction"/>
+                      <!-- Note, for the internal ID to allow references to a reaction, it seems very much best 
+											  for there to be an OID to indicate the namespace.-->
+                      <code code="reaction" codeSystem="ich-observation-code-oid"/>
+                      <effectiveTime xsi:type="IVL_TS">
+                        <low value="20100415"/>
+                        <!-- B.2.i.3 Date of Start of Reaction / Event -->
+                        <high value="20100430"/>
+                        <!-- B.2.i.4: Date of End of Reaction / Event -->
+                      </effectiveTime>
+                      <value xsi:type="CE" code="12345678" codeSystem="2.16.840.1.113883.6.163" codeSystemVersion="11.0">
+                        <!-- B.2.i.1.a: MedDRA Version for Reaction / Event -->
+                        <!-- B.2.i.1.b: Reaction / Event in MedDRA Terminology-->
+                        <originalText>reaction #1</originalText>
+                        <!-- B.2.i.0.a: Reaction / Event as Reported by the Primary Source in Native Language -->
+                      </value>
+                      <location typeCode="LOC">
+                        <locatedEntity classCode="LOCE">
+                          <locatedPlace classCode="COUNTRY" determinerCode="INSTANCE">
+                            <code code="US" codeSystem="1.0.3166.1.2.2"/>
+                            <!-- B.2.i.8: Identification of the Country Where the Reaction / Event Occurred -->
+                          </locatedPlace>
+                        </locatedEntity>
+                      </location>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <!--comment:  term highlighted by reporter B.2.i.2.1 True if present -->
+                          <code code="termHighlightedByReporter" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="CE" code="1" codeSystem="ich-term-highlighted-oid"/>
+                          <!-- B.2.i.2.1: Term Highlighted by the Reporter [1]no, serious [2]yes, serious [3]no, non seious [4]yes, no serious -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="resultsInDeath" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" nullFlavor="NI"/>
+                          <!-- B.2.i.2.2: Seriousness Criteria at Event Level (Results in Death) -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="isLifeThreatening" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" nullFlavor="NI"/>
+                          <!-- B.2.i.2.2: Seriousness Criteria at Event Level (Life Threatening) -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="requiresInpatientHospitalization" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" nullFlavor="NI"/>
+                          <!-- B.2.i.2.2: Seriousness Criteria at Event Level (Caused / Prolonged Hospitalisation) -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="resultsInPersistentOrSignificantDisability" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" nullFlavor="NI"/>
+                          <!-- B.2.i.2.2: Seriousness Criteria at Event Level (Disabling / Incapacitating)  -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="congenitalAnomalyBirthDefect" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" nullFlavor="NI"/>
+                          <!-- B.2.i.2.2: Seriousness Criteria at Event Level (Congenital Anomaly / Birth Defect) -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="otherMedicallyImportantCondition" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" nullFlavor="NI"/>
+                          <!-- B.2.i.2.2: Seriousness Criteria at Event Level (Other Medically Important Condition) -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="outcome" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="CE" code="2" codeSystem="ich-outcome-of-reaction-event-oid"/>
+                          <!-- B.2.i.6: Outcome of Reaction / Event at the Time of Last Observation [1]recovered/resolved [2]recovering/resolving [3]not recovered/not resolved/ongoing 
+                          [4]recovered/resolved with sequelae [5]fatal [6]unknown -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="medicalConfirmationByHealthProfessional" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" value="true"/>
+                          <!-- B.2.i.7: Medical Confirmation by Health Professional -->
+                        </observation>
+                      </outboundRelationship2>
+                    </observation>
+                  </subjectOf2>
+                  <subjectOf2 typeCode="SBJ">
+                    <observation moodCode="EVN" classCode="OBS">
+                      <id extension="2" root="oidInternalReferencesToReaction"/>
+                      <!-- Note, for the internal ID to allow references to a reaction, it seems very much best 
+											  for there to be an OID to indicate the namespace.-->
+                      <code code="reaction" codeSystem="ich-observation-code-oid"/>
+                      <effectiveTime xsi:type="IVL_TS">
+                        <low value="20090415"/>
+                        <!-- B.2.i.3 Date of Start of Reaction / Event -->
+                        <width value="24" unit="h"/>
+                        <!-- B.2.i.5a: Duration of Reaction / Event -->
+                        <!-- B.2.i.5b: Duration of Reaction / Event (Duration Unit) -->
+                      </effectiveTime>
+                      <value xsi:type="CE" code="87654321" codeSystem="2.16.840.1.113883.6.163" codeSystemVersion="11.1">
+                        <!-- B.2.i.1.a: MedDRA Version for Reaction / Event -->
+                        <!-- B.2.i.1.b: Reaction / Event in MedDRA Terminology-->
+                        <originalText>reaction #2</originalText>
+                        <!-- B.2.i.0.a: Reaction / Event as Reported by the Primary Source in Native Language -->
+                      </value>
+                      <location typeCode="LOC">
+                        <locatedEntity classCode="LOCE">
+                          <locatedPlace classCode="COUNTRY" determinerCode="INSTANCE">
+                            <code code="US" codeSystem="1.0.3166.1.2.2"/>
+                            <!-- B.2.i.8: Identification of the Country Where the Reaction / Event Occurred -->
+                          </locatedPlace>
+                        </locatedEntity>
+                      </location>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <!--comment:  term highlighted by reporter B.2.i.2.1 True if present -->
+                          <code code="termHighlightedByReporter" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="CE" code="1" codeSystem="ich-term-highlighted-oid"/>
+                          <!-- B.2.i.2.1: Term Highlighted by the Reporter [1]no, serious [2]yes, serious [3]no, non seious [4]yes, no serious -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="resultsInDeath" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" nullFlavor="NI"/>
+                          <!-- B.2.i.2.2: Seriousness Criteria at Event Level (Results in Death) -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="isLifeThreatening" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" nullFlavor="NI"/>
+                          <!-- B.2.i.2.2: Seriousness Criteria at Event Level (Life Threatening) -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="requiresInpatientHospitalization" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" nullFlavor="NI"/>
+                          <!-- B.2.i.2.2: Seriousness Criteria at Event Level (Caused / Prolonged Hospitalisation) -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="resultsInPersistentOrSignificantDisability" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" nullFlavor="NI"/>
+                          <!-- B.2.i.2.2: Seriousness Criteria at Event Level (Disabling / Incapacitating)  -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="congenitalAnomalyBirthDefect" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" nullFlavor="NI"/>
+                          <!-- B.2.i.2.2: Seriousness Criteria at Event Level (Congenital Anomaly / Birth Defect) -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="otherMedicallyImportantCondition" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" nullFlavor="NI"/>
+                          <!-- B.2.i.2.2: Seriousness Criteria at Event Level (Other Medically Important Condition) -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="outcome" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="CE" code="3" codeSystem="ich-outcome-of-reaction-event-oid"/>
+                          <!-- B.2.i.6: Outcome of Reaction / Event at the Time of Last Observation [1]recovered/resolved [2]recovering/resolving [3]not recovered/not resolved/ongoing 
+                          [4]recovered/resolved with sequelae [5]fatal [6]unknown -->
+                        </observation>
+                      </outboundRelationship2>
+                      <outboundRelationship2 typeCode="PERT">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code code="medicalConfirmationByHealthProfessional" codeSystem="ich-observation-code-oid"/>
+                          <value xsi:type="BL" value="true"/>
+                          <!-- B.2.i.7: Medical Confirmation by Health Professional -->
+                        </observation>
+                      </outboundRelationship2>
+                    </observation>
+                  </subjectOf2>
+                  <subjectOf2 typeCode="SBJ">
+                    <organizer classCode="CATEGORY">
+                      <code code="testsAndProceduresRelevantToTheInvestigation" codeSystem="ich-observation-code-oid"/>
+                      <component typeCode="COMP">
+                        <observation moodCode="EVN" classCode="OBS">
+                          <code nullFlavor="UNK">
+                            <originalText>test name</originalText>
+                            <!-- B.3.r.c1: Test Name (free text) -->
+                          </code>
+                          <effectiveTime xsi:type="SXCM_TS" value="2011"/>
+                          <!-- B.3.r.b: Test Date -->
+                          <value xsi:type="IVL_PQ">
+                            <center value="10" unit="mg/dl"/>
+                            <!-- B.3.r.d2: Test Result (Value) -->
+                            <!-- B.3.r.e: Unit -->
+                          </value>
+                          <outboundRelationship2 typeCode="PERT">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="comment" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="ED">comments</value>
+                              <!-- B.3.r.3: Comments (free text) -->
+                            </observation>
+                          </outboundRelationship2>
+                        </observation>
+                      </component>
+                    </organizer>
+                  </subjectOf2>
+                  <subjectOf2 typeCode="SBJ">
+                    <organizer>
+                      <code code="drugInformation" codeSystem="ich-observation-code-oid"/>
+                      <!-- Note, the drug information may be repeated several times.  Only a single instance is shown here.  
+											*** IN ADDITION *** Please note that the substance administration and drug information is provided on 
+											two hierarchical levels.  This corresponds to the numbering within the E2B(R3) document, where the
+											drug information is in section "B.4.k", and the repeating drug information - mostly dosage and lot - is in 
+											section B.4.k.4r.-->
+                      <component typeCode="COMP">
+                        <substanceAdministration moodCode="EVN" classCode="SBADM">
+                          <id extension="1" root="oidInternalReferencesToSubstanceAdministration"/>
+                          <!-- Note, for the internal ID to allow references to a substance administration, it seems very much best 
+											  for there to be an OID to indicate the namespace.-->
+                          <consumable>
+                            <instanceOfKind classCode="INST">
+                              <kindOfProduct classCode="MMAT" determinerCode="KIND">
+                                <code code="MPID-1" codeSystem="MPID" codeSystemVersion="version"/>
+                                <!-- B.4.k.2.1.1a: MPID -->
+                                <!-- B.4.k.2.1.1b: MPID Version Date / Number -->
+                                <name>drug name #1</name>
+                                <!--B.4.k.2.2: Medicinal Product Name as Reported by the Primary Source  -->
+                                <asManufacturedProduct classCode="MANU">
+                                  <subjectOf typeCode="SBJ">
+                                    <approval classCode="CNTRCT" moodCode="EVN">
+                                      <id extension="auth-nbr-1" root="oidAuthorisationNumber"/>
+                                      <!-- B.4.k.3.1: Authorisation / Application Number -->
+                                      <holder typeCode="HLD">
+                                        <role classCode="HLD">
+                                          <playingOrganization classCode="ORG" determinerCode="INSTANCE">
+                                            <name>holder #1</name>
+                                            <!-- B.4.k.3.3: Name of Holder / Applicant -->
+                                          </playingOrganization>
+                                        </role>
+                                      </holder>
+                                      <author typeCode="AUT">
+                                        <territorialAuthority classCode="TERR">
+                                          <territory classCode="NAT" determinerCode="INSTANCE">
+                                            <code code="EU" codeSystem="1.0.3166.1.2.2"/>
+                                            <!-- B.4.k.3.2: Country of Authorisation / Application -->
+                                          </territory>
+                                        </territorialAuthority>
+                                      </author>
+                                    </approval>
+                                  </subjectOf>
+                                </asManufacturedProduct>
+                                <ingredient classCode="ACTI">
+                                  <quantity>
+                                    <numerator value="100" unit="mg"/>
+                                    <!-- B.4.k.2.3.r.3: Strength -->
+                                    <!-- B.4.k.2.3.r.4: Strength Unit -->
+                                    <denominator value="1"/>
+                                  </quantity>
+                                  <ingredientSubstance classCode="MMAT" determinerCode="KIND">
+                                    <code code="term-id-1" codeSystem="M5" codeSystemVersion="version"/>
+                                    <!-- B.4.k.2.3.r.2a: Substance / Specified Substance TermID -->
+                                    <!-- B.4.k.2.3.r.2b: Substance / Specified Substance TermID Version Date/Number -->
+                                    <name>substance #1</name>
+                                  </ingredientSubstance>
+                                </ingredient>
+                              </kindOfProduct>
+                              <subjectOf typeCode="SBJ">
+                                <productEvent classCode="ACT" moodCode="EVN">
+                                  <code code="retailSupply" codeSystem="ich-observation-code-oid"/>
+                                  <performer typeCode="PRF">
+                                    <assignedEntity classCode="ASSIGNED">
+                                      <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+                                        <addr>
+                                          <country>US</country>
+                                          <!-- B.4.k.2.4: Identification of the Country Where the Drug Was Obtained -->
+                                        </addr>
+                                      </representedOrganization>
+                                    </assignedEntity>
+                                  </performer>
+                                </productEvent>
+                              </subjectOf>
+                            </instanceOfKind>
+                          </consumable>
+                          <outboundRelationship2 typeCode="PERT">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="blinded" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="BL" value="true"/>
+                              <!-- B.4.k.2.5: Investigational Product Status -->
+                            </observation>
+                          </outboundRelationship2>
+                          <!-- dose #1 -->
+                          <outboundRelationship2 typeCode="COMP">
+                            <!-- B.4.k.4.r: Dosage Information -->
+                            <substanceAdministration classCode="SBADM" moodCode="EVN">
+                              <!-- B.4.k.4.r.10: Dosage Text -->
+                              <routeCode nullFlavor="UNK">
+                                <!-- B.4.k.4.r.12.2a: Route of Administration TermID -->
+                                <!-- B.4.k.4.r.12.2b: Route of Administration TermID Version Date -->
+                                <originalText>route text</originalText>
+                                <!-- B.4.k.4.r.12.1: Route of Administration -->
+                              </routeCode>
+                              <consumable typeCode="CSM">
+                                <instanceOfKind classCode="INST">
+                                  <kindOfProduct classCode="MMAT" determinerCode="KIND">
+                                    <formCode>
+                                      <!-- B.4.k.4.4.11.2a: Pharmaceutical Dose Form TermID -->
+                                      <!-- B.4.k.4.4.11.2b: Pharmaceutical Dose Form TermID Version Date/Number -->
+                                      <originalText>form text</originalText>
+                                      <!-- B.4.k.4.r.11.1: Pharmaceutical Dose Form Text -->
+                                    </formCode>
+                                  </kindOfProduct>
+                                </instanceOfKind>
+                              </consumable>
+                              <inboundRelationship typeCode="REFR">
+                                <observation moodCode="EVN" classCode="OBS">
+                                  <code code="parentRouteOfAdministration" codeSystem="ich-observation-code-oid"/>
+                                  <value xsi:type="CE">
+                                    <!-- B.4.k.4.r.13.2a: Parent Route of Administration TermID -->
+                                    <!-- B.4.k.4.r.13.2b: Parent Route of Administration TermID Version Date -->
+                                    <originalText>parent form text</originalText>
+                                    <!-- B.4.k.4.r.13.1: Parent Route of Administration -->
+                                  </value>
+                                </observation>
+                              </inboundRelationship>
+                            </substanceAdministration>
+                          </outboundRelationship2>
+                          <outboundRelationship2 typeCode="PERT">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="recurranceOfReaction" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="CE" code="1"/>
+                              <!-- B.4.k.9.i.4: Did Re-administration Take Place?  -->
+                              <outboundRelationship1 typeCode="REFR">
+                                <actReference moodCode="EVN" classCode="ACT">
+                                  <id extension="1" root="oidInternalReferencesToReaction"/>
+                                  <!-- Note, for the internal ID to allow references to a reaction, it seems very much best 
+																	  for there to be an OID to indicate the namespace.-->
+                                </actReference>
+                              </outboundRelationship1>
+                            </observation>
+                          </outboundRelationship2>
+                          <outboundRelationship2 typeCode="PERT">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="recurranceOfReaction" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="CE" code="2"/>
+                              <!-- B.4.k.9.i.4: Did Re-administration Take Place? -->
+                              <outboundRelationship1 typeCode="REFR">
+                                <actReference moodCode="EVN" classCode="ACT">
+                                  <id extension="2" root="oidInternalReferencesToReaction"/>
+                                  <!-- Note, for the internal ID to allow references to a reaction, it seems very much best 
+											  for there to be an OID to indicate the namespace.-->
+                                </actReference>
+                              </outboundRelationship1>
+                            </observation>
+                          </outboundRelationship2>
+                          <!-- Next 3 additional information codes are B.4.k.10.1.r values that apply, coded true.  Values that do not apply are not listed here. -->
+                          <outboundRelationship2 typeCode="REFR">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="codedDrugInformation" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="CE" code="5" codeSystem="ich-additional-info-on-drug-code-oid"/>
+                              <!-- B.4.k.10.r: Coded Drug Information [1] Counterfeit-->
+                            </observation>
+                          </outboundRelationship2>
+                          <outboundRelationship2 typeCode="REFR">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="additionalInformation" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="ST">additional text</value>
+                              <!-- B.4.k.11: Additional Information on Drug -->
+                            </observation>
+                          </outboundRelationship2>
+                          <inboundRelationship typeCode="RSON">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="indication" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="CE" code="12345678" codeSystem="2.16.840.1.113883.6.163" codeSystemVersion="11.0">
+                                <!-- B.4.k.7.r.2a: Indication in MedDRA Terminology (LLT code) -->
+                                <!-- B.4.k.7.r.2b: Indication in MedDRA Terminology (version) -->
+                                <originalText>indication #1</originalText>
+                                <!-- B.4.k.7.r.1: Indication as Reported by the Primary Source-->
+                              </value>
+                              <performer>
+                                <assignedEntity>
+                                  <code code="sourceReporter" codeSystem="ich-observation-code-oid"/>
+                                </assignedEntity>
+                              </performer>
+                            </observation>
+                          </inboundRelationship>
+                          <inboundRelationship typeCode="RSON">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="indication" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="CE" code="87654321" codeSystem="2.16.840.1.113883.6.163" codeSystemVersion="11.1">
+                                <!-- B.4.k.7.r.2a: Indication in MedDRA Terminology (LLT code) -->
+                                <!-- B.4.k.7.r.2b: Indication in MedDRA Terminology (version) -->
+                                <originalText>indication #2</originalText>
+                                <!-- B.4.k.7.r.1: Indication as Reported by the Primary Source-->
+                              </value>
+                              <performer>
+                                <assignedEntity>
+                                  <code code="sourceReporter" codeSystem="ich-observation-code-oid"/>
+                                </assignedEntity>
+                              </performer>
+                            </observation>
+                          </inboundRelationship>
+                          <inboundRelationship typeCode="CAUS">
+                            <act moodCode="EVN" classCode="ACT">
+                              <code code="2" codeSystem="ich-action-taken-with-drug-oid"/>
+                              <!-- B.4.k.8: Action(s) Taken with Drug [1]Drug withdrawn [2]Dose reduced [3]Dose increased [4]Dose not changed 
+                              [5]Unknown [6]Not applicable -->
+                            </act>
+                          </inboundRelationship>
+                        </substanceAdministration>
+                      </component>
+                      <component typeCode="COMP">
+                        <substanceAdministration moodCode="EVN" classCode="SBADM">
+                          <id extension="2" root="oidInternalReferencesToSubstanceAdministration"/>
+                          <!-- Note, for the internal ID to allow references to a substance administration, it seems very much best 
+											  for there to be an OID to indicate the namespace.-->
+                          <consumable>
+                            <instanceOfKind classCode="INST">
+                              <kindOfProduct classCode="MMAT" determinerCode="KIND">
+                                <code code="MPID-2" codeSystem="MPID" codeSystemVersion="version"/>
+                                <!-- B.4.k.2.1.1a: MPID -->
+                                <!-- B.4.k.2.1.1b: MPID Version Date / Number -->
+                                <name>drug name #2</name>
+                                <!--B.4.k.2.2: Medicinal Product Name as Reported by the Primary Source  -->
+                                <asManufacturedProduct classCode="MANU">
+                                  <subjectOf typeCode="SBJ">
+                                    <approval classCode="CNTRCT" moodCode="EVN">
+                                      <id extension="auth-nbr-2" root="oidAuthorisationNumber"/>
+                                      <!-- B.4.k.3.1: Authorisation / Application Number -->
+                                      <holder typeCode="HLD">
+                                        <role classCode="HLD">
+                                          <playingOrganization classCode="ORG" determinerCode="INSTANCE">
+                                            <name>holder #2</name>
+                                            <!-- B.4.k.3.3: Name of Holder / Applicant -->
+                                          </playingOrganization>
+                                        </role>
+                                      </holder>
+                                      <author typeCode="AUT">
+                                        <territorialAuthority classCode="TERR">
+                                          <territory classCode="NAT" determinerCode="INSTANCE">
+                                            <code code="EU" codeSystem="1.0.3166.1.2.2"/>
+                                            <!-- B.4.k.3.2: Country of Authorisation / Application -->
+                                          </territory>
+                                        </territorialAuthority>
+                                      </author>
+                                    </approval>
+                                  </subjectOf>
+                                </asManufacturedProduct>
+                                <ingredient classCode="ACTI">
+                                  <quantity>
+                                    <numerator value="200" unit="mg"/>
+                                    <!-- B.4.k.2.3.r.3: Strength -->
+                                    <!-- B.4.k.2.3.r.4: Strength Unit -->
+                                    <denominator value="1"/>
+                                  </quantity>
+                                  <ingredientSubstance classCode="MMAT" determinerCode="KIND">
+                                    <code code="term-id-2" codeSystem="M5" codeSystemVersion="version"/>
+                                    <!-- B.4.k.2.3.r.2a: Substance / Specified Substance TermID -->
+                                    <!-- B.4.k.2.3.r.2b: Substance / Specified Substance TermID Version Date/Number -->
+                                    <name>substance #2</name>
+                                  </ingredientSubstance>
+                                </ingredient>
+                              </kindOfProduct>
+                              <subjectOf typeCode="SBJ">
+                                <productEvent classCode="ACT" moodCode="EVN">
+                                  <code code="retailSupply" codeSystem="ich-observation-code-oid"/>
+                                  <performer typeCode="PRF">
+                                    <assignedEntity classCode="ASSIGNED">
+                                      <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+                                        <addr>
+                                          <country>US</country>
+                                          <!-- B.4.k.2.4: Identification of the Country Where the Drug Was Obtained -->
+                                        </addr>
+                                      </representedOrganization>
+                                    </assignedEntity>
+                                  </performer>
+                                </productEvent>
+                              </subjectOf>
+                            </instanceOfKind>
+                          </consumable>
+                          <outboundRelationship1 typeCode="SAS">
+                            <pauseQuantity value="10" unit="B.4.k.9.i.3.1b"/>
+                            <!-- B.4.k.9.i.3.1a: Time Interval between Beginning of Drug Administration and Start of Reaction / Event (number) -->
+                            <!-- B.4.k.9.i.3.1b: Time Interval between Beginning of Drug Administration and Start of Reaction / Event (unit) -->
+                            <actReference classCode="OBS" moodCode="EVN">
+                              <id extension="1" root="oidInternalReferencesToReaction"/>
+                              <!-- Note, for the internal ID to allow references to a reaction, it seems very much best 
+															  for there to be an OID to indicate the namespace.-->
+                            </actReference>
+                          </outboundRelationship1>
+                          <outboundRelationship1 typeCode="SAE">
+                            <pauseQuantity value="10" unit="B.4.k.9.i.3.2b"/>
+                            <!-- B.4.k.9.i.3.2a: Time Interval between Last Dose of Drug and Start of Reaction / Event (number) -->
+                            <!-- B.4.k.9.i.3.2b: Time Interval between Last Dose of Drug and Start of Reaction / Event (unit) -->
+                            <actReference classCode="OBS" moodCode="EVN">
+                              <id extension="1" root="oidInternalReferencesToReaction"/>
+                              <!-- Note, for the internal ID to allow references to a reaction, it seems very much best 
+															  for there to be an OID to indicate the namespace.-->
+                            </actReference>
+                          </outboundRelationship1>
+                          <outboundRelationship2 typeCode="PERT">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="blinded" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="BL" value="true"/>
+                              <!-- B.4.k.2.5: Investigational Product Status -->
+                            </observation>
+                          </outboundRelationship2>
+                          <!-- dose #1 -->
+                          <outboundRelationship2 typeCode="COMP">
+                            <!-- B.4.k.4.r: Dosage Information -->
+                            <substanceAdministration classCode="SBADM" moodCode="EVN">
+                              <!-- B.4.k.4.r.10: Dosage Text -->
+                              <routeCode>
+                                <!-- B.4.k.4.r.12.2a: Route of Administration TermID -->
+                                <!-- B.4.k.4.r.12.2b: Route of Administration TermID Version Date -->
+                                <originalText>route text</originalText>
+                                <!-- B.4.k.4.r.12.1: Route of Administration -->
+                              </routeCode>
+                              <consumable typeCode="CSM">
+                                <instanceOfKind classCode="INST">
+                                  <kindOfProduct classCode="MMAT" determinerCode="KIND">
+                                    <formCode>
+                                      <!-- B.4.k.4.4.11.2a: Pharmaceutical Dose Form TermID -->
+                                      <!-- B.4.k.4.4.11.2b: Pharmaceutical Dose Form TermID Version Date/Number -->
+                                      <originalText>form text</originalText>
+                                      <!-- B.4.k.4.r.11.1: Pharmaceutical Dose Form Text -->
+                                    </formCode>
+                                  </kindOfProduct>
+                                </instanceOfKind>
+                              </consumable>
+                              <inboundRelationship typeCode="REFR">
+                                <observation moodCode="EVN" classCode="OBS">
+                                  <code code="parentRouteOfAdministration" codeSystem="ich-observation-code-oid"/>
+                                  <value xsi:type="CE">
+                                    <!-- B.4.k.4.r.13.2a: Parent Route of Administration TermID -->
+                                    <!-- B.4.k.4.r.13.2b: Parent Route of Administration TermID Version Date -->
+                                    <originalText>parent route text</originalText>
+                                    <!-- B.4.k.4.r.13.1: Parent Route of Administration -->
+                                  </value>
+                                </observation>
+                              </inboundRelationship>
+                            </substanceAdministration>
+                          </outboundRelationship2>
+                          <outboundRelationship2 typeCode="PERT">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="recurranceOfReaction" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="CE" code="3"/>
+                              <!-- B.4.k.9.i.4: Did Re-administration Take Place?  -->
+                              <outboundRelationship1 typeCode="REFR">
+                                <actReference moodCode="EVN" classCode="ACT">
+                                  <id extension="1" root="oidInternalReferencesToReaction"/>
+                                  <!-- Note, for the internal ID to allow references to a reaction, it seems very much best 
+																	  for there to be an OID to indicate the namespace.-->
+                                </actReference>
+                              </outboundRelationship1>
+                            </observation>
+                          </outboundRelationship2>
+                          <outboundRelationship2 typeCode="PERT">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="recurranceOfReaction" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="CE" code="1"/>
+                              <!-- B.4.k.9.i.4: Did Re-administration Take Place? -->
+                              <outboundRelationship1 typeCode="REFR">
+                                <actReference moodCode="EVN" classCode="ACT">
+                                  <id extension="2" root="oidInternalReferencesToReaction"/>
+                                  <!-- Note, for the internal ID to allow references to a reaction, it seems very much best 
+											  for there to be an OID to indicate the namespace.-->
+                                </actReference>
+                              </outboundRelationship1>
+                            </observation>
+                          </outboundRelationship2>
+                          <!-- Next 3 additional information codes are B.4.k.10.1.r values that apply, coded true.  Values that do not apply are not listed here. -->
+                          <outboundRelationship2 typeCode="REFR">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="codedDrugInformation" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="CE" code="5" codeSystem="ich-additional-info-on-drug-code-oid"/>
+                              <!-- B.4.k.10.r: Coded Drug Information [1] Counterfeit-->
+                            </observation>
+                          </outboundRelationship2>
+                          <outboundRelationship2 typeCode="REFR">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="additionalInformation" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="ST">additional text</value>
+                              <!-- B.4.k.11: Additional Information on Drug -->
+                            </observation>
+                          </outboundRelationship2>
+                          <inboundRelationship typeCode="RSON">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="indication" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="CE" code="12345678" codeSystem="2.16.840.1.113883.6.163" codeSystemVersion="11.0">
+                                <!-- B.4.k.7.r.2a: Indication in MedDRA Terminology (LLT code) -->
+                                <!-- B.4.k.7.r.2b: Indication in MedDRA Terminology (version) -->
+                                <originalText>indication #1</originalText>
+                                <!-- B.4.k.7.r.1: Indication as Reported by the Primary Source-->
+                              </value>
+                              <performer>
+                                <assignedEntity>
+                                  <code code="sourceReporter" codeSystem="ich-observation-code-oid"/>
+                                </assignedEntity>
+                              </performer>
+                            </observation>
+                          </inboundRelationship>
+                          <inboundRelationship typeCode="RSON">
+                            <observation moodCode="EVN" classCode="OBS">
+                              <code code="indication" codeSystem="ich-observation-code-oid"/>
+                              <value xsi:type="CE" code="87654321" codeSystem="2.16.840.1.113883.6.163" codeSystemVersion="11.1">
+                                <!-- B.4.k.7.r.2a: Indication in MedDRA Terminology (LLT code) -->
+                                <!-- B.4.k.7.r.2b: Indication in MedDRA Terminology (version) -->
+                                <originalText>indication #2</originalText>
+                                <!-- B.4.k.7.r.1: Indication as Reported by the Primary Source-->
+                              </value>
+                              <performer>
+                                <assignedEntity>
+                                  <code code="sourceReporter" codeSystem="ich-observation-code-oid"/>
+                                </assignedEntity>
+                              </performer>
+                            </observation>
+                          </inboundRelationship>
+                          <inboundRelationship typeCode="CAUS">
+                            <act moodCode="EVN" classCode="ACT">
+                              <code code="3" codeSystem="ich-action-taken-with-drug-oid"/>
+                              <!-- B.4.k.8: Action(s) Taken with Drug [1]Drug withdrawn [2]Dose reduced [3]Dose increased [4]Dose not changed 
+                              [5]Unknown [6]Not applicable -->
+                            </act>
+                          </inboundRelationship>
+                        </substanceAdministration>
+                      </component>
+                    </organizer>
+                  </subjectOf2>
+                </primaryRole>
+              </subject1>
+              <component typeCode="COMP">
+                <causalityAssessment classCode="OBS" moodCode="EVN">
+                  <code code="interventionCharacterization" codeSystem="ich-observation-code-oid"/>
+                  <value xsi:type="CE" code="2" codeSystem="ich-characterisation-of-drug-role-oid"/>
+                  <!-- B.4.k.1: Characterisation of Drug Role [1]Suspect [2]Concomitant [3]Interacting [4]Drug Not Administered -->
+                  <subject2 typeCode="SUBJ">
+                    <productUseReference classCode="ACT" moodCode="EVN">
+                      <id extension="1" root="oidInternalReferencesToSubstanceAdministration"/>
+                      <!-- Note, for the internal ID to allow references to a rsubstance administration, it seems very much best 
+											  for there to be an OID to indicate the namespace.-->
+                    </productUseReference>
+                  </subject2>
+                </causalityAssessment>
+              </component>
+              <component typeCode="COMP">
+                <causalityAssessment classCode="OBS" moodCode="EVN">
+                  <code code="interventionCharacterization" codeSystem="ich-observation-code-oid"/>
+                  <value xsi:type="CE" code="3" codeSystem="ich-characterisation-of-drug-role-oid"/>
+                  <!-- B.4.k.1: Characterisation of Drug Role [1]Suspect [2]Concomitant [3]Interacting [4]Drug Not Administered -->
+                  <subject2 typeCode="SUBJ">
+                    <productUseReference classCode="ACT" moodCode="EVN">
+                      <id extension="2" root="oidInternalReferencesToSubstanceAdministration"/>
+                      <!-- Note, for the internal ID to allow references to a rsubstance administration, it seems very much best 
+											  for there to be an OID to indicate the namespace.-->
+                    </productUseReference>
+                  </subject2>
+                </causalityAssessment>
+              </component>
+              <component typeCode="COMP">
+                <causalityAssessment classCode="OBS" moodCode="EVN">
+                  <code code="causality" codeSystem="ich-observation-code-oid"/>
+                  <value xsi:type="ST">result</value>
+                  <!-- B.4.k.9.i.2.r.3: Result of Assessment -->
+                  <methodCode>
+                    <originalText>method</originalText>
+                    <!-- B.4.k.9.i.2.r.2: Method of Assessment -->
+                  </methodCode>
+                  <author typeCode="AUT">
+                    <assignedEntity classCode="ASSIGNED">
+                      <code>
+                        <originalText>source</originalText>
+                        <!-- B.4.k.9.i.2.r.1: Source of Assessment -->
+                      </code>
+                    </assignedEntity>
+                  </author>
+                  <subject1 typeCode="SUBJ">
+                    <adverseEffectReference classCode="ACT" moodCode="EVN">
+                      <id extension="1" root="oidInternalReferencesToReaction"/>
+                      <!-- Note, for the internal ID to allow references to a reaction, it seems very much best 
+											  for there to be an OID to indicate the namespace.-->
+                    </adverseEffectReference>
+                  </subject1>
+                  <subject2 typeCode="SUBJ">
+                    <productUseReference classCode="ACT" moodCode="EVN">
+                      <id extension="1" root="oidInternalReferencesToSubstanceAdministration"/>
+                      <!-- Note, for the internal ID to allow references to a substance administration, it seems very much best 
+											  for there to be an OID to indicate the namespace.-->
+                    </productUseReference>
+                  </subject2>
+                </causalityAssessment>
+              </component>
+              <component1 typeCode="COMP">
+                <observationEvent classCode="OBS" moodCode="EVN">
+                  <code code="comment" codeSystem="ich-observation-code-oid"/>
+                  <value xsi:type="ED">reporter comments</value>
+                  <!-- B.5.2: Reporter's Comments -->
+                  <author typeCode="AUT">
+                    <assignedEntity classCode="ASSIGNED">
+                      <code code="sourceReporter" codeSystem="ich-observation-code-oid"/>
+                    </assignedEntity>
+                  </author>
+                </observationEvent>
+              </component1>
+              <component1 typeCode="COMP">
+                <observationEvent moodCode="EVN" classCode="OBS">
+                  <code code="diagnosis" codeSystem="ich-observation-code-oid"/>
+                  <value xsi:type="CE" code="12345678" codeSystem="2.16.840.1.113883.6.163" codeSystemVersion="11.0"/>
+                  <!-- B.5.3.r.1: MedDRA Version for Sender's Diagnosis / Syndrome and / or Reclassification of Reaction / Event -->
+                  <!-- B.5.3.r.2: Sender's Diagnosis / Syndrome and / or Reclassification of Reaction / Event -->
+                  <author typeCode="AUT">
+                    <assignedEntity classCode="ASSIGNED">
+                      <code code="sender" codeSystem="ich-observation-code-oid"/>
+                    </assignedEntity>
+                  </author>
+                </observationEvent>
+              </component1>
+              <component1 typeCode="COMP">
+                <observationEvent classCode="OBS" moodCode="EVN">
+                  <code code="comment" codeSystem="ich-observation-code-oid"/>
+                  <value xsi:type="ED">sender comments</value>
+                  <!--B.5.4: Sender's Comments -->
+                  <author typeCode="AUT">
+                    <assignedEntity classCode="ASSIGNED">
+                      <code code="sender" codeSystem="ich-observation-code-oid"/>
+                    </assignedEntity>
+                  </author>
+                </observationEvent>
+              </component1>
+            </adverseEventAssessment>
+          </component>
+          <component typeCode="COMP">
+            <observationEvent classCode="OBS" moodCode="EVN">
+              <code code="additionalDocumentsAvailable" codeSystem="ich-observation-code-oid"/>
+              <value xsi:type="BL" value="true"/>
+              <!-- A.1.8.1: Are Additional Documents Available? -->
+            </observationEvent>
+          </component>
+          <component typeCode="COMP">
+            <observationEvent classCode="OBS" moodCode="EVN">
+              <code code="localCriteriaForExpedited" codeSystem="ich-observation-code-oid"/>
+              <value xsi:type="BL" value="false"/>
+              <!-- A.1.9: Does the Case Fullfill Local Criteria for an Expedited Report?-->
+            </observationEvent>
+          </component>
+          <component typeCode="COMP">
+            <observationEvent classCode="OBS" moodCode="EVN">
+              <code code="summaryAndComment" codeSystem="ich-observation-code-oid"/>
+              <value xsi:type="ED" language="fra">Case summary and reporter’s comments in native language</value>
+              <!-- B.5.5.r.1: Case Summary and Reporter's Comments Text  -->
+              <!-- B.5.5.r.2: Case Summary and Reporter's Comments Text Language -->
+              <author typeCode="AUT">
+                <assignedEntity classCode="ASSIGNED">
+                  <code code="reporter" codeSystem="ich-observation-code-oid"/>
+                </assignedEntity>
+              </author>
+            </observationEvent>
+          </component>
+          <outboundRelationship typeCode="SPRT">
+            <relatedInvestigation classCode="INVSTG" moodCode="EVN">
+              <code code="initialReport" codeSystem="ich-observation-code-oid"/>
+              <subjectOf2 typeCode="SUBJ">
+                <controlActEvent classCode="CACT" moodCode="EVN">
+                  <author typeCode="AUT">
+                    <assignedEntity classCode="ASSIGNED">
+                      <code code="2" codeSystem="ich-first-sender-of-this-case-oid"/>
+                      <!-- A.1.10.2: First Sender of this Case [1]:Regulator [2]:Other -->
+                    </assignedEntity>
+                  </author>
+                </controlActEvent>
+              </subjectOf2>
+            </relatedInvestigation>
+          </outboundRelationship>
+          <outboundRelationship typeCode="SPRT">
+            <relatedInvestigation classCode="INVSTG" moodCode="EVN">
+              <code nullFlavor="NA"/>
+              <subjectOf2 typeCode="SUBJ">
+                <controlActEvent classCode="CACT" moodCode="EVN">
+                  <id extension="linked report" root="ich-worldwide-case-identifier-oid"/>
+                  <!-- A.1.12: Identification Number of the Report Which Is Linked to this Report  -->
+                  <!-- Note, for Identifiers, if no OID can be designated, indicate by specifying NullFlavor ="UNK" -->
+                </controlActEvent>
+              </subjectOf2>
+            </relatedInvestigation>
+          </outboundRelationship>
+          <outboundRelationship typeCode="SPRT">
+            <priorityNumber value="1"/>
+            <!-- A.2.r.1.5: Primary source for regulatory purposes -->
+            <relatedInvestigation classCode="INVSTG" moodCode="EVN">
+              <code code="sourceReport" codeSystem="ich-observation-code-oid"/>
+              <subjectOf2 typeCode="SUBJ">
+                <controlActEvent classCode="CACT" moodCode="EVN">
+                  <author typeCode="AUT">
+                    <assignedEntity classCode="ASSIGNED">
+                      <addr>
+                        <streetAddressLine>street</streetAddressLine>
+                        <!-- A.2.r.1.2c: Reporter's Address and Telephone (Reporter street) -->
+                        <city>city</city>
+                        <!-- A.2.r.1.2d: Reporter's Address and Telpehone (Reporter city) -->
+                        <state>state</state>
+                        <!-- A.2.r.1.2e:  Reporter’s Address and Telephone (Reporter state or province) -->
+                        <postalCode>postcode</postalCode>
+                        <!-- A.2.r.1.2f:  Reporter’s Address and Telephone (Reporter postcode) -->
+                      </addr>
+                      <telecom value="tel:+44 123 456 78"/>
+                      <!-- A.2.r.1.2g Reporter’s Address and Telephone (Telephone) -->
+                      <assignedPerson classCode="PSN" determinerCode="INSTANCE">
+                        <name>
+                          <prefix>title</prefix>
+                          <!-- A.2.r.1.1a: Reporter Identifier (Reporter title) -->
+                          <given>given name</given>
+                          <!-- A.2.r.1.1b: Reporter Identifier (Reporter given name) -->
+                          <given>middle name</given>
+                          <!-- A.2.r.1.1c: Reporter Identifire (Reporter middle name) -->
+                          <family>family name</family>
+                          <!-- A.2.r.1.1d: Reporter Identifier (Reporter family name) -->
+                        </name>
+                        <asQualifiedEntity classCode="QUAL">
+                          <code code="1" codeSystem="ich-qualification-oid"/>
+                          <!-- A.2.r.1.4: Qualification [1] Physician [2]Pharmacist -->
+                        </asQualifiedEntity>
+                        <asLocatedEntity classCode="LOCE">
+                          <location determinerCode="INSTANCE" classCode="COUNTRY">
+                            <code code="UK" codeSystem="1.0.3166.1.2.2"/>
+                            <!-- A.2.r.1.3: Country (Reporter country code) -->
+                          </location>
+                        </asLocatedEntity>
+                      </assignedPerson>
+                      <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+                        <name>department name</name>
+                        <!-- A.2.r.1.2b: Reporter's Address and Telephone (Reporter department) -->
+                        <assignedEntity classCode="ASSIGNED">
+                          <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+                            <name>organisation name</name>
+                            <!-- A.2.r.1.2a: Reporter's Address and Telephone (Reporter organisation) -->
+                          </representedOrganization>
+                        </assignedEntity>
+                      </representedOrganization>
+                    </assignedEntity>
+                  </author>
+                </controlActEvent>
+              </subjectOf2>
+            </relatedInvestigation>
+          </outboundRelationship>
+          <subjectOf1 typeCode="SUBJ">
+            <controlActEvent classCode="CACT" moodCode="EVN">
+              <author typeCode="AUT">
+                <assignedEntity classCode="ASSIGNED">
+                  <code code="3" codeSystem="ich-sender-type-oid"/>
+                  <!-- A.3.1: Sender Type [1] Pharmaceutical Company [2]Regulatory Authority [3]Health Professional [4] Regional Pharmacovigilance Center
+                 [5] WHO collaborating center for international drug monitoring [6] Other [7] Patient / Consumer -->
+                  <addr>
+                    <streetAddressLine>street</streetAddressLine>
+                    <!-- A.3.4a: Sender's Street Address -->
+                    <city>city</city>
+                    <!-- A.3.4b: Sender's City -->
+                    <state>state</state>
+                    <!-- A.3.4c: Sender's State or Province -->
+                    <postalCode>postcode</postalCode>
+                    <!-- A.3.4d: Sender's Postcode -->
+                  </addr>
+                  <telecom value="tel:+01 123 456 78"/>
+                  <!-- A.3.4f: Sender's Telephone -->
+                  <telecom value="fax:+01 123 456 89"/>
+                  <!-- A.3.4i: Sender's Fax -->
+                  <telecom value="mailto:email@city.us"/>
+                  <!-- A.3.4l : Sender's E-mail Address -->
+                  <!-- A.3.4.f,i,l Sender’s address, fax, telephone and E-mail address -->
+                  <assignedPerson classCode="PSN" determinerCode="INSTANCE">
+                    <name>
+                      <prefix>sender title</prefix>
+                      <!-- A.3.3b: Sender's Title -->
+                      <given>sender gname</given>
+                      <!-- A.3.3c: Sender's Given Name -->
+                      <given>sender mname</given>
+                      <!-- A.3.3d: Sender's Middle Name -->
+                      <family>sender fname</family>
+                      <!-- A.3.3e: Sender's Family Name -->
+                    </name>
+                    <asLocatedEntity classCode="LOCE">
+                      <location classCode="COUNTRY" determinerCode="INSTANCE">
+                        <code code="US" codeSystem="1.0.3166.1.2.2"/>
+                        <!-- A.3.4e: Sender's Country Code -->
+                      </location>
+                    </asLocatedEntity>
+                  </assignedPerson>
+                  <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+                    <name>sender department</name>
+                    <!-- A.3.3a: Sender's Department -->
+                    <assignedEntity classCode="ASSIGNED">
+                      <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+                        <name>sender organisation</name>
+                        <!-- A.3.2: Sender's Organization -->
+                      </representedOrganization>
+                    </assignedEntity>
+                  </representedOrganization>
+                </assignedEntity>
+              </author>
+            </controlActEvent>
+          </subjectOf1>
+          <!-- A.1.11.r.1: Source(s) of the Case Identifier: NONE -->
+          <!-- A.1.11.r.2 Case Identifiers(s) : NONE -->
+          <subjectOf2 typeCode="SUBJ">
+            <investigationCharacteristic classCode="OBS" moodCode="EVN">
+              <code code="ichReportType" codeSystem="ich-observation-code-oid"/>
+              <value xsi:type="CE" code="2" codeSystem="ich-type-of-report-oid"/>
+              <!-- A.1.4 Type of Report [1] Spontaneous report [2] Report from study [3] Other [4] Not available to sender (unknown) -->
+            </investigationCharacteristic>
+          </subjectOf2>
+          <subjectOf2 typeCode="SUBJ">
+            <investigationCharacteristic classCode="OBS" moodCode="EVN">
+              <code code="otherCaseIds" codeSystem="ich-observation-code-oid"/>
+              <value xsi:type="BL" nullFlavor="NI"/>
+              <!-- A.1.11 Other case identifiers in previous transmissions-->
+            </investigationCharacteristic>
+          </subjectOf2>
+          <subjectOf2 typeCode="SUBJ">
+            <investigationCharacteristic classCode="OBS" moodCode="EVN">
+              <code code="nullificationAmendmentCode" codeSystem="ich-observation-code-oid"/>
+              <value xsi:type="CE" code="1" codeSystem="ich-report-nullification-amendment-oid"/>
+              <!-- A.1.13: Report Nullification / Amendment [1]:Nullification [2]:Amendment  -->
+              <!-- The code - nullification or amendment has been changed from original text to code.  -->
+            </investigationCharacteristic>
+          </subjectOf2>
+          <!-- Capturing nullification or ammendement as a investigation characteristic is unnecessary, sinec this
+					information is available by capturing the trigger event.  -->
+          <subjectOf2 typeCode="SUBJ">
+            <investigationCharacteristic classCode="OBS" moodCode="EVN">
+              <code code="nullificationAmendmentReason" codeSystem="ich-observation-code-oid"/>
+              <value xsi:type="CE">
+                <originalText>nullification reason</originalText>
+                <!-- A.1.13.1: Nullification/Amendment Reason -->
+              </value>
+            </investigationCharacteristic>
+          </subjectOf2>
+        </investigationEvent>
+      </subject>
+    </controlActProcess>
+  </PORR_IN049016UV>
+  <receiver typeCode="RCV">
+      <device classCode="DEV" determinerCode="INSTANCE">
+        <id extension="batch receiver id" root="ich-batch-receiver-identifier-oid"/>
+      </device>
+    </receiver>
+    <sender typeCode="SND">
+      <device classCode="DEV" determinerCode="INSTANCE">
+        <id extension="batch sender id" root="ich-batch-sender-identifier-oid"/>
+      </device>
+    </sender>
+</MCCI_IN200100UV01>

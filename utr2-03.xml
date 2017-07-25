@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ichicsr SYSTEM "ich-icsr-v2-1.dtd">
+<ichicsr lang="en">
+	<ichicsrmessageheader>
+		<messagetype>ichicsr</messagetype>
+		<messageformatversion>2.1</messageformatversion>
+		<messageformatrelease>1.0</messageformatrelease>
+		<messagenumb>msg-number</messagenumb>
+		<messagesenderidentifier>msg-sender</messagesenderidentifier>
+		<messagereceiveridentifier>msg-receiver</messagereceiveridentifier>
+		<messagedateformat>204</messagedateformat>
+		<messagedate>20110101103045</messagedate>
+	</ichicsrmessageheader>
+	<safetyreport>
+		<safetyreportversion>15</safetyreportversion>
+		<safetyreportid>FR-report-id</safetyreportid>
+		<primarysourcecountry>US</primarysourcecountry>
+		<occurcountry>US</occurcountry>
+		<transmissiondateformat>102</transmissiondateformat>
+		<transmissiondate>20110102</transmissiondate>
+		<reporttype>2</reporttype>
+		<serious>2</serious>
+		<seriousnessdeath>2</seriousnessdeath>
+		<seriousnesslifethreatening>2</seriousnesslifethreatening>
+		<seriousnesshospitalization>2</seriousnesshospitalization>
+		<seriousnessdisabling>2</seriousnessdisabling>
+		<seriousnesscongenitalanomali>2</seriousnesscongenitalanomali>
+		<seriousnessother>2</seriousnessother>
+		<receivedateformat>102</receivedateformat>
+		<receivedate>20110103</receivedate>
+		<receiptdateformat>102</receiptdateformat>
+		<receiptdate>20110104</receiptdate>
+		<additionaldocument>1</additionaldocument>
+		<documentlist>document</documentlist>
+		<fulfillexpeditecriteria>2</fulfillexpeditecriteria>
+		<authoritynumb></authoritynumb>
+		<companynumb>COMP NBR</companynumb>
+		<duplicate>1</duplicate>
+		<casenullification>1</casenullification>
+		<nullificationreason>reason</nullificationreason>
+		<reportduplicate>
+			<duplicatesource>src-1</duplicatesource>
+			<duplicatenumb>id-1</duplicatenumb>
+		</reportduplicate>
+		<reportduplicate>
+			<duplicatesource>src-2</duplicatesource>
+			<duplicatenumb>id-2</duplicatenumb>
+		</reportduplicate>
+		<linkedreport>
+			<linkreportnumb>nbr-1</linkreportnumb>
+		</linkedreport>
+		<linkedreport>
+			<linkreportnumb>nbr-2</linkreportnumb>
+		</linkedreport>
+		<primarysource>
+			<reportertitle>title</reportertitle>
+			<reportergivename>gname</reportergivename>
+			<reportermiddlename>mname</reportermiddlename>
+			<reporterfamilyname>fname</reporterfamilyname>
+			<reporterorganization>org</reporterorganization>
+			<reporterdepartment>dept</reporterdepartment>
+			<reporterstreet>street</reporterstreet>
+			<reportercity>city</reportercity>
+			<reporterstate>state</reporterstate>
+			<reporterpostcode>postcode</reporterpostcode>
+			<reportercountry>FR</reportercountry>
+			<qualification>2</qualification>
+			<literaturereference>lit-ref</literaturereference>
+			<studyname>study-name-1</studyname>
+			<sponsorstudynumb>sponsor-number-1</sponsorstudynumb>
+			<observestudytype>2</observestudytype>
+		</primarysource>
+		<sender>
+			<sendertype>1</sendertype>
+			<senderorganization>sender-org</senderorganization>
+			<senderdepartment>sender-dept</senderdepartment>
+			<sendertitle>stitle</sendertitle>
+			<sendergivename>sgname</sendergivename>
+			<sendermiddlename>smname</sendermiddlename>
+			<senderfamilyname>sfname</senderfamilyname>
+			<senderstreetaddress>sender-street</senderstreetaddress>
+			<sendercity>sender-city</sendercity>
+			<senderstate>sender-state</senderstate>
+			<senderpostcode>sender-postcode</senderpostcode>
+			<sendercountrycode>FR</sendercountrycode>
+			<sendertel>123 456 789</sendertel>
+			<sendertelextension>88</sendertelextension>
+			<sendertelcountrycode>44</sendertelcountrycode>
+			<senderfax>789 456 123</senderfax>
+			<senderfaxextension>99</senderfaxextension>
+			<senderfaxcountrycode>55</senderfaxcountrycode>
+			<senderemailaddress>sender@city.com</senderemailaddress>
+		</sender>
+		<receiver>
+			<receivertype>1</receivertype>
+			<receiverorganization>rcv-org</receiverorganization>
+			<receiverdepartment>rcv-dept</receiverdepartment>
+			<receivergivename>rcv-gname</receivergivename>
+			<receiverfamilyname>rcv-fname</receiverfamilyname>
+		</receiver>
+		<patient>
+			<patientinitial>PRIVACY</patientinitial>
+			<patientbirthdateformat>102</patientbirthdateformat>
+			<patientbirthdate>19660410</patientbirthdate>
+			<patientonsetage>4</patientonsetage>
+			<patientonsetageunit>800</patientonsetageunit>
+			<gestationperiod>1</gestationperiod>
+			<gestationperiodunit>810</gestationperiodunit>
+			<patientagegroup>3</patientagegroup>
+			<patientweight>110</patientweight>
+			<patientheight>120</patientheight>
+			<patientsex>2</patientsex>
+			<lastmenstrualdateformat>610</lastmenstrualdateformat>
+			<patientlastmenstrualdate>201101</patientlastmenstrualdate>
+			<patientmedicalhistorytext/>
+			<resultstestsprocedures>result of tests</resultstestsprocedures>
+			<medicalhistoryepisode>
+				<patientepisodenamemeddraversion>11.1</patientepisodenamemeddraversion>
+				<patientepisodename>disease #1</patientepisodename>
+				<patientmedicalstartdateformat>610</patientmedicalstartdateformat>
+				<patientmedicalstartdate>201101</patientmedicalstartdate>
+				<patientmedicalcontinue>2</patientmedicalcontinue>
+				<patientmedicalenddateformat>610</patientmedicalenddateformat>
+				<patientmedicalenddate>201102</patientmedicalenddate>
+				<patientmedicalcomment>comment-1</patientmedicalcomment>
+			</medicalhistoryepisode>
+			<medicalhistoryepisode>
+				<patientepisodenamemeddraversion>11.2</patientepisodenamemeddraversion>
+				<patientepisodename>disease #2</patientepisodename>
+				<patientmedicalstartdateformat>610</patientmedicalstartdateformat>
+				<patientmedicalstartdate>201001</patientmedicalstartdate>
+				<patientmedicalcontinue>3</patientmedicalcontinue>
+				<patientmedicalenddateformat>610</patientmedicalenddateformat>
+				<patientmedicalenddate>201002</patientmedicalenddate>
+				<patientmedicalcomment>comment-2</patientmedicalcomment>
+			</medicalhistoryepisode>
+			<patientpastdrugtherapy>
+				<patientdrugname>drug name #1</patientdrugname>
+				<patientdrugstartdateformat>610</patientdrugstartdateformat>
+				<patientdrugstartdate>201101</patientdrugstartdate>
+				<patientdrugenddateformat>610</patientdrugenddateformat>
+				<patientdrugenddate>201102</patientdrugenddate>
+				<patientindicationmeddraversion></patientindicationmeddraversion>
+				<patientdrugindication>indication #1</patientdrugindication>
+				<patientdrgreactionmeddraversion></patientdrgreactionmeddraversion>
+				<patientdrugreaction>reaction #1a</patientdrugreaction>
+			</patientpastdrugtherapy>
+			<patientpastdrugtherapy>
+				<patientdrugname>drug name #2</patientdrugname>
+				<patientdrugstartdateformat>610</patientdrugstartdateformat>
+				<patientdrugstartdate>201101</patientdrugstartdate>
+				<patientdrugenddateformat>610</patientdrugenddateformat>
+				<patientdrugenddate>201102</patientdrugenddate>
+				<patientindicationmeddraversion>11.1</patientindicationmeddraversion>
+				<patientdrugindication>indication #2</patientdrugindication>
+				<patientdrgreactionmeddraversion>11.0</patientdrgreactionmeddraversion>
+				<patientdrugreaction>reaction #2a</patientdrugreaction>
+			</patientpastdrugtherapy>
+			<patientdeath>
+				<patientdeathdateformat>610</patientdeathdateformat>
+				<patientdeathdate>201101</patientdeathdate>
+				<patientautopsyyesno>2</patientautopsyyesno>
+				<patientdeathcause>
+					<patientdeathreportmeddraversion></patientdeathreportmeddraversion>
+					<patientdeathreport>cause #1</patientdeathreport>
+				</patientdeathcause>
+				<patientdeathcause>
+					<patientdeathreportmeddraversion>11.1</patientdeathreportmeddraversion>
+					<patientdeathreport>cause #2</patientdeathreport>
+				</patientdeathcause>
+			</patientdeath>
+			<parent>
+				<parentidentification>PRIVACY</parentidentification>
+				<parentbirthdateformat>102</parentbirthdateformat>
+				<parentbirthdate>19500401</parentbirthdate>
+				<parentage>61</parentage>
+				<parentageunit>801</parentageunit>
+				<parentlastmenstrualdateformat></parentlastmenstrualdateformat>
+				<parentlastmenstrualdate></parentlastmenstrualdate>
+				<parentweight></parentweight>
+				<parentheight></parentheight>
+				<parentsex>1</parentsex>
+				<parentmedicalrelevanttext>medical relevant text</parentmedicalrelevanttext>
+				<parentmedicalhistoryepisode>
+					<parentmdepisodemeddraversion>11.1</parentmdepisodemeddraversion>
+					<parentmedicalepisodename>disease #1</parentmedicalepisodename>
+					<parentmedicalstartdateformat>610</parentmedicalstartdateformat>
+					<parentmedicalstartdate>201101</parentmedicalstartdate>
+					<parentmedicalcontinue>2</parentmedicalcontinue>
+					<parentmedicalenddateformat>610</parentmedicalenddateformat>
+					<parentmedicalenddate>201102</parentmedicalenddate>
+					<parentmedicalcomment>comment #1</parentmedicalcomment>
+				</parentmedicalhistoryepisode>
+				<parentmedicalhistoryepisode>
+					<parentmdepisodemeddraversion></parentmdepisodemeddraversion>
+					<parentmedicalepisodename>disease #2</parentmedicalepisodename>
+					<parentmedicalstartdateformat></parentmedicalstartdateformat>
+					<parentmedicalstartdate></parentmedicalstartdate>
+					<parentmedicalcontinue></parentmedicalcontinue>
+					<parentmedicalenddateformat></parentmedicalenddateformat>
+					<parentmedicalenddate></parentmedicalenddate>
+					<parentmedicalcomment>comment #2</parentmedicalcomment>
+				</parentmedicalhistoryepisode>
+				<parentpastdrugtherapy>
+					<parentdrugname>drug name #1</parentdrugname>
+					<parentdrugstartdateformat>610</parentdrugstartdateformat>
+					<parentdrugstartdate>201101</parentdrugstartdate>
+					<parentdrugenddateformat>610</parentdrugenddateformat>
+					<parentdrugenddate>201102</parentdrugenddate>
+					<parentdrgindicationmeddraversion>11.0</parentdrgindicationmeddraversion>
+					<parentdrugindication>indication #1</parentdrugindication>
+					<parentdrgreactionmeddraversion>11.1</parentdrgreactionmeddraversion>
+					<parentdrugreaction>reaction #1b</parentdrugreaction>
+				</parentpastdrugtherapy>
+				<parentpastdrugtherapy>
+					<parentdrugname>drug name #2</parentdrugname>
+					<parentdrugstartdateformat>610</parentdrugstartdateformat>
+					<parentdrugstartdate>201101</parentdrugstartdate>
+					<parentdrugenddateformat></parentdrugenddateformat>
+					<parentdrugenddate></parentdrugenddate>
+					<parentdrgindicationmeddraversion></parentdrgindicationmeddraversion>
+					<parentdrugindication>indication #2</parentdrugindication>
+					<parentdrgreactionmeddraversion></parentdrgreactionmeddraversion>
+					<parentdrugreaction>reaction #2b</parentdrugreaction>
+				</parentpastdrugtherapy>
+			</parent>
+			<reaction>
+				<primarysourcereaction>reaction #1c</primarysourcereaction>
+				<reactionmeddraversionllt></reactionmeddraversionllt>
+				<reactionmeddrallt></reactionmeddrallt>
+				<termhighlighted>3</termhighlighted>
+				<reactionstartdateformat>610</reactionstartdateformat>
+				<reactionstartdate>201101</reactionstartdate>
+				<reactionenddateformat>610</reactionenddateformat>
+				<reactionenddate>201102</reactionenddate>
+				<reactionduration></reactionduration>
+				<reactiondurationunit></reactiondurationunit>
+				<reactionfirsttime></reactionfirsttime>
+				<reactionfirsttimeunit></reactionfirsttimeunit>
+				<reactionlasttime>2</reactionlasttime>
+				<reactionlasttimeunit>805</reactionlasttimeunit>
+				<reactionoutcome>3</reactionoutcome>
+			</reaction>
+			<reaction>
+				<primarysourcereaction>reaction #2c</primarysourcereaction>
+				<reactionmeddraversionllt></reactionmeddraversionllt>
+				<reactionmeddrallt></reactionmeddrallt>
+				<termhighlighted>3</termhighlighted>
+				<reactionstartdateformat>610</reactionstartdateformat>
+				<reactionstartdate>201101</reactionstartdate>
+				<reactionenddateformat></reactionenddateformat>
+				<reactionenddate></reactionenddate>
+				<reactionduration>1</reactionduration>
+				<reactiondurationunit>804</reactiondurationunit>
+				<reactionfirsttime></reactionfirsttime>
+				<reactionfirsttimeunit></reactionfirsttimeunit>
+				<reactionlasttime>45</reactionlasttime>
+				<reactionlasttimeunit>806</reactionlasttimeunit>
+				<reactionoutcome>4</reactionoutcome>
+			</reaction>
+			<test>
+				<testdateformat>610</testdateformat>
+				<testdate>201101</testdate>
+				<testname>test #1</testname>
+				<testresult>10</testresult>
+				<testunit>mg</testunit>
+				<lowtestrange>5</lowtestrange>
+				<hightestrange>15</hightestrange>
+				<moreinformation>1</moreinformation>
+			</test>
+			<test>
+				<testdateformat>610</testdateformat>
+				<testdate>201102</testdate>
+				<testname>test #2</testname>
+				<testresult>10</testresult>
+				<testunit>kg</testunit>
+				<lowtestrange>5</lowtestrange>
+				<hightestrange>15</hightestrange>
+				<moreinformation>1</moreinformation>
+			</test>
+			<drug>
+				<drugcharacterization>2</drugcharacterization>
+				<medicinalproduct>drug name #1</medicinalproduct>
+				<obtaindrugcountry>US</obtaindrugcountry>
+				<drugbatchnumb>batch nbr #1</drugbatchnumb>
+				<drugauthorizationnumb>number #1</drugauthorizationnumb>
+				<drugauthorizationcountry>US</drugauthorizationcountry>
+				<drugauthorizationholder>holder #1</drugauthorizationholder>
+				<drugstructuredosagenumb>12</drugstructuredosagenumb>
+				<drugstructuredosageunit>008</drugstructuredosageunit>
+				<drugseparatedosagenumb>3</drugseparatedosagenumb>
+				<drugintervaldosageunitnumb>2</drugintervaldosageunitnumb>
+				<drugintervaldosagedefinition>805</drugintervaldosagedefinition>
+				<drugcumulativedosagenumb>3</drugcumulativedosagenumb>
+				<drugcumulativedosageunit/>
+				<drugdosagetext>dosage text #1</drugdosagetext>
+				<drugdosageform>dose form #1</drugdosageform>
+				<drugadministrationroute>030</drugadministrationroute>
+				<drugparadministration>048</drugparadministration>
+				<reactiongestationperiod>12</reactiongestationperiod>
+				<reactiongestationperiodunit>803</reactiongestationperiodunit>
+				<drugindicationmeddraversion>11.0</drugindicationmeddraversion>
+				<drugindication>indication #1</drugindication>
+				<drugstartdateformat>610</drugstartdateformat>
+				<drugstartdate>201101</drugstartdate>
+				<drugstartperiod>2</drugstartperiod>
+				<drugstartperiodunit>804</drugstartperiodunit>
+				<druglastperiod>3</druglastperiod>
+				<druglastperiodunit>805</druglastperiodunit>
+				<drugenddateformat/>
+				<drugenddate/>
+				<drugtreatmentduration>1</drugtreatmentduration>
+				<drugtreatmentdurationunit>802</drugtreatmentdurationunit>
+				<actiondrug>3</actiondrug>
+				<drugrecurreadministration>2</drugrecurreadministration>
+				<drugadditional>additional information</drugadditional>
+				<activesubstance>
+					<activesubstancename>substance #1</activesubstancename>
+				</activesubstance>
+				<activesubstance>
+					<activesubstancename>substance #2</activesubstancename>
+				</activesubstance>
+				<drugreactionrelatedness>
+					<drugreactionassesmeddraversion/>
+					<drugreactionasses>reaction #1d</drugreactionasses>
+					<drugassessmentsource>source #1</drugassessmentsource>
+					<drugassessmentmethod>method #1</drugassessmentmethod>
+					<drugresult>result #1</drugresult>
+				</drugreactionrelatedness>
+				<drugreactionrelatedness>
+					<drugreactionassesmeddraversion/>
+					<drugreactionasses>reaction #1e</drugreactionasses>
+					<drugassessmentsource>source #2</drugassessmentsource>
+					<drugassessmentmethod>method #2</drugassessmentmethod>
+					<drugresult>result #2</drugresult>
+				</drugreactionrelatedness>
+			</drug>
+			<drug>
+				<drugcharacterization>2</drugcharacterization>
+				<medicinalproduct>drug name #2</medicinalproduct>
+				<obtaindrugcountry>US</obtaindrugcountry>
+				<drugbatchnumb>batch nbr #2</drugbatchnumb>
+				<drugauthorizationnumb>number #2</drugauthorizationnumb>
+				<drugauthorizationcountry>US</drugauthorizationcountry>
+				<drugauthorizationholder></drugauthorizationholder>
+				<drugstructuredosagenumb>12</drugstructuredosagenumb>
+				<drugstructuredosageunit>013</drugstructuredosageunit>
+				<drugseparatedosagenumb>5</drugseparatedosagenumb>
+				<drugintervaldosageunitnumb>30</drugintervaldosageunitnumb>
+				<drugintervaldosagedefinition>806</drugintervaldosagedefinition>
+				<drugcumulativedosagenumb>5</drugcumulativedosagenumb>
+				<drugcumulativedosageunit/>
+				<drugdosagetext>dosage text #2</drugdosagetext>
+				<drugdosageform>dose form #2</drugdosageform>
+				<drugadministrationroute>030</drugadministrationroute>
+				<drugparadministration/>
+				<reactiongestationperiod>12</reactiongestationperiod>
+				<reactiongestationperiodunit>803</reactiongestationperiodunit>
+				<drugindicationmeddraversion>11.0</drugindicationmeddraversion>
+				<drugindication>indication #2</drugindication>
+				<drugstartdateformat>102</drugstartdateformat>
+				<drugstartdate>20080121</drugstartdate>
+				<drugstartperiod>2</drugstartperiod>
+				<drugstartperiodunit>804</drugstartperiodunit>
+				<druglastperiod>3</druglastperiod>
+				<druglastperiodunit>805</druglastperiodunit>
+				<drugenddateformat>102</drugenddateformat>
+				<drugenddate>201101</drugenddate>
+				<drugtreatmentduration>1</drugtreatmentduration>
+				<drugtreatmentdurationunit>802</drugtreatmentdurationunit>
+				<actiondrug>4</actiondrug>
+				<drugrecurreadministration>2</drugrecurreadministration>
+				<drugadditional>additional information</drugadditional>
+				<activesubstance>
+					<activesubstancename>substance #1</activesubstancename>
+				</activesubstance>
+				<activesubstance>
+					<activesubstancename>substance #2</activesubstancename>
+				</activesubstance>
+				<drugreactionrelatedness>
+					<drugreactionassesmeddraversion/>
+					<drugreactionasses>reaction #1f</drugreactionasses>
+					<drugassessmentsource>source #1</drugassessmentsource>
+					<drugresult>result #1</drugresult>
+				</drugreactionrelatedness>
+				<drugreactionrelatedness>
+					<drugreactionassesmeddraversion/>
+					<drugreactionasses>reaction #2d</drugreactionasses>
+					<drugassessmentsource>source #2</drugassessmentsource>
+					<drugresult>result #2</drugresult>
+				</drugreactionrelatedness>
+			</drug>
+			<summary>
+				<narrativeincludeclinical>case narrative</narrativeincludeclinical>
+				<reportercomment/>
+				<senderdiagnosismeddraversion/>
+				<senderdiagnosis>sender diagnosis</senderdiagnosis>
+				<sendercomment/>
+			</summary>
+		</patient>
+	</safetyreport>
+</ichicsr>

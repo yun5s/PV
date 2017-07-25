@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ichicsr SYSTEM "ich-icsr-v2-1.dtd">
+<ichicsr lang="en">
+	<ichicsrmessageheader>
+		<messagetype>ichicsr</messagetype>
+		<messageformatversion>2.1</messageformatversion>
+		<messageformatrelease>1.0</messageformatrelease>
+		<messagenumb>msg-number</messagenumb>
+		<messagesenderidentifier>msg-sender</messagesenderidentifier>
+		<messagereceiveridentifier>msg-receiver</messagereceiveridentifier>
+		<messagedateformat>204</messagedateformat>
+		<messagedate>20110101103045</messagedate>
+	</ichicsrmessageheader>
+	<safetyreport>
+		<safetyreportversion>59</safetyreportversion>
+		<safetyreportid>FR-report-id</safetyreportid>
+		<primarysourcecountry>JP</primarysourcecountry>
+		<occurcountry>JP</occurcountry>
+		<transmissiondateformat>102</transmissiondateformat>
+		<transmissiondate>20110102</transmissiondate>
+		<reporttype>3</reporttype>
+		<serious>1</serious>
+		<seriousnessdeath>2</seriousnessdeath>
+		<seriousnesslifethreatening>1</seriousnesslifethreatening>
+		<seriousnesshospitalization>2</seriousnesshospitalization>
+		<seriousnessdisabling>1</seriousnessdisabling>
+		<seriousnesscongenitalanomali>2</seriousnesscongenitalanomali>
+		<seriousnessother>1</seriousnessother>
+		<receivedateformat>102</receivedateformat>
+		<receivedate>20110103</receivedate>
+		<receiptdateformat>102</receiptdateformat>
+		<receiptdate>20110104</receiptdate>
+		<additionaldocument>1</additionaldocument>
+		<documentlist>document</documentlist>
+		<fulfillexpeditecriteria>2</fulfillexpeditecriteria>
+		<authoritynumb>AUTH NBR</authoritynumb>
+		<companynumb>COMP NBR</companynumb>
+		<duplicate>1</duplicate>
+		<reportduplicate>
+			<duplicatesource></duplicatesource>
+			<duplicatenumb>id-1</duplicatenumb>
+		</reportduplicate>
+		<reportduplicate>
+			<duplicatesource>src-2</duplicatesource>
+			<duplicatenumb></duplicatenumb>
+		</reportduplicate>
+		<primarysource>
+			<reporterfamilyname>fname-1</reporterfamilyname>
+			<reporterorganization>org-1</reporterorganization>
+			<reportercity>city-1</reportercity>
+			<reportercountry>FR</reportercountry>
+			<qualification>3</qualification>
+			<literaturereference>lit-ref-1</literaturereference>
+			<studyname>study-name-1</studyname>
+			<sponsorstudynumb>sponsor-number-1</sponsorstudynumb>
+			<observestudytype>3</observestudytype>
+		</primarysource>
+		<primarysource>
+			<reporterfamilyname>fname-2</reporterfamilyname>
+			<reporterorganization>org-2</reporterorganization>
+			<reportercity>city-2</reportercity>
+			<reportercountry>FR</reportercountry>
+			<qualification>4</qualification>
+			<literaturereference>lit-ref-2</literaturereference>
+			<studyname>study-name-2</studyname>
+			<sponsorstudynumb>sponsor-number-2</sponsorstudynumb>
+			<observestudytype>1</observestudytype>
+		</primarysource>
+		<sender>
+			<sendertype>1</sendertype>
+			<senderorganization>sender-org</senderorganization>
+			<senderdepartment>sender-dept</senderdepartment>
+			<sendertitle>stitle</sendertitle>
+			<sendergivename>sgname</sendergivename>
+			<sendermiddlename>smname</sendermiddlename>
+			<senderfamilyname>sfname</senderfamilyname>
+			<senderstreetaddress>sender-street</senderstreetaddress>
+			<sendercity>sender-city</sendercity>
+			<senderstate>sender-state</senderstate>
+			<senderpostcode>sender-postcode</senderpostcode>
+			<sendercountrycode>FR</sendercountrycode>
+			<sendertel>123 456 789</sendertel>
+			<sendertelextension>88</sendertelextension>
+			<sendertelcountrycode>44</sendertelcountrycode>
+			<senderfax>123 456 789</senderfax>
+			<senderfaxextension>99</senderfaxextension>
+			<senderfaxcountrycode>44</senderfaxcountrycode>
+			<senderemailaddress>sender@city.com</senderemailaddress>
+		</sender>
+		<receiver>
+			<receivertype>1</receivertype>
+			<receiverorganization>rcv-org</receiverorganization>
+			<receiverdepartment>rcv-dept</receiverdepartment>
+			<receivergivename>rcv-gname</receivergivename>
+			<receiverfamilyname>rcv-fname</receiverfamilyname>
+		</receiver>
+		<patient>
+			<patientinitial>UNKNOWN</patientinitial>
+			<patientbirthdateformat>102</patientbirthdateformat>
+			<patientbirthdate>19660410</patientbirthdate>
+			<patientonsetage>45</patientonsetage>
+			<patientonsetageunit>801</patientonsetageunit>
+			<gestationperiod>12</gestationperiod>
+			<gestationperiodunit>803</gestationperiodunit>
+			<patientagegroup>6</patientagegroup>
+			<patientweight>110.75</patientweight>
+			<patientheight>175</patientheight>
+			<lastmenstrualdateformat>602</lastmenstrualdateformat>
+			<patientlastmenstrualdate>2011</patientlastmenstrualdate>
+			<patientmedicalhistorytext/>
+			<resultstestsprocedures>result of tests</resultstestsprocedures>
+			<medicalhistoryepisode>
+				<patientepisodenamemeddraversion>11.1</patientepisodenamemeddraversion>
+				<patientepisodename>12345678</patientepisodename>
+				<patientmedicalstartdateformat>602</patientmedicalstartdateformat>
+				<patientmedicalstartdate>2011</patientmedicalstartdate>
+				<patientmedicalcomment>comment-1</patientmedicalcomment>
+			</medicalhistoryepisode>
+			<medicalhistoryepisode>
+				<patientepisodenamemeddraversion>11.2</patientepisodenamemeddraversion>
+				<patientepisodename>11234567</patientepisodename>
+				<patientmedicalenddateformat>602</patientmedicalenddateformat>
+				<patientmedicalenddate>2010</patientmedicalenddate>
+				<patientmedicalcomment>comment-2</patientmedicalcomment>
+			</medicalhistoryepisode>
+			<medicalhistoryepisode>
+				<patientepisodenamemeddraversion>11.2</patientepisodenamemeddraversion>
+				<patientepisodename>11123456</patientepisodename>
+				<patientmedicalstartdateformat>602</patientmedicalstartdateformat>
+				<patientmedicalstartdate>2008</patientmedicalstartdate>
+				<patientmedicalenddateformat>602</patientmedicalenddateformat>
+				<patientmedicalenddate>2009</patientmedicalenddate>
+				<patientmedicalcomment>comment-3</patientmedicalcomment>
+			</medicalhistoryepisode>
+			<patientpastdrugtherapy>
+				<patientdrugname>drug name #1</patientdrugname>
+				<patientdrugstartdateformat>602</patientdrugstartdateformat>
+				<patientdrugstartdate>2011</patientdrugstartdate>
+			</patientpastdrugtherapy>
+			<patientpastdrugtherapy>
+				<patientdrugname>drug name #2</patientdrugname>
+				<patientdrugenddateformat>602</patientdrugenddateformat>
+				<patientdrugenddate>2010</patientdrugenddate>
+			</patientpastdrugtherapy>
+			<patientpastdrugtherapy>
+				<patientdrugname>drug name #3</patientdrugname>
+			</patientpastdrugtherapy>
+			<patientdeath>
+				<patientdeathdateformat>602</patientdeathdateformat>
+				<patientdeathdate>2011</patientdeathdate>
+				<patientautopsyyesno>3</patientautopsyyesno>
+			</patientdeath>
+			<parent>
+				<parentidentification>UNKNOWN</parentidentification>
+				<parentbirthdateformat>102</parentbirthdateformat>
+				<parentbirthdate>19500401</parentbirthdate>
+				<parentage></parentage>
+				<parentageunit></parentageunit>
+				<parentlastmenstrualdateformat></parentlastmenstrualdateformat>
+				<parentlastmenstrualdate></parentlastmenstrualdate>
+				<parentweight>102.75</parentweight>
+				<parentheight>188</parentheight>
+				<parentsex></parentsex>
+				<parentmedicalrelevanttext>medical relevant text</parentmedicalrelevanttext>
+				<parentmedicalhistoryepisode>
+					<parentmdepisodemeddraversion>11.1</parentmdepisodemeddraversion>
+					<parentmedicalepisodename>12345678</parentmedicalepisodename>
+					<parentmedicalstartdateformat>602</parentmedicalstartdateformat>
+					<parentmedicalstartdate>2010</parentmedicalstartdate>
+					<parentmedicalcontinue>3</parentmedicalcontinue>
+					<parentmedicalenddateformat>602</parentmedicalenddateformat>
+					<parentmedicalenddate>2011</parentmedicalenddate>
+					<parentmedicalcomment></parentmedicalcomment>
+				</parentmedicalhistoryepisode>
+				<parentmedicalhistoryepisode>
+					<parentmdepisodemeddraversion></parentmdepisodemeddraversion>
+					<parentmedicalepisodename>disease #2</parentmedicalepisodename>
+					<parentmedicalstartdateformat></parentmedicalstartdateformat>
+					<parentmedicalstartdate></parentmedicalstartdate>
+					<parentmedicalcontinue></parentmedicalcontinue>
+					<parentmedicalenddateformat></parentmedicalenddateformat>
+					<parentmedicalenddate></parentmedicalenddate>
+					<parentmedicalcomment>comment #2</parentmedicalcomment>
+				</parentmedicalhistoryepisode>
+				<parentpastdrugtherapy>
+					<parentdrugname></parentdrugname>
+					<parentdrugstartdateformat>602</parentdrugstartdateformat>
+					<parentdrugstartdate>2010</parentdrugstartdate>
+					<parentdrugenddateformat>602</parentdrugenddateformat>
+					<parentdrugenddate>2011</parentdrugenddate>
+					<parentdrgindicationmeddraversion></parentdrgindicationmeddraversion>
+					<parentdrugindication>indication #1</parentdrugindication>
+					<parentdrgreactionmeddraversion></parentdrgreactionmeddraversion>
+					<parentdrugreaction></parentdrugreaction>
+				</parentpastdrugtherapy>
+				<parentpastdrugtherapy>
+					<parentdrugname></parentdrugname>
+					<parentdrugstartdateformat></parentdrugstartdateformat>
+					<parentdrugstartdate></parentdrugstartdate>
+					<parentdrugenddateformat>602</parentdrugenddateformat>
+					<parentdrugenddate>2011</parentdrugenddate>
+					<parentdrgindicationmeddraversion></parentdrgindicationmeddraversion>
+					<parentdrugindication></parentdrugindication>
+					<parentdrgreactionmeddraversion></parentdrgreactionmeddraversion>
+					<parentdrugreaction></parentdrugreaction>
+				</parentpastdrugtherapy>
+			</parent>
+			<reaction>
+				<primarysourcereaction>reaction #1</primarysourcereaction>
+				<reactionmeddraversionllt>11.0</reactionmeddraversionllt>
+				<reactionmeddrallt></reactionmeddrallt>
+				<termhighlighted>3</termhighlighted>
+				<reactionstartdateformat></reactionstartdateformat>
+				<reactionstartdate></reactionstartdate>
+				<reactionenddateformat>602</reactionenddateformat>
+				<reactionenddate>2011</reactionenddate>
+				<reactionduration>6</reactionduration>
+				<reactiondurationunit>802</reactiondurationunit>
+				<reactionfirsttime>4</reactionfirsttime>
+				<reactionfirsttimeunit>803</reactionfirsttimeunit>
+				<reactionlasttime>10</reactionlasttime>
+				<reactionlasttimeunit>807</reactionlasttimeunit>
+				<reactionoutcome>5</reactionoutcome>
+			</reaction>
+			<reaction>
+				<primarysourcereaction>reaction #2</primarysourcereaction>
+				<reactionmeddraversionllt>11.1</reactionmeddraversionllt>
+				<reactionmeddrallt></reactionmeddrallt>
+				<termhighlighted>3</termhighlighted>
+				<reactionstartdateformat></reactionstartdateformat>
+				<reactionstartdate></reactionstartdate>
+				<reactionenddateformat></reactionenddateformat>
+				<reactionenddate></reactionenddate>
+				<reactionduration></reactionduration>
+				<reactiondurationunit></reactiondurationunit>
+				<reactionfirsttime>24</reactionfirsttime>
+				<reactionfirsttimeunit>805</reactionfirsttimeunit>
+				<reactionlasttime>45</reactionlasttime>
+				<reactionlasttimeunit>806</reactionlasttimeunit>
+				<reactionoutcome>6</reactionoutcome>
+			</reaction>
+			<test>
+				<testdateformat>602</testdateformat>
+				<testdate>2010</testdate>
+				<testname>test #1</testname>
+				<testresult>10.55</testresult>
+				<testunit></testunit>
+				<lowtestrange>5</lowtestrange>
+				<hightestrange></hightestrange>
+				<moreinformation>2</moreinformation>
+			</test>
+			<test>
+				<testdateformat>602</testdateformat>
+				<testdate>2011</testdate>
+				<testname>test #2</testname>
+				<testresult>11.66</testresult>
+				<testunit></testunit>
+				<lowtestrange></lowtestrange>
+				<hightestrange>15</hightestrange>
+				<moreinformation>2</moreinformation>
+			</test>
+			<drug>
+				<drugcharacterization>3</drugcharacterization>
+				<medicinalproduct>drug name #1</medicinalproduct>
+				<obtaindrugcountry>JP</obtaindrugcountry>
+				<drugbatchnumb>lot nbr #1</drugbatchnumb>
+				<drugauthorizationnumb>number #1</drugauthorizationnumb>
+				<drugauthorizationcountry>JP</drugauthorizationcountry>
+				<drugauthorizationholder>holder #1</drugauthorizationholder>
+				<drugcumulativedosagenumb>10</drugcumulativedosagenumb>
+				<drugcumulativedosageunit>ml</drugcumulativedosageunit>
+				<drugdosagetext>dosage text #1</drugdosagetext>
+				<drugdosageform>dose form #1</drugdosageform>
+				<drugadministrationroute>048</drugadministrationroute>
+				<drugparadministration>051</drugparadministration>
+				<reactiongestationperiod>1</reactiongestationperiod>
+				<reactiongestationperiodunit>810</reactiongestationperiodunit>
+				<drugindicationmeddraversion/>
+				<drugindication>indication #1</drugindication>
+				<drugstartdateformat>602</drugstartdateformat>
+				<drugstartdate>2010</drugstartdate>
+				<drugstartperiod>30</drugstartperiod>
+				<drugstartperiodunit>806</drugstartperiodunit>
+				<druglastperiod>10</druglastperiod>
+				<druglastperiodunit>807</druglastperiodunit>
+				<drugenddateformat>602</drugenddateformat>
+				<drugenddate>2011</drugenddate>
+				<drugtreatmentduration>1</drugtreatmentduration>
+				<drugtreatmentdurationunit>801</drugtreatmentdurationunit>
+				<actiondrug>5</actiondrug>
+				<drugrecurreadministration>3</drugrecurreadministration>
+				<drugadditional>additional information</drugadditional>
+				<activesubstance>
+					<activesubstancename>substance #1</activesubstancename>
+				</activesubstance>
+				<activesubstance>
+					<activesubstancename>substance #2</activesubstancename>
+				</activesubstance>
+				<drugrecurrence>
+					<drugrecuraction>reaction #1</drugrecuraction>
+				</drugrecurrence>
+				<drugreactionrelatedness>
+					<drugreactionassesmeddraversion/>
+					<drugreactionasses>reaction #1</drugreactionasses>
+					<drugresult>result #1</drugresult>
+				</drugreactionrelatedness>
+				<drugreactionrelatedness>
+					<drugreactionassesmeddraversion/>
+					<drugreactionasses>reaction #1</drugreactionasses>
+					<drugresult>result #2</drugresult>
+				</drugreactionrelatedness>
+			</drug>
+			<drug>
+				<drugcharacterization>3</drugcharacterization>
+				<medicinalproduct>drug name #2</medicinalproduct>
+				<obtaindrugcountry>JP</obtaindrugcountry>
+				<drugbatchnumb>lot nbr #2</drugbatchnumb>
+				<drugauthorizationnumb></drugauthorizationnumb>
+				<drugauthorizationcountry>JP</drugauthorizationcountry>
+				<drugauthorizationholder>holder #2</drugauthorizationholder>
+				<drugcumulativedosagenumb>15</drugcumulativedosagenumb>
+				<drugcumulativedosageunit>mg</drugcumulativedosageunit>
+				<drugdosagetext>dosage text #2</drugdosagetext>
+				<drugdosageform>dose form #2</drugdosageform>
+				<drugadministrationroute/>
+				<drugparadministration>051</drugparadministration>
+				<reactiongestationperiod>1</reactiongestationperiod>
+				<reactiongestationperiodunit>810</reactiongestationperiodunit>
+				<drugindicationmeddraversion/>
+				<drugindication>indication #2</drugindication>
+				<drugstartdateformat>602</drugstartdateformat>
+				<drugstartdate>2010</drugstartdate>
+				<drugstartperiod>30</drugstartperiod>
+				<drugstartperiodunit>806</drugstartperiodunit>
+				<druglastperiod>10</druglastperiod>
+				<druglastperiodunit>807</druglastperiodunit>
+				<drugenddateformat>602</drugenddateformat>
+				<drugenddate>2011</drugenddate>
+				<drugtreatmentduration>1</drugtreatmentduration>
+				<drugtreatmentdurationunit>801</drugtreatmentdurationunit>
+				<actiondrug>6</actiondrug>
+				<drugrecurreadministration>3</drugrecurreadministration>
+				<drugadditional>additional information</drugadditional>
+				<activesubstance>
+					<activesubstancename>substance #1</activesubstancename>
+				</activesubstance>
+				<activesubstance>
+					<activesubstancename>substance #2</activesubstancename>
+				</activesubstance>
+				<drugrecurrence>
+					<drugrecuraction>reaction #2</drugrecuraction>
+				</drugrecurrence>
+				<drugreactionrelatedness>
+					<drugreactionassesmeddraversion/>
+					<drugreactionasses>reaction #1</drugreactionasses>
+					<drugresult>result #1</drugresult>
+				</drugreactionrelatedness>
+				<drugreactionrelatedness>
+					<drugreactionassesmeddraversion/>
+					<drugreactionasses>reaction #2</drugreactionasses>
+					<drugresult>result #2</drugresult>
+				</drugreactionrelatedness>
+			</drug>
+			<summary>
+				<narrativeincludeclinical>Initial Report Date: Feb 22 2008
+
+Eudract protocol # 2006-002303-29, Dose level- ProductX  40 µg soft capsules qod, Center # 01, Patient # 0105 , Cohort 01, Local reference # 200900026.
+
+A 73-year-old male patient, with a medical history of depression from May-2004 to Aug-2007, was included and started to receive ProductX 40µg soft capsules, once every 2 days, by oral route on 21-Jan-2008. Concomitant medications at the time of the event included  docetaxel, intravenous infusion, 75 mg/m2 1 time every 3 weeks, from 21-Jan-2008 to 11-Feb-2008 and prednisone, oral route, 5 mg 2 times a day, from 21-Jan-2008 to 11-Feb-2008.
+
+On Feb 14 2008, the patient experienced grade 4 hypercalcemia leading to death.The patient was hospitalized on Feb 14 2008.Tests the same day showed that blood calcium was abnormal being 17.5 mg and protein urine was positive (3500 mg).
+
+The patient was treated with IV fluids to clear excess calcium and furosemide 20mg to inhibit calcium reabsorption. 
+
+The patient died in the hospital on 17-Feb-2008. The cause of death was acute kidney failure, aggravated hypercalcemia. An autopsy performed  on Feb 18 2008 confirming the causes of death.
+
+According to the IB, hypercalcemia is unexpected.
+
+The investigator determined that the hypercalcmia leading to death, was a serious, grade 4 event, and assessed the relationship to the study medication as suspected. 
+
+</narrativeincludeclinical>
+				<reportercomment/>
+				<senderdiagnosismeddraversion>10.0</senderdiagnosismeddraversion>
+				<senderdiagnosis>123</senderdiagnosis>
+				<sendercomment>Based on the information currently available, the sponsor assessed the relationship of ProductX  40µg capsule soft to the events, hypercalcemia grade 4, as suspected.
+</sendercomment>
+			</summary>
+		</patient>
+	</safetyreport>
+	<safetyreport>
+		<safetyreportversion>59</safetyreportversion>
+		<safetyreportid>FR-report-id</safetyreportid>
+		<primarysourcecountry>JP</primarysourcecountry>
+		<occurcountry>JP</occurcountry>
+		<transmissiondateformat>102</transmissiondateformat>
+		<transmissiondate>20110102</transmissiondate>
+		<reporttype>3</reporttype>
+		<serious>1</serious>
+		<seriousnessdeath>2</seriousnessdeath>
+		<seriousnesslifethreatening>1</seriousnesslifethreatening>
+		<seriousnesshospitalization>2</seriousnesshospitalization>
+		<seriousnessdisabling>1</seriousnessdisabling>
+		<seriousnesscongenitalanomali>2</seriousnesscongenitalanomali>
+		<seriousnessother>1</seriousnessother>
+		<receivedateformat>102</receivedateformat>
+		<receivedate>20110103</receivedate>
+		<receiptdateformat>102</receiptdateformat>
+		<receiptdate>20110104</receiptdate>
+		<additionaldocument>1</additionaldocument>
+		<documentlist>document</documentlist>
+		<fulfillexpeditecriteria>2</fulfillexpeditecriteria>
+		<authoritynumb>AUTH NBR</authoritynumb>
+		<companynumb>COMP NBR</companynumb>
+		<duplicate>1</duplicate>
+		<reportduplicate>
+			<duplicatesource></duplicatesource>
+			<duplicatenumb>id-1</duplicatenumb>
+		</reportduplicate>
+		<reportduplicate>
+			<duplicatesource>src-2</duplicatesource>
+			<duplicatenumb></duplicatenumb>
+		</reportduplicate>
+		<primarysource>
+			<reporterfamilyname>fname-1</reporterfamilyname>
+			<reporterorganization>org-1</reporterorganization>
+			<reportercity>city-1</reportercity>
+			<reportercountry>FR</reportercountry>
+			<qualification>3</qualification>
+			<literaturereference>lit-ref-1</literaturereference>
+			<studyname>study-name-1</studyname>
+			<sponsorstudynumb>sponsor-number-1</sponsorstudynumb>
+			<observestudytype>3</observestudytype>
+		</primarysource>
+		<primarysource>
+			<reporterfamilyname>fname-2</reporterfamilyname>
+			<reporterorganization>org-2</reporterorganization>
+			<reportercity>city-2</reportercity>
+			<reportercountry>FR</reportercountry>
+			<qualification>4</qualification>
+			<literaturereference>lit-ref-2</literaturereference>
+			<studyname>study-name-2</studyname>
+			<sponsorstudynumb>sponsor-number-2</sponsorstudynumb>
+			<observestudytype>1</observestudytype>
+		</primarysource>
+		<sender>
+			<sendertype>1</sendertype>
+			<senderorganization>sender-org</senderorganization>
+			<senderdepartment>sender-dept</senderdepartment>
+			<sendertitle>stitle</sendertitle>
+			<sendergivename>sgname</sendergivename>
+			<sendermiddlename>smname</sendermiddlename>
+			<senderfamilyname>sfname</senderfamilyname>
+			<senderstreetaddress>sender-street</senderstreetaddress>
+			<sendercity>sender-city</sendercity>
+			<senderstate>sender-state</senderstate>
+			<senderpostcode>sender-postcode</senderpostcode>
+			<sendercountrycode>FR</sendercountrycode>
+			<sendertel>123 456 789</sendertel>
+			<sendertelextension>88</sendertelextension>
+			<sendertelcountrycode>44</sendertelcountrycode>
+			<senderfax>123 456 789</senderfax>
+			<senderfaxextension>99</senderfaxextension>
+			<senderfaxcountrycode>44</senderfaxcountrycode>
+			<senderemailaddress>sender@city.com</senderemailaddress>
+		</sender>
+		<receiver>
+			<receivertype>1</receivertype>
+			<receiverorganization>rcv-org</receiverorganization>
+			<receiverdepartment>rcv-dept</receiverdepartment>
+			<receivergivename>rcv-gname</receivergivename>
+			<receiverfamilyname>rcv-fname</receiverfamilyname>
+		</receiver>
+		<patient>
+			<patientinitial>UNKNOWN</patientinitial>
+			<patientbirthdateformat>102</patientbirthdateformat>
+			<patientbirthdate>19660410</patientbirthdate>
+			<patientonsetage>45</patientonsetage>
+			<patientonsetageunit>801</patientonsetageunit>
+			<gestationperiod>12</gestationperiod>
+			<gestationperiodunit>803</gestationperiodunit>
+			<patientagegroup>6</patientagegroup>
+			<patientweight>110.75</patientweight>
+			<patientheight>175</patientheight>
+			<lastmenstrualdateformat>602</lastmenstrualdateformat>
+			<patientlastmenstrualdate>2011</patientlastmenstrualdate>
+			<patientmedicalhistorytext/>
+			<resultstestsprocedures>result of tests</resultstestsprocedures>
+			<medicalhistoryepisode>
+				<patientepisodenamemeddraversion>11.1</patientepisodenamemeddraversion>
+				<patientepisodename>12345678</patientepisodename>
+				<patientmedicalstartdateformat>602</patientmedicalstartdateformat>
+				<patientmedicalstartdate>2011</patientmedicalstartdate>
+				<patientmedicalcomment>comment-1</patientmedicalcomment>
+			</medicalhistoryepisode>
+			<medicalhistoryepisode>
+				<patientepisodenamemeddraversion>11.2</patientepisodenamemeddraversion>
+				<patientepisodename>11234567</patientepisodename>
+				<patientmedicalenddateformat>602</patientmedicalenddateformat>
+				<patientmedicalenddate>2010</patientmedicalenddate>
+				<patientmedicalcomment>comment-2</patientmedicalcomment>
+			</medicalhistoryepisode>
+			<medicalhistoryepisode>
+				<patientepisodenamemeddraversion>11.2</patientepisodenamemeddraversion>
+				<patientepisodename>11123456</patientepisodename>
+				<patientmedicalstartdateformat>602</patientmedicalstartdateformat>
+				<patientmedicalstartdate>2008</patientmedicalstartdate>
+				<patientmedicalenddateformat>602</patientmedicalenddateformat>
+				<patientmedicalenddate>2009</patientmedicalenddate>
+				<patientmedicalcomment>comment-3</patientmedicalcomment>
+			</medicalhistoryepisode>
+			<patientpastdrugtherapy>
+				<patientdrugname>drug name #1</patientdrugname>
+				<patientdrugstartdateformat>602</patientdrugstartdateformat>
+				<patientdrugstartdate>2011</patientdrugstartdate>
+			</patientpastdrugtherapy>
+			<patientpastdrugtherapy>
+				<patientdrugname>drug name #2</patientdrugname>
+				<patientdrugenddateformat>602</patientdrugenddateformat>
+				<patientdrugenddate>2010</patientdrugenddate>
+			</patientpastdrugtherapy>
+			<patientpastdrugtherapy>
+				<patientdrugname>drug name #3</patientdrugname>
+			</patientpastdrugtherapy>
+			<patientdeath>
+				<patientdeathdateformat>602</patientdeathdateformat>
+				<patientdeathdate>2011</patientdeathdate>
+				<patientautopsyyesno>3</patientautopsyyesno>
+			</patientdeath>
+			<parent>
+				<parentidentification>UNKNOWN</parentidentification>
+				<parentbirthdateformat>102</parentbirthdateformat>
+				<parentbirthdate>19500401</parentbirthdate>
+				<parentage></parentage>
+				<parentageunit></parentageunit>
+				<parentlastmenstrualdateformat></parentlastmenstrualdateformat>
+				<parentlastmenstrualdate></parentlastmenstrualdate>
+				<parentweight>102.75</parentweight>
+				<parentheight>188</parentheight>
+				<parentsex></parentsex>
+				<parentmedicalrelevanttext>medical relevant text</parentmedicalrelevanttext>
+				<parentmedicalhistoryepisode>
+					<parentmdepisodemeddraversion>11.1</parentmdepisodemeddraversion>
+					<parentmedicalepisodename>12345678</parentmedicalepisodename>
+					<parentmedicalstartdateformat>602</parentmedicalstartdateformat>
+					<parentmedicalstartdate>2010</parentmedicalstartdate>
+					<parentmedicalcontinue>3</parentmedicalcontinue>
+					<parentmedicalenddateformat>602</parentmedicalenddateformat>
+					<parentmedicalenddate>2011</parentmedicalenddate>
+					<parentmedicalcomment></parentmedicalcomment>
+				</parentmedicalhistoryepisode>
+				<parentmedicalhistoryepisode>
+					<parentmdepisodemeddraversion></parentmdepisodemeddraversion>
+					<parentmedicalepisodename>disease #2</parentmedicalepisodename>
+					<parentmedicalstartdateformat></parentmedicalstartdateformat>
+					<parentmedicalstartdate></parentmedicalstartdate>
+					<parentmedicalcontinue></parentmedicalcontinue>
+					<parentmedicalenddateformat></parentmedicalenddateformat>
+					<parentmedicalenddate></parentmedicalenddate>
+					<parentmedicalcomment>comment #2</parentmedicalcomment>
+				</parentmedicalhistoryepisode>
+				<parentpastdrugtherapy>
+					<parentdrugname></parentdrugname>
+					<parentdrugstartdateformat>602</parentdrugstartdateformat>
+					<parentdrugstartdate>2010</parentdrugstartdate>
+					<parentdrugenddateformat>602</parentdrugenddateformat>
+					<parentdrugenddate>2011</parentdrugenddate>
+					<parentdrgindicationmeddraversion></parentdrgindicationmeddraversion>
+					<parentdrugindication>indication #1</parentdrugindication>
+					<parentdrgreactionmeddraversion></parentdrgreactionmeddraversion>
+					<parentdrugreaction></parentdrugreaction>
+				</parentpastdrugtherapy>
+				<parentpastdrugtherapy>
+					<parentdrugname></parentdrugname>
+					<parentdrugstartdateformat></parentdrugstartdateformat>
+					<parentdrugstartdate></parentdrugstartdate>
+					<parentdrugenddateformat>602</parentdrugenddateformat>
+					<parentdrugenddate>2011</parentdrugenddate>
+					<parentdrgindicationmeddraversion></parentdrgindicationmeddraversion>
+					<parentdrugindication></parentdrugindication>
+					<parentdrgreactionmeddraversion></parentdrgreactionmeddraversion>
+					<parentdrugreaction></parentdrugreaction>
+				</parentpastdrugtherapy>
+			</parent>
+			<reaction>
+				<primarysourcereaction>reaction #1</primarysourcereaction>
+				<reactionmeddraversionllt>11.0</reactionmeddraversionllt>
+				<reactionmeddrallt></reactionmeddrallt>
+				<termhighlighted>3</termhighlighted>
+				<reactionstartdateformat></reactionstartdateformat>
+				<reactionstartdate></reactionstartdate>
+				<reactionenddateformat>602</reactionenddateformat>
+				<reactionenddate>2011</reactionenddate>
+				<reactionduration>6</reactionduration>
+				<reactiondurationunit>802</reactiondurationunit>
+				<reactionfirsttime>4</reactionfirsttime>
+				<reactionfirsttimeunit>803</reactionfirsttimeunit>
+				<reactionlasttime>10</reactionlasttime>
+				<reactionlasttimeunit>807</reactionlasttimeunit>
+				<reactionoutcome>5</reactionoutcome>
+			</reaction>
+			<reaction>
+				<primarysourcereaction>reaction #2</primarysourcereaction>
+				<reactionmeddraversionllt>11.1</reactionmeddraversionllt>
+				<reactionmeddrallt></reactionmeddrallt>
+				<termhighlighted>3</termhighlighted>
+				<reactionstartdateformat></reactionstartdateformat>
+				<reactionstartdate></reactionstartdate>
+				<reactionenddateformat></reactionenddateformat>
+				<reactionenddate></reactionenddate>
+				<reactionduration></reactionduration>
+				<reactiondurationunit></reactiondurationunit>
+				<reactionfirsttime>24</reactionfirsttime>
+				<reactionfirsttimeunit>805</reactionfirsttimeunit>
+				<reactionlasttime>45</reactionlasttime>
+				<reactionlasttimeunit>806</reactionlasttimeunit>
+				<reactionoutcome>6</reactionoutcome>
+			</reaction>
+			<test>
+				<testdateformat>602</testdateformat>
+				<testdate>2010</testdate>
+				<testname>test #1</testname>
+				<testresult>10.55</testresult>
+				<testunit></testunit>
+				<lowtestrange>5</lowtestrange>
+				<hightestrange></hightestrange>
+				<moreinformation>2</moreinformation>
+			</test>
+			<test>
+				<testdateformat>602</testdateformat>
+				<testdate>2011</testdate>
+				<testname>test #2</testname>
+				<testresult>11.66</testresult>
+				<testunit></testunit>
+				<lowtestrange></lowtestrange>
+				<hightestrange>15</hightestrange>
+				<moreinformation>2</moreinformation>
+			</test>
+			<drug>
+				<drugcharacterization>3</drugcharacterization>
+				<medicinalproduct>drug name #1</medicinalproduct>
+				<obtaindrugcountry>JP</obtaindrugcountry>
+				<drugbatchnumb>lot nbr #1</drugbatchnumb>
+				<drugauthorizationnumb>number #1</drugauthorizationnumb>
+				<drugauthorizationcountry>JP</drugauthorizationcountry>
+				<drugauthorizationholder>holder #1</drugauthorizationholder>
+				<drugcumulativedosagenumb>10</drugcumulativedosagenumb>
+				<drugcumulativedosageunit>ml</drugcumulativedosageunit>
+				<drugdosagetext>dosage text #1</drugdosagetext>
+				<drugdosageform>dose form #1</drugdosageform>
+				<drugadministrationroute>048</drugadministrationroute>
+				<drugparadministration>051</drugparadministration>
+				<reactiongestationperiod>1</reactiongestationperiod>
+				<reactiongestationperiodunit>810</reactiongestationperiodunit>
+				<drugindicationmeddraversion/>
+				<drugindication>indication #1</drugindication>
+				<drugstartdateformat>602</drugstartdateformat>
+				<drugstartdate>2010</drugstartdate>
+				<drugstartperiod>30</drugstartperiod>
+				<drugstartperiodunit>806</drugstartperiodunit>
+				<druglastperiod>10</druglastperiod>
+				<druglastperiodunit>807</druglastperiodunit>
+				<drugenddateformat>602</drugenddateformat>
+				<drugenddate>2011</drugenddate>
+				<drugtreatmentduration>1</drugtreatmentduration>
+				<drugtreatmentdurationunit>801</drugtreatmentdurationunit>
+				<actiondrug>5</actiondrug>
+				<drugrecurreadministration>3</drugrecurreadministration>
+				<drugadditional>additional information</drugadditional>
+				<activesubstance>
+					<activesubstancename>substance #1</activesubstancename>
+				</activesubstance>
+				<activesubstance>
+					<activesubstancename>substance #2</activesubstancename>
+				</activesubstance>
+				<drugrecurrence>
+					<drugrecuraction>reaction #1</drugrecuraction>
+				</drugrecurrence>
+				<drugreactionrelatedness>
+					<drugreactionassesmeddraversion/>
+					<drugreactionasses>reaction #1</drugreactionasses>
+					<drugresult>result #1</drugresult>
+				</drugreactionrelatedness>
+				<drugreactionrelatedness>
+					<drugreactionassesmeddraversion/>
+					<drugreactionasses>reaction #1</drugreactionasses>
+					<drugresult>result #2</drugresult>
+				</drugreactionrelatedness>
+			</drug>
+			<drug>
+				<drugcharacterization>3</drugcharacterization>
+				<medicinalproduct>drug name #2</medicinalproduct>
+				<obtaindrugcountry>JP</obtaindrugcountry>
+				<drugbatchnumb>lot nbr #2</drugbatchnumb>
+				<drugauthorizationnumb></drugauthorizationnumb>
+				<drugauthorizationcountry>JP</drugauthorizationcountry>
+				<drugauthorizationholder>holder #2</drugauthorizationholder>
+				<drugcumulativedosagenumb>15</drugcumulativedosagenumb>
+				<drugcumulativedosageunit>mg</drugcumulativedosageunit>
+				<drugdosagetext>dosage text #2</drugdosagetext>
+				<drugdosageform>dose form #2</drugdosageform>
+				<drugadministrationroute/>
+				<drugparadministration>051</drugparadministration>
+				<reactiongestationperiod>1</reactiongestationperiod>
+				<reactiongestationperiodunit>810</reactiongestationperiodunit>
+				<drugindicationmeddraversion/>
+				<drugindication>indication #2</drugindication>
+				<drugstartdateformat>602</drugstartdateformat>
+				<drugstartdate>2010</drugstartdate>
+				<drugstartperiod>30</drugstartperiod>
+				<drugstartperiodunit>806</drugstartperiodunit>
+				<druglastperiod>10</druglastperiod>
+				<druglastperiodunit>807</druglastperiodunit>
+				<drugenddateformat>602</drugenddateformat>
+				<drugenddate>2011</drugenddate>
+				<drugtreatmentduration>1</drugtreatmentduration>
+				<drugtreatmentdurationunit>801</drugtreatmentdurationunit>
+				<actiondrug>6</actiondrug>
+				<drugrecurreadministration>3</drugrecurreadministration>
+				<drugadditional>additional information</drugadditional>
+				<activesubstance>
+					<activesubstancename>substance #1</activesubstancename>
+				</activesubstance>
+				<activesubstance>
+					<activesubstancename>substance #2</activesubstancename>
+				</activesubstance>
+				<drugrecurrence>
+					<drugrecuraction>reaction #2</drugrecuraction>
+				</drugrecurrence>
+				<drugreactionrelatedness>
+					<drugreactionassesmeddraversion/>
+					<drugreactionasses>reaction #1</drugreactionasses>
+					<drugresult>result #1</drugresult>
+				</drugreactionrelatedness>
+				<drugreactionrelatedness>
+					<drugreactionassesmeddraversion/>
+					<drugreactionasses>reaction #2</drugreactionasses>
+					<drugresult>result #2</drugresult>
+				</drugreactionrelatedness>
+			</drug>
+			<summary>
+				<narrativeincludeclinical>Initial Report Date: Feb 22 2008
+
+Eudract protocol # 2006-002303-29, Dose level- ProductX  40 µg soft capsules qod, Center # 01, Patient # 0105 , Cohort 01, Local reference # 200900026.
+
+A 73-year-old male patient, with a medical history of depression from May-2004 to Aug-2007, was included and started to receive ProductX 40µg soft capsules, once every 2 days, by oral route on 21-Jan-2008. Concomitant medications at the time of the event included  docetaxel, intravenous infusion, 75 mg/m2 1 time every 3 weeks, from 21-Jan-2008 to 11-Feb-2008 and prednisone, oral route, 5 mg 2 times a day, from 21-Jan-2008 to 11-Feb-2008.
+
+On Feb 14 2008, the patient experienced grade 4 hypercalcemia leading to death.The patient was hospitalized on Feb 14 2008.Tests the same day showed that blood calcium was abnormal being 17.5 mg and protein urine was positive (3500 mg).
+
+The patient was treated with IV fluids to clear excess calcium and furosemide 20mg to inhibit calcium reabsorption. 
+
+The patient died in the hospital on 17-Feb-2008. The cause of death was acute kidney failure, aggravated hypercalcemia. An autopsy performed  on Feb 18 2008 confirming the causes of death.
+
+According to the IB, hypercalcemia is unexpected.
+
+The investigator determined that the hypercalcmia leading to death, was a serious, grade 4 event, and assessed the relationship to the study medication as suspected. 
+
+</narrativeincludeclinical>
+				<reportercomment/>
+				<senderdiagnosismeddraversion>10.0</senderdiagnosismeddraversion>
+				<senderdiagnosis>123</senderdiagnosis>
+				<sendercomment>Based on the information currently available, the sponsor assessed the relationship of ProductX  40µg capsule soft to the events, hypercalcemia grade 4, as suspected.
+</sendercomment>
+			</summary>
+		</patient>
+	</safetyreport>
+</ichicsr>
