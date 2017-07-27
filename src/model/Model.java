@@ -1,15 +1,8 @@
 package model;
 
-import controller.Controller;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.xml.transform.*;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+
 
 
 /**
@@ -17,9 +10,9 @@ import java.io.FileOutputStream;
  */
 public class Model{
 
-    private static Controller controller;
     JFileChooser chooserInput = new JFileChooser();
     JFileChooser chooserOutput = new JFileChooser();
+    //private Transformer transformer;
 
 
     public void pickInputFile() throws Exception{
@@ -38,6 +31,11 @@ public class Model{
             System.out.println("Your input file: " +
                     chooserInput.getSelectedFile().getName());
 
+            System.out.println("inside out file after" + chooserInput.getSelectedFile());       //TESTING WHATS INSIDE
+
+            System.out.println("chosen Input method returns --> " + getChosenInputFile());
+
+
 
         }
 
@@ -46,7 +44,7 @@ public class Model{
 
     public void pickOutputFile() throws Exception{
 
-        System.out.println("inside out file" + chooserOutput.getSelectedFile());       //TESTING WHATS INSIDE
+        System.out.println("inside out file before" + chooserOutput.getSelectedFile());       //TESTING WHATS INSIDE
 
         java.io.File file = chooserOutput.getSelectedFile();
 
@@ -62,6 +60,9 @@ public class Model{
             System.out.println("Your output file: " +
                     chooserOutput.getSelectedFile().getName());
 
+            System.out.println("inside out file after" + chooserOutput.getSelectedFile());       //TESTING WHATS INSIDE
+
+    System.out.println("chosen output method returns --> "+ getChosenOutputFile());
 
 
         }
@@ -82,18 +83,7 @@ public class Model{
 
 
 
-    public void transformerDownICSR() throws TransformerException, FileNotFoundException {
 
-        TransformerFactory factory = TransformerFactory.newInstance();
-        Source xslt = new StreamSource(new File("downgrade-icsr.xsl"));
-        Transformer transformer = factory.newTransformer(xslt);
-
-
-        Source text = new StreamSource(new File((getChosenInputFile())));
-        transformer.transform(text, new StreamResult(new File(getChosenOutputFile())));
-
-
-    }
 
 
 

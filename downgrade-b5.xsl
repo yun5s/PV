@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Viewsion Style-Sheet (Downgrade - B.5 Part)
+<!--
+		Conversion Style-Sheet (Downgrade - B.5 Part)
 		Input : 			ICSR File compliant with E2B(R3)
 		Output : 		ICSR File compliant with E2B(R2)
 
@@ -8,10 +9,10 @@
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:hl7="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif"  exclude-result-prefixes="hl7 xsi xsl fo mif">
-
+	
 	<!--	B.5. Narrative case summary and further information	-->
 	<xsl:template match="hl7:investigationEvent" mode="summary">
 		<summary>
@@ -35,7 +36,7 @@
 				<xsl:call-template name="SummaryActiveIngredient" />
 				<xsl:call-template name="SummaryIndication" />
 				<xsl:call-template name="SummaryDrugAdditional" />
-				<xsl:call-template name="SummaryReporterComments" />
+				<xsl:call-template name="SummaryReporterComments" />				
 				<xsl:call-template name="SummarySendersDiagnosis" />
 				<xsl:call-template name="SummarySenderComments" />
 			</narrativeincludeclinical>
@@ -58,7 +59,7 @@
 			</sendercomment>
 		</summary>
 	</xsl:template>
-
+	
 	<!-- B.5.3. Sender’s diagnosis -->
 	<xsl:template match="hl7:observationEvent" mode="sender-diagnosis">
 		<!-- take only first occurrence -->
@@ -70,19 +71,19 @@
 			</senderdiagnosis>
 		</xsl:if>
 	</xsl:template>
-
+			
 	<!--	Additional information to case summary coming from the downgrade rules	-->
-
+	
 	<!-- CASE SUMMARY -->
 	<xsl:template name="CaseSummary">
 		<xsl:for-each select="hl7:component/hl7:observationEvent[hl7:code/@code=$SummaryAndComment and hl7:author/hl7:assignedEntity/hl7:code/@code=$Reporter]">
 			<xsl:text>
 CASE SUMMARY: (</xsl:text>
 			<xsl:value-of select="hl7:value/@language"></xsl:value-of>
-			<xsl:text>) </xsl:text><xsl:value-of select="hl7:value"></xsl:value-of>
+			<xsl:text>) </xsl:text><xsl:value-of select="hl7:value"></xsl:value-of>		
 		</xsl:for-each>
 	</xsl:template>
-
+	
 	<!-- ADDITIONAL DOCUMENTS-->
 	<xsl:template name="SummaryAdditionalDocuments">
 		<xsl:call-template name="DocumentList">
@@ -91,7 +92,7 @@ ADDITIONAL DOCUMENTS: </xsl:with-param>
 			<xsl:with-param name="Length">100</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
-
+	
 	<!-- DUPLICATE REPORTS -->
 	<xsl:template name="SummaryDuplicateReports">
 		<xsl:call-template name="ReportDuplicate">
@@ -99,8 +100,8 @@ ADDITIONAL DOCUMENTS: </xsl:with-param>
 CASE IDENTIFIER: </xsl:with-param>
 			<xsl:with-param name="Length">50</xsl:with-param>
 		</xsl:call-template>
-	</xsl:template>
-
+	</xsl:template>	
+	
 	<!-- NULLIFICATION/AMENDMENT-->
 	<xsl:template name="SummaryReportNullification">
 		<xsl:if test="hl7:subjectOf2/hl7:investigationCharacteristic[hl7:code/@code=$NullificationAmendmentCode]/hl7:value/@code = 2">
@@ -109,7 +110,7 @@ NULLIFICATION/AMENDMENT: Amendment : </xsl:text>
 			<xsl:value-of select="hl7:subjectOf2/hl7:investigationCharacteristic[hl7:code/@code=$NullificationAmendmentReason]/hl7:value/hl7:originalText" />
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- NULLIFICATION/AMENDMENT REASON-->
 	<xsl:template name="SummaryReportNullificationReason">
 		<xsl:variable name="reason" select="hl7:subjectOf2/hl7:investigationCharacteristic[hl7:code/@code=$NullificationAmendmentReason]/hl7:value/hl7:originalText"/>
@@ -118,7 +119,7 @@ NULLIFICATION/AMENDMENT: Amendment : </xsl:text>
 NULLIFICATION/AMENDMENT REASON: </xsl:text><xsl:value-of select="$reason"/>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- STUDY NAME - SPONSOR STUDY NUMBER-->
 	<xsl:template match="hl7:researchStudy" mode="SummaryStudyIdentification">
 		<xsl:call-template name="StudyName">
@@ -132,7 +133,7 @@ SPONSOR STUDY NUMBER: </xsl:text>
 			<xsl:value-of select="hl7:id/@extension"/>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- RESULTS OF TESTS -->
 	<xsl:template name="SummaryTests">
 		<xsl:variable name="resultsTests">
@@ -143,7 +144,7 @@ SPONSOR STUDY NUMBER: </xsl:text>
 TEST RESULTS: </xsl:text><xsl:value-of select="$resultsTests"/>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- MEDICAL HISTORY-->
 	<xsl:template name="SummaryMedicalHistory">
 		<xsl:variable name="ContentString">
@@ -165,7 +166,7 @@ MEDICAL HISTORY: </xsl:text>
 			<xsl:value-of select="$ContentString"/>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- DRUG HISTORY-->
 	<xsl:template name="SummaryDrugHistory">
 		<xsl:variable name="ContentString">
@@ -187,7 +188,7 @@ DRUG HISTORY: </xsl:text>
 			<xsl:value-of select="$ContentString"/>
 		</xsl:if>
 	</xsl:template>
-
+	
 		<!-- PARENT MEDICAL HISTORY-->
 	<xsl:template name="SummaryParentMedicalHistory">
 		<xsl:variable name="ContentString">
@@ -209,7 +210,7 @@ PARENT MEDICAL HISTORY: </xsl:text>
 			<xsl:value-of select="$ContentString"/>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- PARENT DRUG HISTORY-->
 	<xsl:template name="SummaryParentDrugHistory">
 		<xsl:variable name="ContentString">
@@ -231,7 +232,7 @@ PARENT DRUG HISTORY: </xsl:text>
 			<xsl:value-of select="$ContentString"/>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- REACTION/EVENT-->
 	<xsl:template name="SummaryReactionEvent">
 		<xsl:variable name="ContentString">
@@ -256,7 +257,7 @@ REACTION/EVENT: </xsl:text>
 			<xsl:value-of select="$ContentString"/>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- DRUG-->
 	<xsl:template name="SummaryDrug">
 		<xsl:variable name="ContentString">
@@ -278,7 +279,7 @@ DRUG: </xsl:text>
 			<xsl:value-of select="$ContentString"/>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- ACTIVE INGREDIENT-->
 	<xsl:template name="SummaryActiveIngredient">
 		<xsl:variable name="ContentString">
@@ -300,7 +301,7 @@ ACTIVE INGREDIENT: </xsl:text>
 			<xsl:value-of select="$ContentString"/>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- INDICATION-->
 	<xsl:template name="SummaryIndication">
 		<xsl:for-each select="hl7:component/hl7:adverseEventAssessment/hl7:subject1/hl7:primaryRole/hl7:subjectOf2/hl7:organizer[hl7:code/@code=$DrugInformation]/hl7:component/hl7:substanceAdministration/hl7:inboundRelationship[@typeCode='RSON']/hl7:observation[hl7:performer/hl7:assignedEntity/hl7:code/@code=$SourceReporter]" >
@@ -313,7 +314,7 @@ INDICATION </xsl:text>
 			</xsl:if>
 		</xsl:for-each>
 	</xsl:template>
-
+	
 	<!-- DRUG ADDITIONAL-->
 	<xsl:template name="SummaryDrugAdditional">
 		<xsl:variable name="ContentString">
@@ -333,7 +334,7 @@ ADDITIONAL INFORMATION ON DRUG: </xsl:text>
 			<xsl:value-of select="$ContentString"/>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- REPORTER COMMENTS -->
 	<xsl:template name="SummaryReporterComments">
 		<xsl:if test="string-length(hl7:component/hl7:adverseEventAssessment/hl7:component1/hl7:observationEvent[hl7:code/@code=$Comment and hl7:author/hl7:assignedEntity/hl7:code/@code=$SourceReporter]/hl7:value)>500">
@@ -342,7 +343,7 @@ REPORTER COMMENTS: </xsl:text>
 			<xsl:value-of select="hl7:component/hl7:adverseEventAssessment/hl7:component1/hl7:observationEvent[hl7:code/@code=$Comment and hl7:author/hl7:assignedEntity/hl7:code/@code=$SourceReporter]/hl7:value"/>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- ADDITIONAL SENDER'S DIAGNOSIS -->
 	<xsl:template name="SummarySendersDiagnosis">
 		<xsl:for-each select="hl7:component/hl7:adverseEventAssessment/hl7:component1/hl7:observationEvent[hl7:code/@code=$Diagnosis and hl7:author/hl7:assignedEntity/hl7:code/@code=$Sender]/hl7:value" >
@@ -352,7 +353,7 @@ ADDITIONAL SENDER'S DIAGNOSIS: </xsl:text><xsl:value-of select="@code"/><xsl:tex
 			</xsl:if>
 		</xsl:for-each>
 	</xsl:template>
-
+	
 		<!-- SENDER COMMENTS -->
 	<xsl:template name="SummarySenderComments">
 		<xsl:if test="string-length(hl7:component/hl7:adverseEventAssessment/hl7:component1/hl7:observationEvent[hl7:code/@code=$Comment and hl7:author/hl7:assignedEntity/hl7:code/@code=$Sender]/hl7:value)>2000">
@@ -360,6 +361,6 @@ ADDITIONAL SENDER'S DIAGNOSIS: </xsl:text><xsl:value-of select="@code"/><xsl:tex
 SENDER COMMENTS: </xsl:text>
 			<xsl:value-of select="hl7:component/hl7:adverseEventAssessment/hl7:component1/hl7:observationEvent[hl7:code/@code=$Comment and hl7:author/hl7:assignedEntity/hl7:code/@code=$Sender]/hl7:value"/>
 		</xsl:if>
-	</xsl:template>
-
+	</xsl:template>			
+			
 </xsl:stylesheet>

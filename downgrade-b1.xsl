@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Viewsion Style-Sheet (Downgrade - B.1 Part)
+<!--
+		Conversion Style-Sheet (Downgrade - B.1 Part)
 		Input : 			ICSR File compliant with E2B(R3)
 		Output : 		ICSR File compliant with E2B(R2)
 
@@ -8,10 +9,10 @@
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:hl7="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif"  exclude-result-prefixes="hl7 xsi xsl fo mif">
-
+	
 	<!-- B.1 Patient -->
 	<xsl:template match="hl7:primaryRole" mode="patient">
 		<!-- B.1.1 Patient characteristics -->
@@ -29,7 +30,7 @@
 		<!-- B.1.10 Parent -->
 		<xsl:apply-templates select="hl7:player1/hl7:role[hl7:code/@code=$Parent]" mode="parent"/>
 	</xsl:template>
-
+	
 	<!-- B.1.1 Patient -->
 	<xsl:template match="hl7:player1" mode="patient-characteristics">
 		<!-- if Patient Age Group = Foetus: set Foetus as patient name -->
@@ -64,7 +65,7 @@
 			<xsl:value-of select="hl7:asIdentifiedEntity[hl7:code/@code=$Investigation]/hl7:id/@extension"/>
 		</patientinvestigationnumb>
 	</xsl:template>
-
+	
 	<!-- B.1.2. Age information -->
 	<xsl:template match="hl7:player1" mode="patient-age">
 		<!-- B.1.2.1b Date of birth -->
@@ -103,7 +104,7 @@
 			</patientagegroup>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- B.1.3. - B.1.6. Patient other characteristics -->
 	<xsl:template match="hl7:primaryRole" mode="patient-other-characteristics">
 		<!-- B.1.3 Patient weight -->
@@ -146,7 +147,7 @@
 			</xsl:call-template>
 		</resultstestsprocedures>
 	</xsl:template>
-
+	
 	<!-- B.3.2. Results of tests and procedures relevant to the investigation of the patient -->
 	<xsl:template match="hl7:observation" mode="results-tests-procedures">
 		<xsl:if test="string-length(hl7:outboundRelationship2/hl7:observation[hl7:code/@code=$Comment]/hl7:value) > 0 or (string-length(hl7:interpretationCode/@code) > 0 and string-length(hl7:value[@xsi:type='ED']) + count(hl7:value/hl7:center) + count(hl7:value/hl7:low) > 0)">
@@ -160,7 +161,7 @@
 			<xsl:if test="position()!=last()"><xsl:text>; </xsl:text></xsl:if>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<xsl:template name="testresult">
 		<xsl:choose>
 			<xsl:when test="count(hl7:value/hl7:center) = 1">							<!-- single quantity -->
@@ -184,7 +185,7 @@
 					<xsl:when test="hl7:value/hl7:high/@nullFlavor='PINF'">			<!-- interval greater (or equal) than PQ -->
 						<xsl:text>&gt;</xsl:text>
 						<xsl:if test="hl7:value/hl7:low/@inclusive='true'"><xsl:text>=</xsl:text></xsl:if>
-						<xsl:value-of select="hl7:value/hl7:low/@value"/>
+						<xsl:value-of select="hl7:value/hl7:low/@value"/>					
 						<xsl:if test="hl7:value/hl7:low/@unit != 1">
 							<xsl:text> </xsl:text>
 							<xsl:value-of select="hl7:value/hl7:low/@unit"/>
@@ -197,7 +198,7 @@
 			</xsl:when>
 		</xsl:choose>
 	</xsl:template>
-
+	
 	<!-- B.1.7. Relevant medical history and concurrent conditions -->
 	<xsl:template match="hl7:observation" mode="patient-medical-history">
 		<!-- B.1.7.2 is treated elsewhere and B.1.7.3 is ignored -->
@@ -246,7 +247,7 @@
 			</medicalhistoryepisode>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- B.1.8. Relevant past drug -->
 	<xsl:template match="hl7:substanceAdministration" mode="patient-drug-history">
 		<patientpastdrugtherapy>
@@ -292,7 +293,7 @@
 			</patientdrugreaction>
 		</patientpastdrugtherapy>
 	</xsl:template>
-
+	
 	<!-- B.1.(10.)8.r.a0 Drugname - prefixed with MPID and PhPID -->
 	<xsl:template name="DrugName">
 		<xsl:if test="string-length(hl7:consumable/hl7:instanceOfKind/hl7:kindOfProduct/hl7:code/@code) > 0">
@@ -310,7 +311,7 @@
 		</xsl:if>
 		<xsl:value-of select="hl7:consumable/hl7:instanceOfKind/hl7:kindOfProduct/hl7:name"/>
 	</xsl:template>
-
+	
 	<!-- B.1.9. In case of death -->
 	<xsl:template match="hl7:primaryRole" mode="patient-death">
 		<xsl:if test="string-length(hl7:player1/hl7:deceasedTime/@value) > 0">
@@ -335,7 +336,7 @@
 			</patientdeath>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<!-- B.1.9.2. Patient reported cause of death -->
 	<xsl:template match="hl7:observation" mode="patient-death-cause">
 		<patientdeathcause>
@@ -350,7 +351,7 @@
 			</patientdeathreport>
 		</patientdeathcause>
 	</xsl:template>
-
+	
 	<!-- B.1.9.4. Patient authopsy-determined cause of death -->
 	<xsl:template match="hl7:observation" mode="patient-autopsy">
 		<patientautopsy>
@@ -365,7 +366,7 @@
 			</patientdetermineautopsy>
 		</patientautopsy>
 	</xsl:template>
-
+	
 	<!-- B.1.10. Parent - For a parent-child/foetus report, information concerning the parent -->
 	<xsl:template match="hl7:role" mode="parent">
 		<parent>
@@ -422,7 +423,7 @@
 			<xsl:apply-templates select="hl7:subjectOf2/hl7:organizer[hl7:code/@code=$DrugHistory]/hl7:component/hl7:substanceAdministration" mode="parent-drug-history"/>
 		</parent>
 	</xsl:template>
-
+	
 	<!-- B.1.10.7. Relevant medical history and concurrent conditions of parent -->
 	<xsl:template match="hl7:observation" mode="parent-medical-history">
 		<parentmedicalhistoryepisode>
@@ -468,7 +469,7 @@
 			</parentmedicalcomment>
 		</parentmedicalhistoryepisode>
 	</xsl:template>
-
+	
 	<!-- B.1.10.8. Relevant past drug history -->
 	<xsl:template match="hl7:substanceAdministration" mode="parent-drug-history">
 		<parentpastdrugtherapy>
@@ -514,5 +515,5 @@
 			</parentdrugreaction>
 		</parentpastdrugtherapy>
 	</xsl:template>
-
+	
 </xsl:stylesheet>

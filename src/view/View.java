@@ -16,7 +16,7 @@ import model.Model;
 /**
  * Created by MaiwandMaidanwal on 20/07/2017.
  */
-public class View implements Observer{
+public class View{
     private JButton convertButton;
     private JPanel panel1;
     private JTextField welcomeTextField;
@@ -100,7 +100,7 @@ public class View implements Observer{
             public void actionPerformed(ActionEvent e) {
 
 
-                if (backwardsICSR.isSelected()) {
+                if (getBackwardsICSR().isSelected()) {
                     System.out.println(" backwardsICSR has been selected fam.");
                     try {
                         controller.testConversions();
@@ -112,29 +112,29 @@ public class View implements Observer{
                         e1.printStackTrace();
                     }
 
-                    if (!inputButton.isSelected() && !outputButton.isSelected()) {
-                        System.out.println("Please select your input and output files");
-                    }
+//                    if (!inputButton.isSelected() && !outputButton.isSelected()) {
+//                        System.out.println("Please select your input and output files");
+//                    }
 
                 }
             }
         });
 
 
-        backwardsICSR.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    controller.testConversions();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                } catch (URISyntaxException e2) {
-                    e2.printStackTrace();
-                } catch (TransformerException e3) {
-                    e3.printStackTrace();
-                }
-            }
-        });
+//        backwardsICSR.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                try {
+//                    controller.testConversions();
+//                } catch (IOException e1) {
+//                    e1.printStackTrace();
+//                } catch (URISyntaxException e2) {
+//                    e2.printStackTrace();
+//                } catch (TransformerException e3) {
+//                    e3.printStackTrace();
+//                }
+//            }
+//        });
 
 
     }
@@ -164,9 +164,4 @@ public class View implements Observer{
             }
 
 
-    @Override
-    public void update(Observable o, Object arg) {
-
-
-    }
 }

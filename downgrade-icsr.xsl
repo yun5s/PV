@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Viewsion Style-Sheet (Downgrade)
+<!--
+		Conversion Style-Sheet (Downgrade)
 		Input : 			ICSR File compliant with E2B(R3)
 		Output : 		ICSR File compliant with E2B(R2)
 
@@ -8,14 +9,14 @@
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<xsl:stylesheet version="1.0" 
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+	xmlns:fo="http://www.w3.org/1999/XSL/Format" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:hl7="urn:hl7-org:v3"
+	xmlns:hl7="urn:hl7-org:v3" 
 	xmlns:mif="urn:hl7-org:v3/mif"
 	exclude-result-prefixes="hl7 xsi xsl fo mif">
-
+	
 	<xsl:include href="downgrade.xsl"/>
 	<xsl:include href="downgrade-m.xsl"/>
 	<xsl:include href="downgrade-a1.xsl"/>
@@ -26,11 +27,11 @@
 	<xsl:include href="downgrade-b3.xsl"/>
 	<xsl:include href="downgrade-b4.xsl"/>
 	<xsl:include href="downgrade-b5.xsl"/>
-
+	
 	<xsl:output indent="yes" method="xml" omit-xml-declaration="no" encoding="utf-8" doctype-system="./ich-icsr-v2-1.dtd"/>
 	<xsl:strip-space elements="*"/>
-
-	<!-- ICH ICSR :
+	
+	<!-- ICH ICSR : 
 	E2B(R3): root element "PORR_IN049006UV"
 	E2B(R2): root element "ichicsr"
 	-->
@@ -40,7 +41,7 @@
 			<xsl:apply-templates select="hl7:MCCI_IN200100UV01/hl7:PORR_IN049016UV/hl7:controlActProcess/hl7:subject/hl7:investigationEvent" mode="safetyreport"/>
 		</ichicsr>
 	</xsl:template>
-
+	
 	<!-- ICSR Backbone -->
 	<xsl:template match="hl7:investigationEvent" mode="safetyreport">
 		<safetyreport>
@@ -48,7 +49,7 @@
 			<xsl:call-template name="safetyreportheader"/>
 			<!-- A.2 Primary Sources, sorted to have the one for regulatory purposes first -->
 			<xsl:apply-templates select="hl7:outboundRelationship/hl7:relatedInvestigation[hl7:code/@code=$SourceReport]/hl7:subjectOf2/hl7:controlActEvent/hl7:author/hl7:assignedEntity" mode="primary-source">
-				<xsl:sort select = "../../../../../hl7:priorityNumber/@value" order="descending"/>
+				<xsl:sort select = "../../../../../hl7:priorityNumber/@value" order="descending"/>  
 			</xsl:apply-templates>
 			<!-- A.3.1 Sender -->
 			<sender>
@@ -70,5 +71,5 @@
 			</patient>
 		</safetyreport>
 	</xsl:template>
-
+	
 </xsl:stylesheet>

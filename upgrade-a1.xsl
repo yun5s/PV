@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Viewsion Style-Sheet (Upgrade - A1 Part)
+<!--
+		Conversion Style-Sheet (Upgrade - A1 Part)
 
 		Version:		0.9
 		Date:			21/06/2011
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif">
 
 	<xsl:include href="upgrade-m.xsl"/>
@@ -16,7 +17,7 @@
 	<xsl:include href="upgrade-b1.xsl"/>
 	<xsl:include href="upgrade-b5.xsl"/>
 
-	<!-- Safety Report (date of transmission) :
+	<!-- Safety Report (date of transmission) : 
 	E2B(R2): element "transmissiondate" inside "safetyreport"
 	E2B(R3): element "controlActProcess"
 	-->
@@ -30,7 +31,7 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<!-- Safety Report (main) :
+	<!-- Safety Report (main) : 
 	E2B(R2): element "safetyreport" inside "ichicsr"
 	E2B(R3): element "investigationEvent"
 	-->
@@ -67,7 +68,7 @@
 				</xsl:if>
 				<!-- A.1.8.1.r Document Held by Sender -->
 				<xsl:apply-templates select="documentlist"/>
-				<!-- BFC: Document Added to StViewsion -->
+				<!-- BFC: Document Added to State Conversion -->
 				<reference typeCode="REFR">
 					<document classCode="DOC" moodCode="EVN">
 						<title>Source of this Case Safety Report in E2B(R2) Format</title>
@@ -164,8 +165,8 @@
 			</investigationEvent>
 		</subject>
 	</xsl:template>
-
-	<!-- Document List :
+	
+	<!-- Document List : 
 	E2B(R2): element "documentlist" inside "safetyreport"
 	E2B(R3): element "reference"
 	-->
@@ -179,8 +180,8 @@
 			</reference>
 		</xsl:if>
 	</xsl:template>
-
-	<!-- Fulfil Expedited Criteria:
+	
+	<!-- Fulfil Expedited Criteria: 
 	E2B(R2): element "documentlist" inside "safetyreport"
 	E2B(R3): element "component"
 	-->
@@ -203,8 +204,8 @@
 			</observationEvent>
 		</component>
 	</xsl:template>
-
-	<!-- Linked Report:
+	
+	<!-- Linked Report: 
 	E2B(R2): element "linkedreport" inside "safetyreport"
 	E2B(R3): element "relatedInvestigation"
 	-->
@@ -223,8 +224,8 @@
 			</outboundRelationship>
 		</xsl:if>
 	</xsl:template>
-
-	<!-- Report Duplicate :
+	
+	<!-- Report Duplicate : 
 	E2B(R2): element "reportduplicate" inside "safetyreport"
 	E2B(R3): element "controlActEvent"
 	-->
@@ -243,5 +244,5 @@
 			</subjectOf1>
 		</xsl:if>
 	</xsl:template>
-
+	
 </xsl:stylesheet>

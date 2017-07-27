@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Viewsion Style-Sheet (Downgrade - B.3 Part)
+<!--
+		Conversion Style-Sheet (Downgrade - B.3 Part)
 		Input : 			ICSR File compliant with E2B(R3)
 		Output : 		ICSR File compliant with E2B(R2)
 
@@ -8,10 +9,10 @@
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:hl7="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif"  exclude-result-prefixes="hl7 xsi xsl fo mif">
-
+	
 	<!--	B.3. Results of tests and procedures relevant to the investigation of the patient -->
 	<xsl:template match="hl7:observation" mode="test">
 		<test>
@@ -53,7 +54,7 @@
 							<testresult>
 								<xsl:text>&gt;</xsl:text>
 								<xsl:if test="hl7:value/hl7:low/@inclusive='true'"><xsl:text>=</xsl:text></xsl:if>
-								<xsl:value-of select="hl7:value/hl7:low/@value"/>
+								<xsl:value-of select="hl7:value/hl7:low/@value"/>					
 							</testresult>
 							<testunit><xsl:value-of select="hl7:value/hl7:low/@unit"/></testunit>
 						</xsl:when>
@@ -88,7 +89,7 @@
 			</moreinformation>
 		</test>
 	</xsl:template>
-
+	
 	<!-- B.3.r.c Test name -->
 	<xsl:template name="testname">
 		<xsl:variable name="testname">
@@ -107,5 +108,5 @@
 			<xsl:with-param name="string-length">100</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
-
+		
 </xsl:stylesheet>

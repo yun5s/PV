@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Viewsion Style-Sheet (Upgrade - B.4 Part)
+<!--
+		Conversion Style-Sheet (Upgrade - B.4 Part)
 
 		Version:		0.9
 		Date:			21/06/2011
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif">
 
-	<!-- Drug (main):
+	<!-- Drug (main): 
 	E2B(R2): element "drug"
 	E2B(R3): element "drugInformation"
 	-->
@@ -286,8 +287,8 @@
 			</organizer>
 		</subjectOf2>
 	</xsl:template>
-
-	<!-- Active Substance :
+	
+	<!-- Active Substance : 
 	E2B(R2): element "activesubstance"
 	E2B(R3): element "drugInformation"
 	-->
@@ -298,9 +299,9 @@
 				<name><xsl:value-of select="activesubstancename"/></name>
 			</ingredientSubstance>
 		</ingredient>
-	</xsl:template>
-
-	<!-- Did Recur on Readministration:
+	</xsl:template>	
+	
+	<!-- Did Recur on Readministration: 
 	E2B(R2): element "recur"
 	E2B(R3): element ""
 	-->
@@ -330,8 +331,8 @@
 			</outboundRelationship2>
 		</xsl:if>
 	</xsl:template>
-
-		<!-- Drug (causality):
+	
+		<!-- Drug (causality): 
 	E2B(R2): element "drug"
 	E2B(R3): element "causalityAssessment"
 	-->
@@ -354,8 +355,8 @@
 		<!-- B.4.k.9.r Drug Reaction Matrix -->
 		<xsl:apply-templates select="drugreactionrelatedness"/>
 	</xsl:template>
-
-	<!-- Drug Reaction Matrix :
+	
+	<!-- Drug Reaction Matrix : 
 	E2B(R2): element "drugreactionrelatedness"
 	E2B(R3): element ""
 	-->
@@ -413,6 +414,6 @@
 				</causalityAssessment>
 			</component>
 		</xsl:if>
-	</xsl:template>
-
+	</xsl:template>	
+	
 </xsl:stylesheet>

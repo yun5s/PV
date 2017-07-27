@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Viewsion Style-Sheet (Downgrade - B.2 Part)
+<!--
+		Conversion Style-Sheet (Downgrade - B.2 Part)
 		Input : 			ICSR File compliant with E2B(R3)
 		Output : 		ICSR File compliant with E2B(R2)
 
@@ -8,10 +9,10 @@
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:hl7="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif"  exclude-result-prefixes="hl7 xsi xsl fo mif">
-
+	
 	<!--	B.2. Reaction(s)/Event(s) -->
 	<xsl:template match="hl7:observation" mode="reaction">
 		<xsl:variable name="reactionID" select="hl7:id/@extension"/>
@@ -78,14 +79,14 @@
 			</reactionoutcome>
 		</reaction>
 	</xsl:template>
-
+	
 	<!-- B.2.i.2.1 Term Highlighted -->
 	<xsl:template name="TermHighlighted">
 		<termhighlighted>
 			<xsl:value-of select="hl7:outboundRelationship2/hl7:observation[hl7:code/@code=$TermHighlightedByReporter]/hl7:value/@code"/>
 		</termhighlighted>
 	</xsl:template>
-
+	
 	<!-- B.2.i.7.1 Reaction first time -->
 	<xsl:template match="hl7:sourceOf1" mode="SAS">
 		<reactionfirsttime>
@@ -98,7 +99,7 @@
 			</xsl:call-template>
 		</reactionfirsttimeunit>
 	</xsl:template>
-
+	
 	<!-- B.2.i.7.2 Reaction last time -->
 	<xsl:template match="hl7:sourceOf1" mode="SAE">
 		<reactionlasttime>
@@ -111,5 +112,5 @@
 			</xsl:call-template>
 		</reactionlasttimeunit>
 	</xsl:template>
-
+	
 </xsl:stylesheet>

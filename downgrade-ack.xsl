@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Viewsion Style-Sheet (Downgrade - ACK)
+<!--
+		Conversion Style-Sheet (Downgrade - ACK)
 		Input : 			ICSR ACK File compliant with E2B(R3)
 		Output : 		ICSR ACK File compliant with E2B(R2)
 
@@ -8,12 +9,12 @@
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:hl7="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif"  exclude-result-prefixes="hl7 xsi xsl fo mif">
-
+	
 	<xsl:include href="downgrade.xsl"/>
-
+		
 	<xsl:output indent="yes" method="xml" omit-xml-declaration="no" encoding="utf-8" doctype-system="ich-icsrack-v1_1.dtd"/>
 
 	<!-- ICH ICSR ACK -->
@@ -48,7 +49,7 @@
 			</xsl:call-template>
 		</ichicsrmessageheader>
 	</xsl:template>
-
+	
 	<!-- A - Message Acknowledgment -->
 	<xsl:template match="hl7:MCCI_IN200101UV01" mode="message">
 		<acknowledgment>
@@ -84,7 +85,7 @@
 			<xsl:apply-templates select="hl7:MCCI_IN000002UV01"/>
 		</acknowledgment>
 	</xsl:template>
-
+	
 	<!-- B - Report Acknowledgment -->
 	<xsl:template match="hl7:MCCI_IN000002UV01">
 		<reportacknowledgment>

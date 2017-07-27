@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Viewsion Style-Sheet (Upgrade - ACK)
+<!--
+		Conversion Style-Sheet (Upgrade - ACK)
 		Input : 			ACK ICSR File compliant with E2B(R2)
 		Output : 		ACK ICSR File compliant with E2B(R3)
 
@@ -8,15 +9,15 @@
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif">
 
 	<xsl:include href="upgrade.xsl"/>
-
+	
 	<xsl:output indent="yes" method="xml" omit-xml-declaration="no" encoding="utf-8"/>
 	<xsl:strip-space elements="*"/>
 
-	<!-- ICH ICSviewsion of the main structure incl. root element and controlActProcess
+	<!-- ICH ICSR : conversion of the main structure incl. root element and controlActProcess
 	E2B(R2): root element "ichicsr"
 	E2B(R3): root element "PORR_IN049016UV"
 	-->
@@ -41,7 +42,7 @@
 			<xsl:apply-templates select="/ichicsrack/acknowledgment/messageacknowledgment"/>
 		</MCCI_IN200101UV01>
 	</xsl:template>
-
+	
 	<!-- ACK.M - ACK Batch Header (Part I) -->
 	<xsl:template match="ichicsrmessageheader" mode="header-1">
 		<!-- ACK.M.1 - ACK Batch Number -->
@@ -51,7 +52,7 @@
 		<responseModeCode code="D"/>
 		<interactionId extension="MCCI_IN200100UV01" root="2.16.840.1.113883.1.18"/>
 	</xsl:template>
-
+	
 	<!-- ACK.M - ACK Batch Header (Part II) -->
 	<xsl:template match="ichicsrmessageheader" mode="header-2">
 		<!-- ACK.M.4 - ACK Date of Batch Transmission -->
@@ -73,7 +74,7 @@
 			</device>
 		</sender>
 	</xsl:template>
-
+	
 	<!-- ACK.M - ACK Batch Header (Sender & Receiver) -->
 	<xsl:template match="ichicsrmessageheader" mode="header-3">
 		<receiver typeCode="RCV">
@@ -89,12 +90,12 @@
 			</device>
 		</sender>
 	</xsl:template>
-
+	
 	<!-- ACK.B - Report Acknowledgment (Part I) -->
 	<xsl:template match="reportacknowledgment" mode="ack-1">
 		<id extension="{localreportnumb}" root="{$oidLocalReportNumber}"/>
 	</xsl:template>
-
+	
 	<!-- ACK.B - Report Acknowledgment (Part II) -->
 	<xsl:template match="reportacknowledgment" mode="ack-2">
 		<xsl:if test="string-length(receiptdate) > 0">
@@ -137,7 +138,7 @@
 			</attentionLine>
 		</xsl:if-->
 
-
+	
 	<!-- ACK.A - Message Acknowledgment (Message) -->
 	<xsl:template match="messageacknowledgment">
 		<!-- ACK.A.2 - Local Message Number -->
@@ -176,5 +177,5 @@
 			</xsl:if>
 		</acknowledgement>
 	</xsl:template>
-
+	
 </xsl:stylesheet>

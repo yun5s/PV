@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Viewsion Style-Sheet (Downgrade - M Part)
+<!--
+		Conversion Style-Sheet (Downgrade - M Part)
 
 		Version:		0.92
 		Date:			29/06/2011
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:hl7="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" >
-
+	
 	<!-- M.1. ICH ICSR Message Header -->
 	<xsl:template match="hl7:MCCI_IN200100UV01">
 		<ichicsrmessageheader>

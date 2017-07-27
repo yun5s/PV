@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Viewsion Style-Sheet (Upgrade - A.3 Part)
+<!--
+		Conversion Style-Sheet (Upgrade - A.3 Part)
 
 		Version:		0.9
 		Date:			21/06/2011
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif">
 
-	<!-- Sender :
+	<!-- Sender : 
 	E2B(R2): element "sender"
 	E2B(R3): element "controlActEvent"
 	-->
@@ -123,5 +124,5 @@
 			</controlActEvent>
 		</subjectOf1>
 	</xsl:template>
-
+	
 </xsl:stylesheet>

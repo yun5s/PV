@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Viewsion Style-Sheet (Downgrade - Backbone & A.1 Part)
+<!--
+		Conversion Style-Sheet (Downgrade - Backbone & A.1 Part)
 		Input : 			ICSR File compliant with E2B(R3)
 		Output : 		ICSR File compliant with E2B(R2)
 
@@ -8,10 +9,10 @@
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:hl7="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif"  exclude-result-prefixes="hl7 xsi xsl fo mif">
-
+	
 	<!-- A.1. Case Safety Report (level of investigationEvent)-->
 	<xsl:template name="safetyreportheader">
 		<!-- A.1.0.1 Sender’s Case Safety Report Unique Identifier -->
@@ -100,21 +101,21 @@
 		<!-- A.1.12.r Identification number of the report which is linked to this report -->
 		<xsl:apply-templates select="hl7:outboundRelationship/hl7:relatedInvestigation/hl7:subjectOf2/hl7:controlActEvent/hl7:id" mode="LinkedReport"/>
 	</xsl:template>
-
+	
 	<!-- A.1.1 Primary source country - Rule STR-01 -->
 	<xsl:template match="hl7:relatedInvestigation" mode="ps-country">
 		<primarysourcecountry>
 			<xsl:value-of select="hl7:subjectOf2/hl7:controlActEvent/hl7:author/hl7:assignedEntity/hl7:assignedPerson/hl7:asLocatedEntity/hl7:location/hl7:code/@code"/>
 		</primarysourcecountry>
 	</xsl:template>
-
+	
 	<!-- A.1.2 Occur country - Rule STR-02 -->
 	<xsl:template match="hl7:subjectOf2" mode="occur-country">
 		<occurcountry>
 			<xsl:value-of select="hl7:observation/hl7:location/hl7:locatedEntity/hl7:locatedPlace/hl7:code/@code"/>
 		</occurcountry>
 	</xsl:template>
-
+	
 	<!-- A.1.5. Seriousness = all the seriousness criteria set for any event B.2.i.2 fields -->
 	<xsl:template name="Seriousness">
 		<xsl:apply-templates select="hl7:component/hl7:adverseEventAssessment/hl7:subject1/hl7:primaryRole" mode="serious">
@@ -145,11 +146,11 @@
 			<xsl:with-param name="observationCode"><xsl:value-of select="$OtherMedicallyImportantCondition" /></xsl:with-param>
 		</xsl:apply-templates>
 	</xsl:template>
-
+	
 	<!-- A.1.5 - serious if any seriousness criteria in any serious event-->
 	<xsl:template match="hl7:primaryRole" mode="serious">
 		<xsl:param name="elementName"/>
-		<xsl:variable name="allSeriousness"
+		<xsl:variable name="allSeriousness" 
 			select="count(hl7:subjectOf2/hl7:observation/hl7:outboundRelationship2/hl7:observation[hl7:code/@code=$ResultsInDeath]/hl7:value[@value='true']) + count(hl7:subjectOf2/hl7:observation/hl7:outboundRelationship2/hl7:observation[hl7:code/@code=$LifeThreatening]/hl7:value[@value='true']) + count(hl7:subjectOf2/hl7:observation/hl7:outboundRelationship2/hl7:observation[hl7:code/@code=$CausedProlongedHospitalisation]/hl7:value[@value='true']) + count(hl7:subjectOf2/hl7:observation/hl7:outboundRelationship2/hl7:observation[hl7:code/@code=$DisablingIncapaciting]/hl7:value[@value='true']) + count(hl7:subjectOf2/hl7:observation/hl7:outboundRelationship2/hl7:observation[hl7:code/@code=$CongenitalAnomalyBirthDefect]/hl7:value[@value='true']) + count(hl7:subjectOf2/hl7:observation/hl7:outboundRelationship2/hl7:observation[hl7:code/@code=$OtherMedicallyImportantCondition]/hl7:value[@value='true'])"/>
 		<xsl:element name="{$elementName}">
 			<xsl:choose>
@@ -158,7 +159,7 @@
 			</xsl:choose>
 		</xsl:element>
 	</xsl:template>
-
+	
 	<!-- service that transforms any seriousness from R3 to R2 -->
 	<xsl:template match="hl7:primaryRole" mode="seriousness">
 		<xsl:param name="elementName"/>
@@ -174,7 +175,7 @@
 			</xsl:choose>
 		</xsl:element>
 	</xsl:template>
-
+	
 	<!-- A.1.8.1.r.1 - DocumentList = concat all documents with seperator-->
 	<xsl:template name="DocumentList">
 		<xsl:param name="NarrativeText"/>
@@ -199,7 +200,7 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-
+	
 	<!-- A.1.11.r.1 - A.1.11.r.2 Other case identifiers in previous transmissions-->
 	<xsl:template name="ReportDuplicate">
 		<xsl:param name="NarrativeText"/>
@@ -228,7 +229,7 @@
 			</xsl:choose>
 		</xsl:for-each>
 	</xsl:template>
-
+	
 	<!-- A.1.12.r Identification number of the report which is linked to this report -->
 	<xsl:template match="hl7:id" mode="LinkedReport">
 		<xsl:if test="string-length(@extension)>0">

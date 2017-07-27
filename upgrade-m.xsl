@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Viewsion Style-Sheet (Upgrade - M Part)
+<!--
+		Conversion Style-Sheet (Upgrade - M Part)
 
 		Version:		0.9
 		Date:			21/06/2011
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif">
 
 	<!-- Batch Header : M.1.1, M.1.4 and M.1.7 -->
@@ -49,7 +50,7 @@
 			</device>
 		</sender>
 	</xsl:template>
-
+	
 	<!-- Batch Footer : M.1.5 and M.1.6 -->
 	<xsl:template match="ichicsrmessageheader" mode="part-c">
 		<receiver typeCode="RCV">
@@ -63,5 +64,5 @@
 			</device>
 		</sender>
 	</xsl:template>
-
+	
 </xsl:stylesheet>

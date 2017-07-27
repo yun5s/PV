@@ -11,6 +11,7 @@ import javax.xml.transform.stream.StreamSource;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Observable;
@@ -19,7 +20,7 @@ import model.Model;
 /**
  * Created by MaiwandMaidanwal on 21/07/2017.
  */
-public class Controller  extends Observable implements ActionListener {
+public class Controller{
 
     private Model model;
 
@@ -35,10 +36,23 @@ public class Controller  extends Observable implements ActionListener {
 
         System.out.println(" will call the models transformation now.");
 
-        model.transformerDownICSR();
+//        model.transformerDownICSR();
 
-        System.out.println("errors begin");
 
+        TransformerFactory factory = TransformerFactory.newInstance();
+        Source xslt = new StreamSource(new File("downgrade-icsr.xsl"));
+        Transformer transformer = factory.newTransformer(xslt);
+
+
+        Source text = new StreamSource(new File(model.getChosenInputFile()));
+        System.out.println("chosen input file" + text);
+
+
+        transformer.transform(text, new StreamResult(new File(model.getChosenOutputFile())));
+        System.out.println("chosen output file" + model.getChosenOutputFile());
+
+
+    }
 
 
 
@@ -76,13 +90,4 @@ public class Controller  extends Observable implements ActionListener {
 //        }
 //
 
-
-
-    }
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 }
