@@ -103,7 +103,38 @@ public class View{
                 if (getBackwardsICSR().isSelected()) {
                     System.out.println(" backwardsICSR has been selected fam.");
                     try {
-                        controller.testConversions();
+                        model.transformerDownICSR();
+                    } catch (TransformerException e1) {
+                        e1.printStackTrace();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (URISyntaxException e1) {
+                        e1.printStackTrace();
+                    }
+//                    if (!inputButton.isSelected() && !outputButton.isSelected()) {
+//                        System.out.println("Please select your input and output files");
+//                    }
+
+                }
+
+                else if(getForwardsICSR().isSelected()){
+                    System.out.println(" ForwardsICSR has been selected fam.");
+
+                    try {
+                        model.transformerUpICSR();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (URISyntaxException e1) {
+                        e1.printStackTrace();
+                    } catch (TransformerException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+
+                else if (getBackwardsACK().isSelected()){
+
+                    try {
+                        model.transformerDownAck();
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (URISyntaxException e1) {
@@ -112,29 +143,27 @@ public class View{
                         e1.printStackTrace();
                     }
 
-//                    if (!inputButton.isSelected() && !outputButton.isSelected()) {
-//                        System.out.println("Please select your input and output files");
-//                    }
-
                 }
+
+                else if (getForwardsACK().isSelected()){
+
+                    try {
+                        model.transformerUpAck();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (URISyntaxException e1) {
+                        e1.printStackTrace();
+                    } catch (TransformerException e1) {
+                        e1.printStackTrace();
+                    }
+
+                } else{
+            System.out.println("Please select your option first.");
+              }
+
             }
         });
 
-
-//        backwardsICSR.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                try {
-//                    controller.testConversions();
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();
-//                } catch (URISyntaxException e2) {
-//                    e2.printStackTrace();
-//                } catch (TransformerException e3) {
-//                    e3.printStackTrace();
-//                }
-//            }
-//        });
 
 
     }
