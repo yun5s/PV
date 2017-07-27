@@ -33,7 +33,7 @@ public class Model{
             System.out.println("Your input file: " +
                     chooserInput.getSelectedFile().getName());
 
-            System.out.println("chosen Input method returns --> " + getChosenInputFile());
+            System.out.println("chosen Input method returns --> " + getChosenInputFileName());
 
 
 
@@ -57,7 +57,7 @@ public class Model{
         int returnVal = chooserOutput.showOpenDialog(null);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
 
-    System.out.println("chosen output method returns --> "+ getChosenOutputFile());
+    System.out.println("chosen output method returns --> "+ getChosenOutputFileName());
 
 
         }
@@ -66,14 +66,18 @@ public class Model{
 
 
     public String getChosenInputFile() {
-
-        return String.valueOf(chooserInput.getSelectedFile());
+        return String.valueOf(chooserInput.getSelectedFile());     //returns file location
+    }
+    public String getChosenOutputFile() {
+        return String.valueOf(chooserOutput.getSelectedFile());
     }
 
 
-    public String getChosenOutputFile() {
-
-        return String.valueOf(chooserOutput.getSelectedFile());
+    public String getChosenInputFileName(){
+        return chooserInput.getSelectedFile().getName();   //returns file name
+    }
+    public String getChosenOutputFileName(){
+        return chooserOutput.getSelectedFile().getName();
     }
 
 

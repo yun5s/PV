@@ -30,6 +30,8 @@ public class View{
     private JTabbedPane tabbedPane1;
     private JRadioButton backwardsACK;
     private JRadioButton forwardsACK;
+    private JLabel yourSelectedInputFile;
+    private JLabel yourSelectedOutputFile;
     private Model model;
     private Controller controller;
 
@@ -78,6 +80,11 @@ public class View{
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
+
+                if(model.getChosenInputFile() == null){
+                    yourSelectedInputFile.setText("Please Select An Input File");
+                }
+                else{ yourSelectedInputFile.setText(model.getChosenInputFileName());}
             }
 
         });
@@ -91,6 +98,11 @@ public class View{
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
+
+                if(model.getChosenOutputFile() == null){
+                    yourSelectedOutputFile.setText("Please Select An Output File");
+                }
+                else{ yourSelectedOutputFile.setText(model.getChosenOutputFileName());}
             }
         });
 
@@ -104,6 +116,7 @@ public class View{
                     System.out.println(" backwardsICSR has been selected fam.");
                     try {
                         model.transformerDownICSR();
+                        System.out.println("Conversion has been successful");
                     } catch (TransformerException e1) {
                         e1.printStackTrace();
                     } catch (IOException e1) {
@@ -122,6 +135,7 @@ public class View{
 
                     try {
                         model.transformerUpICSR();
+                        System.out.println("Conversion has been successful");
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (URISyntaxException e1) {
@@ -135,6 +149,7 @@ public class View{
 
                     try {
                         model.transformerDownAck();
+                        System.out.println("Conversion has been successful");
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (URISyntaxException e1) {
@@ -149,6 +164,7 @@ public class View{
 
                     try {
                         model.transformerUpAck();
+                        System.out.println("Conversion has been successful");
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (URISyntaxException e1) {

@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="528" y="149" width="720" height="474"/>
+      <xy x="528" y="149" width="720" height="483"/>
     </constraints>
     <properties>
       <background color="-131585"/>
@@ -24,7 +24,7 @@
           <text value="Convert!"/>
         </properties>
       </component>
-      <grid id="f1349" layout-manager="GridLayoutManager" row-count="8" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="f1349" layout-manager="GridLayoutManager" row-count="9" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
@@ -37,7 +37,7 @@
         <children>
           <component id="4a54" class="javax.swing.JSeparator">
             <constraints>
-              <grid row="0" column="2" row-span="3" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="2" row-span="4" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <orientation value="1"/>
@@ -55,7 +55,7 @@
           </component>
           <component id="aa050" class="javax.swing.JSeparator">
             <constraints>
-              <grid row="3" column="2" row-span="5" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="4" column="2" row-span="5" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <orientation value="1"/>
@@ -73,13 +73,13 @@
           </component>
           <component id="4dfda" class="javax.swing.JSeparator">
             <constraints>
-              <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
           <component id="6d049" class="javax.swing.JLabel">
             <constraints>
-              <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+              <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="&lt;HTML&gt;&lt;U&gt;2.        Choose input file:&lt;/U&gt;&lt;/HTML&gt;"/>
@@ -87,7 +87,7 @@
           </component>
           <component id="df78" class="javax.swing.JButton" binding="inputButton">
             <constraints>
-              <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="2" use-parent-layout="false">
+              <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="2" use-parent-layout="false">
                 <preferred-size width="170" height="40"/>
               </grid>
             </constraints>
@@ -103,7 +103,7 @@
           </component>
           <component id="7fad" class="javax.swing.JLabel">
             <constraints>
-              <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+              <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="&lt;HTML&gt;&lt;U&gt;4.      Choose output folder:&lt;/U&gt;&lt;/HTML&gt;"/>
@@ -111,7 +111,7 @@
           </component>
           <component id="94013" class="javax.swing.JButton" binding="outputFolderButton">
             <constraints>
-              <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="2" use-parent-layout="false">
+              <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="2" use-parent-layout="false">
                 <preferred-size width="170" height="40"/>
               </grid>
             </constraints>
@@ -123,20 +123,20 @@
           </component>
           <component id="ae1c8" class="javax.swing.JSeparator">
             <constraints>
-              <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
           <vspacer id="faa5a">
             <constraints>
-              <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+              <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="20"/>
               </grid>
             </constraints>
           </vspacer>
           <vspacer id="32b53">
             <constraints>
-              <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+              <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="20"/>
               </grid>
             </constraints>
@@ -155,7 +155,7 @@
           </component>
           <tabbedpane id="f6a75" binding="tabbedPane1" default-binding="true">
             <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+              <grid row="1" column="1" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="200" height="100"/>
               </grid>
             </constraints>
@@ -224,6 +224,22 @@
               </grid>
             </children>
           </tabbedpane>
+          <component id="37489" class="javax.swing.JLabel" binding="yourSelectedInputFile">
+            <constraints>
+              <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="84689" class="javax.swing.JLabel" binding="yourSelectedOutputFile">
+            <constraints>
+              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
         </children>
       </grid>
       <component id="e7e62" class="javax.swing.JProgressBar" binding="progressBar1" default-binding="true">
