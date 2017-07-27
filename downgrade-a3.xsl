@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-Viewsion Style-Sheet (Downgrade - A.3 Part)
+<!--Viewsion Style-Sheet (Downgrade - A.3 Part)
 		Input : 			ICSR File compliant with E2B(R3)
 		Output : 		ICSR File compliant with E2B(R2)
 
@@ -8,10 +8,10 @@
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0" 
+<xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:hl7="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif"  exclude-result-prefixes="hl7 xsi xsl fo mif">
-	
+
 	<!--	A.3.1. Sender -->
 	<xsl:template match="hl7:assignedEntity" mode="sender">
 		<sendertype>
@@ -100,11 +100,11 @@
 			</xsl:call-template>
 		</senderemailaddress>
 	</xsl:template>
-	
+
 	<xsl:template name="telecom">
 		<xsl:param name="type"/>
 		<xsl:param name="len"/>
 		<xsl:value-of select="substring(substring-after(hl7:telecom[starts-with(@value, $type)]/@value, $type), 1, $len)"/>
 	</xsl:template>
-	
+
 </xsl:stylesheet>

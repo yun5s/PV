@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-Viewsion Style-Sheet (Upgrade - B.3 Part)
+<!--Viewsion Style-Sheet (Upgrade - B.3 Part)
 
 		Version:		0.9
 		Date:			21/06/2011
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0" 
+<xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif">
 
-	<!-- Test : 
+	<!-- Test :
 	E2B(R2): element "test"
 	E2B(R3): element ""
 	-->
@@ -134,7 +134,7 @@
 			</subjectOf2>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<!-- B.3.r.3 Test Comments in an additional test occurrence -->
 	<xsl:template match="resultstestsprocedures">
 		<xsl:if test="string-length(.) > 0">
@@ -156,5 +156,5 @@
 			</subjectOf2>
 		</xsl:if>
 	</xsl:template>
-	
+
 </xsl:stylesheet>

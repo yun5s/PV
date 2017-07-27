@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-Viewsion Style-Sheet (Upgrade - B.1 Part)
+<!--Viewsion Style-Sheet (Upgrade - B.1 Part)
 
 		Version:		0.9
 		Date:			21/06/2011
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0" 
+<xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif">
 
 	<xsl:include href="upgrade-a5.xsl"/>
@@ -15,7 +15,7 @@
 	<xsl:include href="upgrade-b4.xsl"/>
 	<xsl:include href="upgrade-b5.xsl"/>
 
-	<!-- Patient (identification) : 
+	<!-- Patient (identification) :
 	E2B(R2): element "patient"
 	E2B(R3): element "primaryRole"
 	-->
@@ -124,8 +124,8 @@
 			</adverseEventAssessment>
 		</component>
 	</xsl:template>
-	
-	<!-- Parent (identification) : 
+
+	<!-- Parent (identification) :
 	E2B(R2): element "parent"
 	E2B(R3): element "role"
 	-->
@@ -223,7 +223,7 @@
 		</role>
 	</xsl:template>
 
-	<!-- Parent (medical history episode) : 
+	<!-- Parent (medical history episode) :
 	E2B(R2): element "parentmedicalhistoryepisode"
 	E2B(R3): element "role"
 	-->
@@ -281,7 +281,7 @@
 		</component>
 	</xsl:template>
 
-	<!-- Parent (past drug therapy) : 
+	<!-- Parent (past drug therapy) :
 	E2B(R2): element "parentpastdrugtherapy"
 	E2B(R3): element "role"
 	-->
@@ -366,8 +366,8 @@
 			</substanceAdministration>
 		</component>
 	</xsl:template>
-	
-		<!-- Patient (characteristics) : 
+
+		<!-- Patient (characteristics) :
 	E2B(R2): element "patient"
 	E2B(R3): element "primaryRole"
 	-->
@@ -393,7 +393,7 @@
 					</value>
 				</observation>
 			</subjectOf2>
-		</xsl:if>	
+		</xsl:if>
 		<!-- B.1.2.3. Age Group -->
 		<xsl:if test="string-length(patientagegroup) > 0">
 			<subjectOf2 typeCode="SBJ">
@@ -431,8 +431,8 @@
 			</subjectOf2>
 		</xsl:if>
 	</xsl:template>
-	
-	<!-- Patient (medical history episode) : 
+
+	<!-- Patient (medical history episode) :
 	E2B(R2): element "medicalhistoryepisode"
 	E2B(R3): element "primaryRole"
 	-->
@@ -489,8 +489,8 @@
 			</observation>
 		</component>
 	</xsl:template>
-	
-	<!-- Patient (past drug therapy) : 
+
+	<!-- Patient (past drug therapy) :
 	E2B(R2): element "patientpastdrugtherapy"
 	E2B(R3): element "primaryRole"
 	-->
@@ -574,7 +574,7 @@
 		</component>
 	</xsl:template>
 
-	<!-- Patient (reported cause of death) : 
+	<!-- Patient (reported cause of death) :
 	E2B(R2): element "patientdeathreport"
 	E2B(R3): element "primaryRole"
 	-->
@@ -604,8 +604,8 @@
 			</observation>
 		</subjectOf2>
 	</xsl:template>
-	
-	<!-- Patient (death) : 
+
+	<!-- Patient (death) :
 	E2B(R2): element "patientdeath"
 	E2B(R3): element "primaryRole"
 	-->
@@ -634,8 +634,8 @@
 			</subjectOf2>
 		</xsl:if>
 	</xsl:template>
-	
-	<!-- Patient (autopsy-determined cause of death) : 
+
+	<!-- Patient (autopsy-determined cause of death) :
 	E2B(R2): element "patientautopsy"
 	E2B(R3): element "primaryRole"
 	-->
@@ -665,5 +665,5 @@
 			</observation>
 		</outboundRelationship2>
 	</xsl:template>
-	
+
 </xsl:stylesheet>

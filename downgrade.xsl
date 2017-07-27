@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-Viewsion Style-Sheet (Downgrade Commons)
+<!--Viewsion Style-Sheet (Downgrade Commons)
 		Input : 			ICSR File compliant with E2B(R3)
 		Output : 		ICSR File compliant with E2B(R2)
 
@@ -8,12 +8,12 @@
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0" 
+<xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:hl7="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif"  exclude-result-prefixes="hl7 xsi xsl fo mif">
-	
+
 	<xsl:include href="oids.xsl"/>
-	
+
 	<!-- Other Variables used for Special Cases -->
 	<xsl:variable name="Decade">800</xsl:variable>
 	<xsl:variable name="Year">801</xsl:variable>
@@ -21,10 +21,10 @@
 	<xsl:variable name="Week">803</xsl:variable>
 	<xsl:variable name="Day">804</xsl:variable>
 	<xsl:variable name="Trimester">810</xsl:variable>
-	
+
 	<xsl:template name="getDateFormat">
 		<xsl:param name="precision"/>
-		
+
 		<xsl:choose>
 			<xsl:when test="$precision = 4">602</xsl:when> 	<!-- CCYY -->
 			<xsl:when test="$precision = 6">610</xsl:when> 	<!-- CCYYMM -->
@@ -46,7 +46,7 @@
 		<xsl:param name="date-value"/>
 		<xsl:param name="min-format"/>
 		<xsl:param name="max-format"/>
-		
+
 		<xsl:variable name="before-dot">
 			<xsl:choose>
 				<xsl:when test="string-length(substring-before($date-value, '.')) > 0"><xsl:value-of select="substring-before($date-value, '.')"/></xsl:when>
@@ -65,7 +65,7 @@
 				<xsl:otherwise><xsl:value-of select="$date-value"/></xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-		
+
 		<xsl:variable name="date">
 			<xsl:choose>
 				<xsl:when test="string-length($before-dot) &lt;= string-length($before-tz1) and string-length($before-dot) &lt;= string-length($before-tz2)"><xsl:value-of select="$before-dot"/></xsl:when>
@@ -73,7 +73,7 @@
 				<xsl:when test="string-length($before-tz2) &lt;= string-length($before-dot) and string-length($before-tz2) &lt;= string-length($before-tz1)"><xsl:value-of select="$before-tz2"/></xsl:when>
 			</xsl:choose>
 		</xsl:variable>
-		
+
 		<xsl:variable name="precision" select="string-length($date)"/>
 		<xsl:variable name="min-precision" select="string-length($min-format)"/>
 		<xsl:variable name="max-precision" select="string-length($max-format)"/>
@@ -84,7 +84,7 @@
 				<xsl:otherwise><xsl:value-of select="concat($elementName, 'format')"/></xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-		
+
 		<xsl:choose>
 			<!-- Same precision is accepted -->
 			<xsl:when test="$precision >= $min-precision and $max-precision >= $precision">
@@ -132,12 +132,12 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	
+
 	<!-- Extend a date with default digits -->
 	<xsl:template name="extend-date">
 		<xsl:param name="beg"/>
 		<xsl:param name="end"/>
-		
+
 		<xsl:choose>
 			<xsl:when test="$beg = 1">0</xsl:when>		<!-- C -->
 			<xsl:when test="$beg = 2">0</xsl:when>		<!-- C -->
@@ -204,5 +204,5 @@
 			<xsl:otherwise><xsl:value-of select="$id" /></xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	
+
 </xsl:stylesheet>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-Viewsion Style-Sheet (Downgrade - A.2 Part, including A.5)
+<!--Viewsion Style-Sheet (Downgrade - A.2 Part, including A.5)
 		Input : 			ICSR File compliant with E2B(R3)
 		Output : 		ICSR File compliant with E2B(R2)
 
@@ -8,10 +8,10 @@
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0" 
+<xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:hl7="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif"  exclude-result-prefixes="hl7 xsi xsl fo mif">
-	
+
 	<!-- A.2 Primary sources -->
 	<xsl:template match="hl7:assignedEntity" mode="primary-source">
 		<primarysource>
@@ -77,7 +77,7 @@
 			</xsl:if>
 		</primarysource>
 	</xsl:template>
-	
+
 	<!--	A.5. Study identification -->
 	<xsl:template match="hl7:researchStudy" mode="StudyIdentification">
 		<xsl:call-template name="StudyName">
@@ -91,7 +91,7 @@
 		</sponsorstudynumb>
 		<observestudytype><xsl:value-of select="hl7:code/@code"/></observestudytype>
 	</xsl:template>
-	
+
 	<!-- A.5.2 Study name -->
 	<xsl:template name="StudyName">
 		<xsl:param name="NarrativeText" />
@@ -136,8 +136,8 @@
 				</xsl:if>
 			</xsl:otherwise>
 		</xsl:choose>
-	</xsl:template>	
-	
+	</xsl:template>
+
 	<xsl:template match="*" mode="field-or-mask">
 		<xsl:param name="size">0</xsl:param>
 		<xsl:choose>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-Viewsion Style-Sheet (Upgrade)
+<!--Viewsion Style-Sheet (Upgrade)
 		Input : 			ICSR File compliant with E2B(R2)
 		Output : 		ICSR File compliant with E2B(R3)
 
@@ -8,16 +8,16 @@
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0" 
+<xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif">
 
 	<xsl:include href="upgrade.xsl"/>
 	<xsl:include href="upgrade-m.xsl"/>
 	<xsl:include href="upgrade-a1.xsl"/>
-	
+
 	<xsl:output indent="yes" method="xml" omit-xml-declaration="no" encoding="utf-8"/>
 	<xsl:strip-space elements="*"/>
-	
+
 	<!-- ICH ICSviewsion of the main structure incl. root element and controlActProcess
 	E2B(R2): root element "ichicsr"
 	E2B(R3): root element "PORR_IN049016UV"
@@ -33,7 +33,7 @@
 			<xsl:apply-templates select="/ichicsr/ichicsrmessageheader" mode="part-c"/>
 		</MCCI_IN200100UV01>
 	</xsl:template>
-	
+
 	<xsl:template match="safetyreport" mode="report">
 		<PORR_IN049016UV>
 			<!-- M.2.r.4 - Message Number-->
@@ -48,5 +48,5 @@
 			</controlActProcess>
 		</PORR_IN049016UV>
 	</xsl:template>
-	
+
 </xsl:stylesheet>

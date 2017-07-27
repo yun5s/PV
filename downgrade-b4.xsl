@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-Viewsion Style-Sheet (Downgrade - B.4 Part)
+<!--Viewsion Style-Sheet (Downgrade - B.4 Part)
 		Input : 			ICSR File compliant with E2B(R3)
 		Output : 		ICSR File compliant with E2B(R2)
 
@@ -8,10 +8,10 @@
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0" 
+<xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:hl7="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif"  exclude-result-prefixes="hl7 xsi xsl fo mif">
-	
+
 	<!--	B.4. Drug(s) Information	-->
 	<xsl:template name="Drug" >
 		<xsl:for-each select="hl7:component/hl7:adverseEventAssessment/hl7:subject1/hl7:primaryRole/hl7:subjectOf2/hl7:organizer[hl7:code/@code=$DrugInformation]/hl7:component/hl7:substanceAdministration">
@@ -30,9 +30,9 @@
 					</xsl:apply-templates>
 				</xsl:otherwise>
 			</xsl:choose>
-		</xsl:for-each>		
-	</xsl:template>	
-	
+		</xsl:for-each>
+	</xsl:template>
+
 	<xsl:template match="hl7:substanceAdministration"  mode="drug-tag">
 		<xsl:param name="DosageNum">0</xsl:param>
 		<xsl:variable name="DrugId" select="hl7:id/@extension"/>
@@ -140,7 +140,7 @@
 			<xsl:apply-templates select="../../../../../../hl7:component/hl7:causalityAssessment[hl7:code/@code = $Causality and hl7:subject2/hl7:productUseReference/hl7:id/@extension = $DrugId]" mode="drug-reaction"/>
 		</drug>
 	</xsl:template>
-	
+
 	<!-- B.4.k.10 Additional information on drug -->
 	<xsl:template match="hl7:substanceAdministration" mode="drug-additional">
 		<xsl:param name="DrugId"/>
@@ -159,7 +159,7 @@
 				; PARENT ROUTE : <xsl:value-of select="@code"/> <xsl:if test="hl7:originalText"> [<xsl:value-of select="hl7:originalText"/>]</xsl:if>
 				(<xsl:value-of select="@codeSystem"/> ; <xsl:value-of select="@codeSystemVersion"/>)
 			</xsl:for-each>
-			
+
 			<xsl:apply-templates select="hl7:outboundRelationship2/hl7:observation[hl7:code/@code=$CodedDrugInformation]" mode="drug-additional2"/>
 			<xsl:apply-templates select="hl7:outboundRelationship2/hl7:observation[hl7:code/@code=$AdditionalInformation]" mode="drug-additional3"/>
 		</xsl:variable>
@@ -168,7 +168,7 @@
 			<xsl:value-of select="$AdditionalInfo" />
 		</xsl:if>
 	</xsl:template>
-	
+
 	<!-- B.4.k.2.0; B.4.k.2.1; B.4.k.2.2; B.4.k.2.4 -->
 	<xsl:template match="hl7:instanceOfKind" mode="drug-manufactured-product">
 		<medicinalproduct>
@@ -186,16 +186,16 @@
 			<xsl:value-of select="hl7:subjectOf/hl7:productEvent[hl7:code/@code=$RetailSupply]/hl7:performer/hl7:assignedEntity/hl7:representedOrganization/hl7:addr/hl7:country"/>
 		</obtaindrugcountry>
 	</xsl:template>
-		
+
 	<!-- B.4.k.4.r.9 Batch/lot number -->
 	<xsl:template match="hl7:substanceAdministration" mode="drug-batch-number">
 		<drugbatchnumb>
 			<xsl:value-of select="hl7:consumable/hl7:instanceOfKind/hl7:productInstanceInstance/hl7:lotNumberText"/>
 		</drugbatchnumb>
 	</xsl:template>
-	
+
 	<!-- B.4.k.3 Holder and authorization/application number of drug -->
-	<xsl:template match="hl7:asManufacturedProduct" mode="drug-holder">		
+	<xsl:template match="hl7:asManufacturedProduct" mode="drug-holder">
 		<drugauthorizationnumb>
 			<xsl:value-of select="hl7:subjectOf/hl7:approval/hl7:id/@extension"/>
 		</drugauthorizationnumb>
@@ -206,7 +206,7 @@
 			<xsl:value-of select="hl7:subjectOf/hl7:approval/hl7:holder/hl7:role/hl7:playingOrganization/hl7:name"/>
 		</drugauthorizationholder>
 	</xsl:template>
-	
+
 	<!-- B.4.k.2.2 Medicinal product name as reported by the primary source -->
 	<xsl:template name="MedicinalProduct">
 		<xsl:if test="hl7:kindOfProduct/hl7:code/@codeSystem=$MPID">
@@ -221,7 +221,7 @@
 		<xsl:text>): </xsl:text>
 		<xsl:value-of select="hl7:kindOfProduct/hl7:name"/>
 	</xsl:template>
-	
+
 	<!-- B.4.k.2.3.r.1 Active Ingredient name -->
 	<xsl:template match="hl7:ingredientSubstance" mode="active-substance-name">
 		<activesubstance>
@@ -238,7 +238,7 @@
 			</activesubstancename>
 		</activesubstance>
 	</xsl:template>
-	
+
 	<!-- B.4.k.2.3.r.1 Active Ingredient name -->
 	<xsl:template name="ActiveIngredient">
 		<xsl:if test="string-length(hl7:code/@code) > 0">
@@ -250,7 +250,7 @@
 		</xsl:if>
 		<xsl:value-of select="hl7:name"/>
 	</xsl:template>
-	
+
 	<!-- B.4.k.4.r1 - 5 Dosage Information -->
 	<xsl:template match="hl7:substanceAdministration" mode="drug-dosage-information1">
 		<drugstructuredosagenumb>
@@ -275,7 +275,7 @@
 			</drugintervaldosagedefinition>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<!-- B.4.k.5 cumulative dose to the reaction/event -->
 	<xsl:template match="hl7:observation" mode="drug-cumulative-dosage">
 		<drugcumulativedosagenumb>
@@ -288,7 +288,7 @@
 			</xsl:call-template>
 		</drugcumulativedosageunit>
 	</xsl:template>
-	
+
 	<!-- B.4.k.4.r.10 - 13 Dosage Information -->
 	<xsl:template match="hl7:substanceAdministration" mode="drug-dosage-information2">
 		<drugdosagetext>
@@ -341,7 +341,7 @@
 			</drugparadministration>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<!-- B.4.k.6 Gestation period at time of exposure -->
 	<xsl:template match="hl7:observation" mode="reaction-gestation-period">
 		<reactiongestationperiod>
@@ -361,7 +361,7 @@
 			</xsl:choose>
 		</reactiongestationperiodunit>
 	</xsl:template>
-	
+
 	<!-- B.4.k.7.r.1 Indication for use in the case from primary source -->
 	<xsl:template match="hl7:observation" mode="drug-indication">
 		<drugindicationmeddraversion>
@@ -371,7 +371,7 @@
 			<xsl:value-of select="hl7:value/@code"/>
 		</drugindication>
 	</xsl:template>
-	
+
 	<!-- B.4.k.4.r.6 Date of start of drug -->
 	<xsl:template match="hl7:substanceAdministration" mode="drug-start-date">
 		<xsl:if test="hl7:effectiveTime/hl7:comp[@xsi:type='IVL_TS']/hl7:low/@value">
@@ -383,7 +383,7 @@
 			</xsl:call-template>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<!-- B.4.k.9.r.3.1 - Time interval between beginning  of drug administration and start of reaction/event -->
 	<xsl:template name="drug-period-sas">
 		<drugstartperiod>
@@ -396,7 +396,7 @@
 			</xsl:call-template>
 		</drugstartperiodunit>
 	</xsl:template>
-	
+
 	<!-- B.4.k.9.r.3.2 - Time interval between beginning  of drug administration and end of reaction/event -->
 	<xsl:template name="drug-period-sae">
 		<druglastperiod>
@@ -409,7 +409,7 @@
 			</xsl:call-template>
 		</druglastperiodunit>
 	</xsl:template>
-	
+
 	<!-- B.4.k.4.r.7; B.4.k.4.r.8 - Date of last/ Duration of drug administration -->
 	<xsl:template match="hl7:substanceAdministration" mode="drug-end-date">
 		<xsl:if test="hl7:effectiveTime/hl7:comp[@xsi:type='IVL_TS']/hl7:high/@value">
@@ -432,7 +432,7 @@
 			</drugtreatmentdurationunit>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<!-- B.4.k.19. Additional information on drug - Part 1 -->
 	<xsl:template match="hl7:ingredient" mode="drug-additional1">
 		<xsl:if test="string-length(hl7:quantity/hl7:numerator/@value) > 0">
@@ -451,7 +451,7 @@
 			<xsl:text>; </xsl:text>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<!-- B.4.k.19. Additional information on drug - Part 2 -->
 	<xsl:template match="hl7:observation" mode="drug-additional2">
 		<xsl:call-template name="getText">
@@ -462,12 +462,12 @@
 			<xsl:text>, </xsl:text>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<!-- B.4.k.19. Additional information on drug - Part 3 -->
 	<xsl:template match="hl7:observation" mode="drug-additional3">
 		<xsl:text>, </xsl:text><xsl:value-of select="hl7:value"/>
 	</xsl:template>
-	
+
 	<!-- B.4.k.9.r.4 Did reaction recur on readministration? -->
 	<xsl:template match="hl7:observation" mode="drug-recurrence">
 		<xsl:if test="hl7:value/@code = 1">

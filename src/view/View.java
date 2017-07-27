@@ -3,16 +3,11 @@ package view;
 import controller.Controller;
 
 import javax.swing.*;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamSource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -21,7 +16,7 @@ import model.Model;
 /**
  * Created by MaiwandMaidanwal on 20/07/2017.
  */
-public class View {
+public class View implements Observer{
     private JButton convertButton;
     private JPanel panel1;
     private JTextField welcomeTextField;
@@ -29,26 +24,33 @@ public class View {
     private JButton outputButton;
     private JButton outputFolderButton;
     private JProgressBar progressBar1;
-    private JRadioButton backwards;
-    private JRadioButton forwards;
+    private JRadioButton backwardsICSR;
+    private JRadioButton forwardsICSR;
     private JLabel chooseConversion;
     private JTabbedPane tabbedPane1;
-    private JRadioButton backwardsR3ToR2RadioButton;
-    private JRadioButton forwardsR2ToR3RadioButton;
+    private JRadioButton backwardsACK;
+    private JRadioButton forwardsACK;
     private Model model;
+    private Controller controller;
 
-    public View() {
+    public View(Model model, Controller controller) {
 
         Font font = welcomeTextField.getFont();
         Map attributes = font.getAttributes();
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         welcomeTextField.setFont(font.deriveFont(attributes));
 
-        model = new Model();
+        this.model = model;
+        this.controller = controller;
 
-        ButtonGroup group = new ButtonGroup();
-        group.add(forwards);
-        group.add(backwards);
+        ButtonGroup groupICSR = new ButtonGroup();
+        groupICSR.add(forwardsICSR);
+        groupICSR.add(backwardsICSR);
+
+        ButtonGroup groupACK = new ButtonGroup();
+        groupACK.add(forwardsACK);
+        groupACK.add(backwardsACK);
+
 
 //        java.util.Timer t = new Timer()
 
@@ -66,28 +68,26 @@ public class View {
             }
         });
 
+
         inputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Controller of = new Controller();
-
                 try {
-                    of.pickFile();
+                    model.pickInputFile();
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
             }
 
         });
+
         outputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Controller of = new Controller();
-
                 try {
-                    of.pickFile();
+                    model.pickOutputFile();
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -99,43 +99,73 @@ public class View {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                try {
-                    model.transform();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                } catch (URISyntaxException e1) {
-                    e1.printStackTrace();
-                } catch (TransformerException e1) {
-                    e1.printStackTrace();
+
+                if (backwardsICSR.isSelected()) {
+                    System.out.println(" backwardsICSR has been selected fam.");
+                    try {
+                        controller.testConversions();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (URISyntaxException e1) {
+                        e1.printStackTrace();
+                    } catch (TransformerException e1) {
+                        e1.printStackTrace();
+                    }
+
+                    if (!inputButton.isSelected() && !outputButton.isSelected()) {
+                        System.out.println("Please select your input and output files");
+                    }
+
                 }
             }
         });
+
+
+        backwardsICSR.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.testConversions();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (URISyntaxException e2) {
+                    e2.printStackTrace();
+                } catch (TransformerException e3) {
+                    e3.printStackTrace();
+                }
+            }
+        });
+
+
     }
 
-    public javax.swing.JPanel getPanel1(){
-
-        return panel1;
-    }
-
-    public JRadioButton getBackwards() {
-        return backwards;
-    }
-
-    public JRadioButton getForwards() {
-        return forwards;
-    }
 
 
-    public void conversionType() throws IOException, URISyntaxException, TransformerException {
+            public javax.swing.JPanel getPanel1() {
 
-        if(backwards.isSelected()){
+                return panel1;
+            }
 
-            TransformerFactory factory = TransformerFactory.newInstance();
-            Source xslt = new StreamSource(new File("downgrade-icsr.xsl"));
-            Transformer transformer = factory.newTransformer(xslt);
-        }
+            public JRadioButton getBackwardsICSR() {
+                return backwardsICSR;
+            }
 
-        else if(forwards.isSelected())
+            public JRadioButton getForwardsICSR() {
+                return forwardsICSR;
+            }
+
+
+            public JRadioButton getBackwardsACK() {
+                return backwardsACK;
+            }
+
+            public JRadioButton getForwardsACK() {
+                return forwardsACK;
+            }
+
+
+    @Override
+    public void update(Observable o, Object arg) {
 
 
     }

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-Viewsion Style-Sheet (Upgrade - A.2 Part)
+<!--Viewsion Style-Sheet (Upgrade - A.2 Part)
 
 		Version:		0.9
 		Date:			21/06/2011
 		Status:		Step 2
 		Author:		Laurent DESQUEPER (EU)
 -->
-<xsl:stylesheet version="1.0" 
+<xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif">
 
-	<!-- Primary Source : 
+	<!-- Primary Source :
 	E2B(R2): element "primarysource"
 	E2B(R3): element "relatedInvestigation"
 	-->
@@ -109,7 +109,7 @@
 	<xsl:template name="field-or-mask">
 		<xsl:param name="element"/>
 		<xsl:param name="value"/>
-		
+
 		<xsl:if test="string-length($value) > 0">
 			<xsl:element name="{$element}">
 				<xsl:choose>
@@ -120,5 +120,5 @@
 			</xsl:element>
 		</xsl:if>
 	</xsl:template>
-	
+
 </xsl:stylesheet>
