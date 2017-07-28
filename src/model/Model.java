@@ -17,7 +17,6 @@ public class Model{
 
     JFileChooser chooserInput = new JFileChooser();
     JFileChooser chooserOutput = new JFileChooser();
-    //private Transformer transformer;
 
 
     public void pickInputFile() throws Exception{
@@ -92,7 +91,6 @@ public class Model{
 
         Source text = new StreamSource(new File(getChosenInputFile()));
         transformer.transform(text, new StreamResult(new File(getChosenOutputFile())));
-
     }
 
 
@@ -104,6 +102,7 @@ public class Model{
 
         Source text = new StreamSource(new File(getChosenInputFile()));
         transformer.transform(text, new StreamResult(new File(getChosenOutputFile())));
+
     }
 
 
@@ -115,6 +114,7 @@ public class Model{
 
         Source text = new StreamSource(new File(getChosenInputFile()));
         transformer.transform(text, new StreamResult(new File(getChosenOutputFile())));
+
     }
 
     public void transformerUpAck() throws IOException, URISyntaxException, TransformerException {
@@ -125,7 +125,10 @@ public class Model{
 
         Source text = new StreamSource(new File(getChosenInputFile()));
         transformer.transform(text, new StreamResult(new File(getChosenOutputFile())));
+
     }
+
+
 
 
 
