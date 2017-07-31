@@ -5,6 +5,7 @@ import controller.Controller;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
 import model.Model;
+import org.xml.sax.SAXException;
 
 import static com.sun.tools.internal.xjc.reader.Ring.add;
 
@@ -93,17 +95,18 @@ public class View{
 
                 try {
                     model.pickInputFile();
+                    if(model.getChosenInputFile() == null || (model.getChosenInputFile() != null && ("".equals(model.getChosenInputFile()))))
+                    {
+                        yourSelectedInputFile.setText("Please Select An Input File");
+                    }
+                    else{ yourSelectedInputFile.setText(model.getChosenInputFileName());
+                        progressBar.setValue(40);
+                    }
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
 
-                if(model.getChosenInputFile() == null || (model.getChosenInputFile() != null && ("".equals(model.getChosenOutputFile()))))
-                        {
-                    yourSelectedInputFile.setText("Please Select An Input File");
-                }
-                else{ yourSelectedInputFile.setText(model.getChosenInputFileName());
-                    progressBar.setValue(40);
-                }
+
             }
 
         });
@@ -114,18 +117,32 @@ public class View{
 
                 try {
                     model.pickOutputFile();
+
+                    if(model.getChosenOutputFile() == null){
+                        yourSelectedOutputFile.setText("Please Select An Output File");
+                    }
+                    else{ yourSelectedOutputFile.setText(model.getChosenOutputFileName());
+                        progressBar.setValue(60);
+                    }
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
 
-                if(model.getChosenOutputFile() == null){
-                    yourSelectedOutputFile.setText("Please Select An Output File");
-                }
-                else{ yourSelectedOutputFile.setText(model.getChosenOutputFileName());
-                    progressBar.setValue(60);
+            }
+        });
+
+
+        outputFolderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    model.pickFolder();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
                 }
             }
         });
+
 
 
 
@@ -180,6 +197,10 @@ public class View{
                     } catch (URISyntaxException e1) {
                         e1.printStackTrace();
                     } catch (TransformerException e1) {
+                        e1.printStackTrace();
+                    } catch (SAXException e1) {
+                        e1.printStackTrace();
+                    } catch (ParserConfigurationException e1) {
                         e1.printStackTrace();
                     }
                 }
