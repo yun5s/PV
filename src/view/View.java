@@ -137,6 +137,7 @@ public class View{
             public void actionPerformed(ActionEvent e) {
                 try {
                     model.pickFolder();
+//                    model.createNewBlankFile();
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -156,7 +157,7 @@ public class View{
 
                     progressBar.setValue(100);
 
-                    JOptionPane.showMessageDialog(null, "Transformation has been successful!");
+                    JOptionPane.showMessageDialog(null, "Conversion is successful! \nPlease press OK to finalise.");
 
                 }else if (!inputButton.isSelected() && !outputButton.isSelected()) {
 
@@ -191,7 +192,9 @@ public class View{
 
                     try {
                         model.transformerUpICSR();
+//                        model.readAndWriteToNewFile();
                         System.out.println("Conversion has been successful");
+
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (URISyntaxException e1) {

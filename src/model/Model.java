@@ -1,9 +1,6 @@
 package model;
 
-import jdk.internal.org.xml.sax.InputSource;
-import jdk.internal.org.xml.sax.SAXException;
 import org.w3c.dom.Document;
-import org.xml.sax.EntityResolver;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -15,10 +12,7 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.StringReader;
+import java.io.*;
 import java.net.URISyntaxException;
 
 
@@ -28,6 +22,7 @@ import java.net.URISyntaxException;
 public class Model{
 
     private DocumentBuilder db;
+    private String folderFilePath;
     JFileChooser chooserInput = new JFileChooser();
     JFileChooser chooserOutput = new JFileChooser();
     JFileChooser chooserFolder = new JFileChooser();
@@ -90,19 +85,40 @@ public class Model{
 
 
         chooserFolder.setDialogTitle("Specify your save location");
-        int file = chooserFolder.showSaveDialog(null);
+
+
+        //set it to be a save dialog
+        chooserFolder.setDialogType(JFileChooser.SAVE_DIALOG);
+        chooserFolder.setSelectedFile(new File("myfile.xml"));
+//Set an extension filter, so the user sees other XML files
+        chooserFolder.setFileFilter(new FileNameExtensionFilter("xml file","xml"));
+
 
         int userSelection = chooserFolder.showSaveDialog(null);
 
-
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = chooserFolder.getSelectedFile();
+
+            if (fileToSave.createNewFile()){
+                System.out.println("File is created!");
+            }else{
+                System.out.println("File already exists.");
+            }
+
+
             System.out.println("Save as file: " + fileToSave.getAbsolutePath());
 
 
-        }
 
-    }
+            folderFilePath = fileToSave.getAbsolutePath();
+
+
+
+
+            }
+
+
+        }
 
 
 
@@ -139,7 +155,6 @@ public class Model{
 
     public void transformerUpICSR() throws IOException, URISyntaxException, TransformerException, ParserConfigurationException, org.xml.sax.SAXException {
 
-
         ignoreDOCTYPE();
         Document doc = db.parse(new FileInputStream(getChosenInputFile()));
 
@@ -147,18 +162,14 @@ public class Model{
         Source xslt = new StreamSource(new File("upgrade-icsr.xsl"));
         Transformer transformer = factory.newTransformer(xslt);
 
-//        Source text = new StreamSource(new File(getChosenInputFile()));
-
-        Document newdoc = db.newDocument();
-        Result XmlResult = new DOMResult(newdoc);
-
         transformer.transform(
                 new DOMSource(doc.getDocumentElement()),
-//                XmlResult); //    option1:  to store into a variable.
+                new StreamResult(new File(folderFilePath)));
 
-        new StreamResult(new File(getChosenOutputFile())));     //option2 : to print into chosen output file
-
+//        readAndWriteToNewFile();
     }
+
+
 
 
     public void ignoreDOCTYPE() throws ParserConfigurationException {
@@ -174,10 +185,6 @@ public class Model{
 
         db = dbf.newDocumentBuilder();
     }
-
-
-
-
 
 
 
@@ -212,10 +219,21 @@ public class Model{
 
 
 
-
-
-
-
+//    public void readAndWriteToNewFile() throws IOException {
+//
+//                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("fromVariableToFile.xml"), "UTF-8"));
+//                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folderFilePath), "UTF-8"));
+//
+//                String line = null;
+//
+//                while ((line = reader.readLine()) != null)
+//                {
+//                    writer.write(line);
+//                }
+//
+//                reader.close();
+//                writer.close();
+//            }
 
 
 
