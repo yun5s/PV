@@ -3,7 +3,6 @@ package view;
 import controller.Controller;
 
 import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -16,7 +15,6 @@ import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.*;
 import model.Model;
 import org.xml.sax.SAXException;
@@ -31,7 +29,6 @@ public class View{
     private JPanel panel1;
     private JTextField welcomeTextField;
     private JButton inputButton;
-    private JButton outputButton;
     private JButton outputFolderButton;
     private JProgressBar progressBar;
     private JRadioButton backwardsICSR;
@@ -41,9 +38,7 @@ public class View{
     private JRadioButton backwardsACK;
     private JRadioButton forwardsACK;
     private JLabel yourSelectedInputFile;
-    private JLabel yourSelectedOutputFile;
     private JLabel logoLabel;
-    private JLabel inputLabel;
     private Model model;
     private Controller controller;
 
@@ -81,6 +76,7 @@ public class View{
 //        }
         setLogoImage();
     setInputImage();
+    setFolderImage();
 
 
 //        java.util.Timer t = new Timer()
@@ -111,25 +107,6 @@ public class View{
 
         });
 
-        outputButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                try {
-                    model.pickOutputFile();
-
-                    if(model.getChosenOutputFile() == null){
-                        yourSelectedOutputFile.setText("Please Select An Output File");
-                    }
-                    else{ yourSelectedOutputFile.setText(model.getChosenOutputFileName());
-                        progressBar.setValue(60);
-                    }
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
-
-            }
-        });
 
 
         outputFolderButton.addActionListener(new ActionListener() {
@@ -137,6 +114,8 @@ public class View{
             public void actionPerformed(ActionEvent e) {
                 try {
                     model.pickFolder();
+                    progressBar.setValue(75);
+
 //                    model.createNewBlankFile();
                 } catch (Exception e1) {
                     e1.printStackTrace();
@@ -152,93 +131,84 @@ public class View{
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                if(!(backwardsICSR.isSelected() || forwardsICSR.isSelected() || backwardsACK.isSelected() || forwardsACK.isSelected())){
 
-                if(!(model.getChosenInputFile() == null) && !(model.getChosenOutputFile() == null)) {
+                    JOptionPane.showMessageDialog(null, "Please select your conversion type");
 
-                    progressBar.setValue(100);
-
-                    JOptionPane.showMessageDialog(null, "Conversion is successful! \nPlease press OK to finalise.");
-
-                }else if (!inputButton.isSelected() && !outputButton.isSelected()) {
+                }
+                else if((model.getChosenInputFile() == null) || (model.getfolderFilePath() == null)) {
 
                     JOptionPane.showMessageDialog(null, "Please select your input and output files");
 
-                }else{
-                    JOptionPane.showMessageDialog(null, "Transformation has failed please restart application.");}
+                }else {
 
-
-
-
-
-
-                if (getBackwardsICSR().isSelected()) {
-                    System.out.println(" backwardsICSR has been selected fam.");
-                    try {
-                        model.transformerDownICSR();
-                        System.out.println("Conversion has been successful");
-                    } catch (TransformerException e1) {
-                        e1.printStackTrace();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (URISyntaxException e1) {
-                        e1.printStackTrace();
-                    }
+                    if (getBackwardsICSR().isSelected()) {
+                        try {
+                            model.transformerDownICSR();
+                            JOptionPane.showMessageDialog(null, "Conversion is successful!");
+                        } catch (TransformerException e1) {
+                            e1.printStackTrace();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (SAXException e1) {
+                            e1.printStackTrace();
+                        } catch (ParserConfigurationException e1) {
+                            e1.printStackTrace();
+                        }
 //
 
-                }
+                    } else if (getForwardsICSR().isSelected()) {
 
-                else if(getForwardsICSR().isSelected()){
-                    System.out.println(" ForwardsICSR has been selected fam.");
-
-                    try {
-                        model.transformerUpICSR();
+                        try {
+                            model.transformerUpICSR();
 //                        model.readAndWriteToNewFile();
-                        System.out.println("Conversion has been successful");
+                            JOptionPane.showMessageDialog(null, "Conversion is successful!");
 
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (URISyntaxException e1) {
-                        e1.printStackTrace();
-                    } catch (TransformerException e1) {
-                        e1.printStackTrace();
-                    } catch (SAXException e1) {
-                        e1.printStackTrace();
-                    } catch (ParserConfigurationException e1) {
-                        e1.printStackTrace();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (TransformerException e1) {
+                            e1.printStackTrace();
+                        } catch (SAXException e1) {
+                            e1.printStackTrace();
+                        } catch (ParserConfigurationException e1) {
+                            e1.printStackTrace();
+                        }
+                    } else if (getBackwardsACK().isSelected()) {
+
+                        try {
+                            model.transformerDownAck();
+                            JOptionPane.showMessageDialog(null, "Conversion is successful!");
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (TransformerException e1) {
+                            e1.printStackTrace();
+                        } catch (SAXException e1) {
+                            e1.printStackTrace();
+                        } catch (ParserConfigurationException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    } else if (getForwardsACK().isSelected()) {
+
+                        try {
+                            model.transformerUpAck();
+                            JOptionPane.showMessageDialog(null, "Conversion is successful!");
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (TransformerException e1) {
+                            e1.printStackTrace();
+                        } catch (SAXException e1) {
+                            e1.printStackTrace();
+                        } catch (ParserConfigurationException e1) {
+                            e1.printStackTrace();
+                        }
+
                     }
+
+                    progressBar.setValue(100);
+
+
                 }
-
-                else if (getBackwardsACK().isSelected()){
-
-                    try {
-                        model.transformerDownAck();
-                        System.out.println("Conversion has been successful");
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (URISyntaxException e1) {
-                        e1.printStackTrace();
-                    } catch (TransformerException e1) {
-                        e1.printStackTrace();
-                    }
-
-                }
-
-                else if (getForwardsACK().isSelected()){
-
-                    try {
-                        model.transformerUpAck();
-                        System.out.println("Conversion has been successful");
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (URISyntaxException e1) {
-                        e1.printStackTrace();
-                    } catch (TransformerException e1) {
-                        e1.printStackTrace();
-                    }
-
-                } else{
-            System.out.println("Please select your option first.");
-              }
 
             }
         });
@@ -357,13 +327,32 @@ public class View{
             e.printStackTrace();
         }
 
-        inputButton.setSize(60,60);
+        inputButton.setSize(70,70);
         Image dimg = img.getScaledInstance(inputButton.getWidth(), inputButton.getHeight(),
                 Image.SCALE_SMOOTH);
 
         ImageIcon imageIcon = new ImageIcon(dimg);
 
         inputButton.setIcon(imageIcon);
+
+    }
+
+    public void setFolderImage(){
+
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File("src/images/folder.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        outputFolderButton.setSize(70,70);
+        Image dimg = img.getScaledInstance(outputFolderButton.getWidth(), outputFolderButton.getHeight(),
+                Image.SCALE_SMOOTH);
+
+        ImageIcon imageIcon = new ImageIcon(dimg);
+
+        outputFolderButton.setIcon(imageIcon);
 
     }
 

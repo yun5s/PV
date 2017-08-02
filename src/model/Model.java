@@ -1,6 +1,8 @@
 package model;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -24,7 +26,6 @@ public class Model{
     private DocumentBuilder db;
     private String folderFilePath;
     JFileChooser chooserInput = new JFileChooser();
-    JFileChooser chooserOutput = new JFileChooser();
     JFileChooser chooserFolder = new JFileChooser();
 
 
@@ -33,52 +34,19 @@ public class Model{
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "XML files", "XML", "XSL");
 
-        java.io.File file = chooserInput.getSelectedFile();
+//        java.io.File file = chooserInput.getSelectedFile();
 
         chooserInput.setFileFilter(filter);
         int returnVal = chooserInput.showOpenDialog(null);
+
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             System.out.println("Your input file: " +
                     chooserInput.getSelectedFile().getName());
 
-            System.out.println("chosen Input method returns --> " + getChosenInputFileName());
-
-
-
         }
 
     }
 
-    public JFileChooser getChooserInput(){
-        return chooserInput;
-    }
-
-
-
-    public void pickOutputFile() throws Exception{
-
-
-        java.io.File file = chooserOutput.getSelectedFile();
-
-
-
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "XML files", "XML", "XSL");
-
-
-        chooserOutput.setFileFilter(filter);
-        int returnVal = chooserOutput.showOpenDialog(null);
-        if(returnVal == JFileChooser.APPROVE_OPTION) {
-
-    System.out.println("chosen output method returns --> "+ getChosenOutputFileName());
-
-
-        }if(returnVal == JFileChooser.CANCEL_OPTION){
-
-            System.out.println ("cancelled");
-        }
-
-    }
 
 
     public void pickFolder() throws Exception{
@@ -87,7 +55,6 @@ public class Model{
         chooserFolder.setDialogTitle("Specify your save location");
 
 
-        //set it to be a save dialog
         chooserFolder.setDialogType(JFileChooser.SAVE_DIALOG);
         chooserFolder.setSelectedFile(new File("myfile.xml"));
 //Set an extension filter, so the user sees other XML files
@@ -108,11 +75,7 @@ public class Model{
 
             System.out.println("Save as file: " + fileToSave.getAbsolutePath());
 
-
-
             folderFilePath = fileToSave.getAbsolutePath();
-
-
 
 
             }
@@ -126,34 +89,35 @@ public class Model{
     public String getChosenInputFile() {
         return String.valueOf(chooserInput.getSelectedFile());     //returns file location
     }
-    public String getChosenOutputFile() {
-        return String.valueOf(chooserOutput.getSelectedFile());
-    }
+
+    public String getfolderFilePath(){
+return folderFilePath;    }
 
 
     public String getChosenInputFileName(){
-        return chooserInput.getSelectedFile().getName();   //returns file name
-    }
-    public String getChosenOutputFileName(){
-        return chooserOutput.getSelectedFile().getName();
+
+        return chooserInput.getSelectedFile().getName();
     }
 
 
 
 
 
-    public void transformerDownICSR() throws IOException, URISyntaxException, TransformerException {
+    public void transformerDownICSR() throws ParserConfigurationException, IOException, TransformerException, SAXException {
+
 
         TransformerFactory factory = TransformerFactory.newInstance();
         Source xslt = new StreamSource(new File("downgrade-icsr.xsl"));
         Transformer transformer = factory.newTransformer(xslt);
 
+
         Source text = new StreamSource(new File(getChosenInputFile()));
-        transformer.transform(text, new StreamResult(new File(getChosenOutputFile())));
+
+        transformer.transform(text, new StreamResult(new File(folderFilePath)));
     }
 
 
-    public void transformerUpICSR() throws IOException, URISyntaxException, TransformerException, ParserConfigurationException, org.xml.sax.SAXException {
+    public void transformerUpICSR() throws ParserConfigurationException, IOException, TransformerException, SAXException {
 
         ignoreDOCTYPE();
         Document doc = db.parse(new FileInputStream(getChosenInputFile()));
@@ -165,11 +129,37 @@ public class Model{
         transformer.transform(
                 new DOMSource(doc.getDocumentElement()),
                 new StreamResult(new File(folderFilePath)));
-
-//        readAndWriteToNewFile();
     }
 
 
+
+    public void transformerDownAck() throws ParserConfigurationException, IOException, TransformerException, SAXException {
+
+
+        TransformerFactory factory = TransformerFactory.newInstance();
+        Source xslt = new StreamSource(new File("downgrade-ack.xsl"));
+        Transformer transformer = factory.newTransformer(xslt);
+
+
+       Source text = new StreamSource(new File(getChosenInputFile()));
+
+        transformer.transform( text, new StreamResult(new File(folderFilePath)));
+    }
+
+    public void transformerUpAck() throws ParserConfigurationException, IOException, TransformerException, SAXException {
+
+        ignoreDOCTYPE();
+        Document doc = db.parse(new FileInputStream(getChosenInputFile()));
+
+        TransformerFactory factory = TransformerFactory.newInstance();
+        Source xslt = new StreamSource(new File("upgrade-ack.xsl"));
+        Transformer transformer = factory.newTransformer(xslt);
+
+        transformer.transform(
+                new DOMSource(doc.getDocumentElement()),
+                new StreamResult(new File(folderFilePath)));
+
+    }
 
 
     public void ignoreDOCTYPE() throws ParserConfigurationException {
@@ -184,36 +174,6 @@ public class Model{
         dbf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
 
         db = dbf.newDocumentBuilder();
-    }
-
-
-
-
-
-
-
-
-
-    public void transformerDownAck() throws IOException, URISyntaxException, TransformerException {
-
-        TransformerFactory factory = TransformerFactory.newInstance();
-        Source xslt = new StreamSource(new File("downgrade-ack.xsl"));
-        Transformer transformer = factory.newTransformer(xslt);
-
-        Source text = new StreamSource(new File(getChosenInputFile()));
-        transformer.transform(text, new StreamResult(new File(getChosenOutputFile())));
-
-    }
-
-    public void transformerUpAck() throws IOException, URISyntaxException, TransformerException {
-
-        TransformerFactory factory = TransformerFactory.newInstance();
-        Source xslt = new StreamSource(new File("upgrade-ack.xsl"));
-        Transformer transformer = factory.newTransformer(xslt);
-
-        Source text = new StreamSource(new File(getChosenInputFile()));
-        transformer.transform(text, new StreamResult(new File(getChosenOutputFile())));
-
     }
 
 
