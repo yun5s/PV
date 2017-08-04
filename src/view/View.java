@@ -26,7 +26,6 @@ import static com.sun.tools.internal.xjc.reader.Ring.add;
 public class View{
     private JButton convertButton;
     private JPanel panel1;
-    private JTextField welcomeTextField;
     private JButton inputButton;
     private JButton outputFolderButton;
     private JProgressBar progressBar;
@@ -39,24 +38,32 @@ public class View{
     private JLabel yourSelectedInputFile;
     private JLabel logoLabel;
     private JLabel outputDestinationMessage;
+    private JLabel welcomeLabel;
+    private JLabel helpLabel;
     private Model model;
     private Controller controller;
     private int convertClicked;
+
+    public ButtonGroup getRadioGroup() {
+        return radioGroup;
+    }
+
+    private ButtonGroup radioGroup;
 
 
 
     public View(Model model, Controller controller) throws IOException {
 
-        Font font = welcomeTextField.getFont();
+        Font font = welcomeLabel.getFont();
 
         Map attributes = font.getAttributes();
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-        welcomeTextField.setFont(font.deriveFont(attributes));
+        welcomeLabel.setFont(font.deriveFont(attributes));
 
         this.model = model;
         this.controller = controller;
 
-        ButtonGroup radioGroup = new ButtonGroup();
+        radioGroup = new ButtonGroup();
         radioGroup.add(forwardsICSR);
         radioGroup.add(backwardsICSR);
         radioGroup.add(forwardsACK);
@@ -79,6 +86,7 @@ public class View{
         setLogoImage();
     setInputImage();
     setFolderImage();
+    setHelpImage();
 
 
 //        java.util.Timer t = new Timer()
@@ -290,6 +298,25 @@ public class View{
         ImageIcon imageIcon = new ImageIcon(dimg);
 
         outputFolderButton.setIcon(imageIcon);
+
+    }
+
+    public void setHelpImage(){
+
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File("src/images/help.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        helpLabel.setSize(30,30);
+        Image dimg = img.getScaledInstance(helpLabel.getWidth(), helpLabel.getHeight(),
+                Image.SCALE_SMOOTH);
+
+        ImageIcon imageIcon = new ImageIcon(dimg);
+
+        helpLabel.setIcon(imageIcon);
 
     }
 

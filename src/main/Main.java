@@ -39,17 +39,20 @@ public class Main {
                 if (JOptionPane.showConfirmDialog(frame,
                         "Are you sure to close this window?", "Really Closing?",
                         JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 
+                    if (view.getConvertClicked() == 0 && !(model.getfolderFilePath() == null)) {
 
-                    if(view.getConvertClicked() == 0){
+                        File f = model.getFileToSave().getAbsoluteFile();
 
-                    File f = model.getFileToSave().getAbsoluteFile();
+                        f.delete();
+                        System.exit(0);
 
-                    f.delete();}
-
+                    }
                     System.exit(0);
                 }
+
+
             }
         });
     }
