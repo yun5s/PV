@@ -27,6 +27,7 @@ public class Model{
     private String folderFilePath;
     JFileChooser chooserInput = new JFileChooser();
     JFileChooser chooserFolder = new JFileChooser();
+    private File fileToSave;
 
 
     public void pickInputFile() throws Exception{
@@ -64,12 +65,13 @@ public class Model{
         int userSelection = chooserFolder.showSaveDialog(null);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
-            File fileToSave = chooserFolder.getSelectedFile();
+
+            fileToSave = chooserFolder.getSelectedFile();
 
             if (fileToSave.createNewFile()){
                 System.out.println("File is created!");
             }else{
-                System.out.println("File already exists.");
+                JOptionPane.showMessageDialog(null, "File already exists.");
             }
 
 
@@ -81,6 +83,10 @@ public class Model{
             }
 
 
+        }
+
+        public File getFileToSave(){
+        return fileToSave;
         }
 
 
@@ -179,22 +185,4 @@ return folderFilePath;    }
 
 
 
-//    public void readAndWriteToNewFile() throws IOException {
-//
-//                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("fromVariableToFile.xml"), "UTF-8"));
-//                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folderFilePath), "UTF-8"));
-//
-//                String line = null;
-//
-//                while ((line = reader.readLine()) != null)
-//                {
-//                    writer.write(line);
-//                }
-//
-//                reader.close();
-//                writer.close();
-//            }
-
-
-
-    }
+}
