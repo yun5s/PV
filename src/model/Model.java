@@ -16,6 +16,10 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 
 /**
@@ -25,12 +29,19 @@ public class Model{
 
     private DocumentBuilder db;
     private String folderFilePath;
-    JFileChooser chooserInput = new JFileChooser();
+    private JFileChooser chooserInput;
     JFileChooser chooserFolder = new JFileChooser();
     private File fileToSave;
+    private File[] files;
+
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
 
 
     public void pickInputFile() throws Exception{
+
+        chooserInput = new JFileChooser();
+
+        chooserInput.setMultiSelectionEnabled(true);
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "XML files", "XML", "XSL");
@@ -41,47 +52,54 @@ public class Model{
         int returnVal = chooserInput.showOpenDialog(null);
 
         if(returnVal == JFileChooser.APPROVE_OPTION) {
+
+            files = chooserInput.getSelectedFiles();
+
+
             System.out.println("Your input file: " +
-                    chooserInput.getSelectedFile().getName());
+                    files.toString());
 
         }
 
     }
 
 
-
     public void pickFolder() throws Exception{
 
+        int numbers = 0;
 
         chooserFolder.setDialogTitle("Specify your save location");
-
-
         chooserFolder.setDialogType(JFileChooser.SAVE_DIALOG);
-        chooserFolder.setSelectedFile(new File("myfile.xml"));
 //Set an extension filter, so the user sees other XML files
+     chooserFolder.setSelectedFile(new File("myFile.xml"));
         chooserFolder.setFileFilter(new FileNameExtensionFilter("xml file","xml"));
 
-
         int userSelection = chooserFolder.showSaveDialog(null);
-
         if (userSelection == JFileChooser.APPROVE_OPTION) {
 
-            fileToSave = chooserFolder.getSelectedFile();
-
-            if (fileToSave.createNewFile()){
-                System.out.println("File is created!");
-            }else{
-                JOptionPane.showMessageDialog(null, "File already exists.");
-            }
+            for (File file : files) {
 
 
-            System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+//                chooserFolder.setSelectedFile(new File(chooserFolder.getSelectedFile().getAbsolutePath()+ numbers++ + ".xml"));
+
+                boolean f = chooserFolder.getSelectedFile().renameTo(new File(chooserFolder.getSelectedFile().getAbsolutePath() + numbers++ + ".xml"));
+
+                fileToSave = chooserFolder.getSelectedFile();
+                if (fileToSave.createNewFile()){
+                    System.out.println("File is created!");
+                    fileToSave = chooserFolder.getSelectedFile();
+
+                }else{
+                    JOptionPane.showMessageDialog(null, "File already exists.");
+                }
+
+                System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+
+               }
 
             folderFilePath = fileToSave.getAbsolutePath();
 
-
-            }
-
+        }
 
         }
 
@@ -92,17 +110,33 @@ public class Model{
 
 
 
+
+
+
     public String getChosenInputFile() {
+
         return String.valueOf(chooserInput.getSelectedFile());     //returns file location
     }
+
+
+
+
 
     public String getfolderFilePath(){
 return folderFilePath;    }
 
 
-    public String getChosenInputFileName(){
+    public String getChosenInputFileName() {
 
-        return chooserInput.getSelectedFile().getName();
+        ArrayList<String> names = new ArrayList<String>();
+
+        for (File file : files) {
+            System.out.println(file.getName());
+
+            names.add(file.getName());
+        }
+
+        return String.valueOf(names);
     }
 
 
