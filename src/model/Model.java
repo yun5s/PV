@@ -16,6 +16,7 @@ import java.io.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 /**
@@ -28,19 +29,28 @@ public class Model {
     private JFileChooser chooserInput;
     JFileChooser chooserFolder = new JFileChooser();
     private File fileToSave;
-    private File[] files;
+    private ArrayList<File> inputFiles;
+    private ArrayList<String> names;
+    private int name;
+    private Iterator<String> namesIterator;
+    private Iterator<String> pathsIterator;
+    private Iterator<File> inputFilesIterator;
+
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd.HH.mm");
 
 
     public void pickInputFile() throws Exception {
 
+        inputFiles = new ArrayList<File>();
+
+
         chooserInput = new JFileChooser();
 
         chooserInput.setMultiSelectionEnabled(true);
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "XML files", "XML", "XSL");
+                "XML inputFiles", "XML", "XSL");
 
 //        java.io.File file = chooserInput.getSelectedFile();
 
@@ -49,11 +59,17 @@ public class Model {
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
 
-            files = chooserInput.getSelectedFiles();
+            int n = chooserInput.getSelectedFiles().length;
 
+            System.out.println("length of input..." + n);
 
+            for (File file : chooserInput.getSelectedFiles()) {
+                inputFiles.add(file);
+            }
+
+            System.out.println("input files be like...." + inputFiles);
             System.out.println("Your input file: " +
-                    files.toString());
+                    inputFiles.toString());
 
         }
 
@@ -65,16 +81,21 @@ public class Model {
         int numbers = 0;
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         folderFilePaths = new ArrayList<String>();
+        namesIterator = names.iterator();
+        inputFilesIterator = inputFiles.iterator();
 
-        JOptionPane.showMessageDialog(null, "<html>PLEASE NOTE:    If you have chosen to convert multiple files: <br/><br/>" +
-                "then please continue pressing ok to save each file to your output folder.<br/> You do not have to name your file unless you wish to<html/>");
+
+        if (inputFiles.size() > 1) {
+            JOptionPane.showMessageDialog(null, "<html>PLEASE NOTE:    If you have chosen to convert multiple inputFiles: <br/><br/>" +
+                    "then please continue pressing ok to save each file to your output folder.<br/> You do not have to name your file unless you wish to<html/>");
+        }
 
 
-        for (File file : files) {
+        for (File file : inputFiles) {
 
             chooserFolder.setDialogTitle("Specify your save location");
             chooserFolder.setDialogType(JFileChooser.SAVE_DIALOG);
-            chooserFolder.setSelectedFile(new File(sdf.format(timestamp) + ".Convert" + numbers++ + ".xml"));
+            chooserFolder.setSelectedFile(new File(namesIterator.next() + " Convert" + ".xml"));
             chooserFolder.setFileFilter(new FileNameExtensionFilter("xml file", "xml"));
 
             if (chooserFolder.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
@@ -95,22 +116,18 @@ public class Model {
                 folderFilePaths.add(fileToSave.getAbsolutePath());
             }
 
-            System.out.println(folderFilePaths);
-
-
         }
+
+        System.out.println("file paths......" + folderFilePaths.size());
+        System.out.println(folderFilePaths);
+        System.out.println("inputFiles....." + inputFiles.size());
+
     }
 
 
-
-        public File getFileToSave(){
+    public File getFileToSave() {
         return fileToSave;
-        }
-
-
-
-
-
+    }
 
 
     public String getChosenInputFile() {
@@ -118,29 +135,55 @@ public class Model {
         return String.valueOf(chooserInput.getSelectedFile());     //returns file location
     }
 
+//    public String getAllInputFiles(){
+//
+//            return
+//    }
 
-
-
-
-    public ArrayList<String> getfolderFilePath(){
-return folderFilePaths;    }
-
-
-    public String getChosenInputFileName() {
-
-        ArrayList<String> names = new ArrayList<String>();
-
-        for (File file : files) {
-            System.out.println(file.getName());
-
-            names.add(file.getName());
-        }
-
-        return String.valueOf(names);
+    public ArrayList<File> getInputFiles() {
+        return inputFiles;
     }
 
 
+    public ArrayList<String> getfolderFilePath() {
+        return folderFilePaths;
+    }
 
+
+    public String getChosenInputFileNames() {
+
+        names = new ArrayList<String>();
+
+
+        for (File file : inputFiles) {           //for number of input inputFiles
+
+            String n = file.getName().replaceAll(".xml", "");
+            names.add(n);      //get the input file names and store in arraylist.
+        }
+
+        return String.valueOf(names);
+
+//        while (true){
+//            for(int i = 0; i = names.size(); i++){
+//
+//                return names.get(i+1);
+//            }
+//        }
+
+//
+//        for(int i=0;i<names.size()-1;i++) {
+//            String curr = names.get(i);
+//            String next = names.get(i + 1);
+//
+//
+//            for (String next : names) {
+//                if (curr != null) {
+//                    // compare
+//                }
+//                curr = next;
+//            }
+//        }
+    }
 
 
     public void transformerDownICSR() throws ParserConfigurationException, IOException, TransformerException, SAXException {
@@ -172,7 +215,6 @@ return folderFilePaths;    }
     }
 
 
-
     public void transformerDownAck() throws ParserConfigurationException, IOException, TransformerException, SAXException {
 
 
@@ -181,24 +223,58 @@ return folderFilePaths;    }
         Transformer transformer = factory.newTransformer(xslt);
 
 
-       Source text = new StreamSource(new File(getChosenInputFile()));
+        Source text = new StreamSource(new File(getChosenInputFile()));
 
-        transformer.transform( text, new StreamResult(new File(String.valueOf(folderFilePaths))));
+        transformer.transform(text, new StreamResult(new File(String.valueOf(folderFilePaths))));
     }
 
+
     public void transformerUpAck() throws ParserConfigurationException, IOException, TransformerException, SAXException {
+        pathsIterator = folderFilePaths.iterator();
 
-        ignoreDOCTYPE();
-        Document doc = db.parse(new FileInputStream(getChosenInputFile()));
+        if (inputFiles.size() == 1) {
 
-        TransformerFactory factory = TransformerFactory.newInstance();
-        Source xslt = new StreamSource(new File("upgrade-ack.xsl"));
-        Transformer transformer = factory.newTransformer(xslt);
+            System.out.println("Single file iysss..." + getChosenInputFile());
 
-        transformer.transform(
-                new DOMSource(doc.getDocumentElement()),
-                new StreamResult(new File(String.valueOf(folderFilePaths))));
+            ignoreDOCTYPE();
+            Document doc = db.parse(new FileInputStream(getChosenInputFile()));
 
+            TransformerFactory factory = TransformerFactory.newInstance();
+            Source xslt = new StreamSource(new File("upgrade-ack.xsl"));
+            Transformer transformer = factory.newTransformer(xslt);
+
+            transformer.transform(
+                    new DOMSource(doc.getDocumentElement()),
+                    new StreamResult(new File(String.valueOf(fileToSave.getAbsolutePath()))));
+        } else {
+
+            System.out.println("number of files are..." + inputFiles);
+
+            for (File file : inputFiles) {
+
+
+                System.out.println("this is chosen input..." + file.getName());
+
+                ignoreDOCTYPE();
+                Document doc = db.parse(new FileInputStream(file));
+
+
+                TransformerFactory factory = TransformerFactory.newInstance();
+                Source xslt = new StreamSource(new File("upgrade-ack.xsl"));
+                Transformer transformer = factory.newTransformer(xslt);
+
+                //for loop, if the path equals i, then use i as the output folder
+                if (pathsIterator.equals(folderFilePaths.get(0))) {
+                    transformer.transform(
+                            new DOMSource(doc.getDocumentElement()),
+                            new StreamResult(new File(folderFilePaths.get(0))));
+                } else if (pathsIterator.hasNext()) {
+                    transformer.transform(
+                            new DOMSource(doc.getDocumentElement()),
+                            new StreamResult(new File(pathsIterator.next())));
+                }
+            }
+        }
     }
 
 
@@ -215,8 +291,6 @@ return folderFilePaths;    }
 
         db = dbf.newDocumentBuilder();
     }
-
-
 
 
 }

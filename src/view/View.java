@@ -15,6 +15,7 @@ import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
+
 import model.Model;
 import org.xml.sax.SAXException;
 
@@ -23,7 +24,7 @@ import static com.sun.tools.internal.xjc.reader.Ring.add;
 /**
  * Created by MaiwandMaidanwal on 20/07/2017.
  */
-public class View{
+public class View {
     private JButton convertButton;
     private JPanel panel1;
     private JButton inputButton;
@@ -51,7 +52,6 @@ public class View{
     private ButtonGroup radioGroup;
 
 
-
     public View(Model model, Controller controller) throws IOException {
 
         Font font = welcomeLabel.getFont();
@@ -70,11 +70,10 @@ public class View{
         radioGroup.add(backwardsACK);
 
 
-
 //        logo = new Logo();
 //        logo.setPreferredSize(new Dimension(300,100));	//create the size of the boat panel
 //    tabbedPane1.setopaque(true);							//not opaque
-        tabbedPane1.setBackground( new Color(226,235,220, 80) );
+        tabbedPane1.setBackground(new Color(226, 235, 220, 80));
 
 //        logoLabel.add(logo);
 
@@ -84,9 +83,9 @@ public class View{
 //            e.printStackTrace();
 //        }
         setLogoImage();
-    setInputImage();
-    setFolderImage();
-    setHelpImage();
+        setInputImage();
+        setFolderImage();
+        setHelpImage();
 
 
 //        java.util.Timer t = new Timer()
@@ -95,18 +94,16 @@ public class View{
 //        jLabel2.setIcon(imgThisImg);
 
 
-
         inputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 try {
                     model.pickInputFile();
-                    if(model.getChosenInputFile() == null || (model.getChosenInputFile() != null && ("".equals(model.getChosenInputFile()))))
-                    {
+                    if (model.getChosenInputFile() == null || (model.getChosenInputFile() != null && ("".equals(model.getChosenInputFile())))) {
                         yourSelectedInputFile.setText("Please Select An Input File");
-                    }
-                    else{ yourSelectedInputFile.setText(model.getChosenInputFileName());
+                    } else {
+                        yourSelectedInputFile.setText(model.getChosenInputFileNames());
                         progressBar.setValue(40);
                     }
                 } catch (Exception e1) {
@@ -119,13 +116,12 @@ public class View{
         });
 
 
-
         outputFolderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     model.pickFolder();
-                    if(!convertButton.isSelected()){
+                    if (!convertButton.isSelected()) {
                         boolean b = model.getFileToSave().createNewFile() == false;
                     }
                     outputDestinationMessage.setText("You have chosen your output folder");
@@ -139,9 +135,6 @@ public class View{
         });
 
 
-
-
-
         convertButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -150,9 +143,7 @@ public class View{
 
                     JOptionPane.showMessageDialog(null, "Please select your conversion type");
 
-                }
-
-               else if ((model.getChosenInputFile() == null) || (model.getfolderFilePath() == null)) {
+                } else if ((model.getChosenInputFile() == null) || (model.getfolderFilePath() == null)) {
 
                     JOptionPane.showMessageDialog(null, "Please select your input and output files");
 
@@ -183,7 +174,7 @@ public class View{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                    progressBar.setValue(20);
+                progressBar.setValue(20);
 
             }
         });
@@ -214,20 +205,14 @@ public class View{
     }
 
 
+    public javax.swing.JPanel getPanel1() {
 
-            public javax.swing.JPanel getPanel1() {
+        return panel1;
+    }
 
-                return panel1;
-            }
-
-            public JButton getConvertButton() {
-                return convertButton;
-            }
-
-
-
-
-
+    public JButton getConvertButton() {
+        return convertButton;
+    }
 
 
 //
@@ -242,9 +227,7 @@ public class View{
 //
 
 
-
-
-    public void setLogoImage(){
+    public void setLogoImage() {
 
         BufferedImage img = null;
         try {
@@ -253,7 +236,7 @@ public class View{
             e.printStackTrace();
         }
 
-        logoLabel.setSize(220,90);
+        logoLabel.setSize(220, 90);
         Image dimg = img.getScaledInstance(logoLabel.getWidth(), logoLabel.getHeight(),
                 Image.SCALE_SMOOTH);
 
@@ -263,7 +246,7 @@ public class View{
 
     }
 
-    public void setInputImage(){
+    public void setInputImage() {
 
         BufferedImage img = null;
         try {
@@ -272,7 +255,7 @@ public class View{
             e.printStackTrace();
         }
 
-        inputButton.setSize(70,70);
+        inputButton.setSize(70, 70);
         Image dimg = img.getScaledInstance(inputButton.getWidth(), inputButton.getHeight(),
                 Image.SCALE_SMOOTH);
 
@@ -282,7 +265,7 @@ public class View{
 
     }
 
-    public void setFolderImage(){
+    public void setFolderImage() {
 
         BufferedImage img = null;
         try {
@@ -291,7 +274,7 @@ public class View{
             e.printStackTrace();
         }
 
-        outputFolderButton.setSize(70,70);
+        outputFolderButton.setSize(70, 70);
         Image dimg = img.getScaledInstance(outputFolderButton.getWidth(), outputFolderButton.getHeight(),
                 Image.SCALE_SMOOTH);
 
@@ -301,7 +284,7 @@ public class View{
 
     }
 
-    public void setHelpImage(){
+    public void setHelpImage() {
 
         BufferedImage img = null;
         try {
@@ -310,7 +293,7 @@ public class View{
             e.printStackTrace();
         }
 
-        helpLabel.setSize(30,30);
+        helpLabel.setSize(30, 30);
         Image dimg = img.getScaledInstance(helpLabel.getWidth(), helpLabel.getHeight(),
                 Image.SCALE_SMOOTH);
 
@@ -323,131 +306,128 @@ public class View{
 
     public boolean readInputFiles() throws IOException {
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(model.getChosenInputFile()), "UTF-8"));
+        for (File file : model.getInputFiles()) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 
-        String line = null;
-
-        while ((line = reader.readLine()) != null) {
-
-            if(line.contains("<MCCI_IN200101UV01 ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 multicacheschemas/MCCI_IN200101UV01.xsd\" xmlns=\"urn:hl7-org:v3\" xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:mif=\"urn:hl7-org:v3/mif\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">")){
-
-                if(!backwardsACK.isSelected()){
-
-                    JOptionPane.showMessageDialog(null, "<html>Your input file   " + model.getChosenInputFileName() +
-                            "   is an Acknowledgement's file in R3 format" +
-                            "<br/><br/>What to do?<br/>" +
-                            "<br/>Either select your conversion type to be:     Acknowledgement's Backwards" +
-                            "<br/> Or change your input file to match your selected conversion type<html/>");}
-
-                else {
+            String line = null;
 
 
-                    try {
-                        model.transformerDownAck();
-                        JOptionPane.showMessageDialog(null, "Conversion is successful!");
-                        progressBar.setValue(100);
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (TransformerException e1) {
-                        e1.printStackTrace();
-                    } catch (SAXException e1) {
-                        e1.printStackTrace();
-                    } catch (ParserConfigurationException e1) {
-                        e1.printStackTrace();
+            while ((line = reader.readLine()) != null) {
+
+                if (line.contains("<MCCI_IN200101UV01 ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 multicacheschemas/MCCI_IN200101UV01.xsd\" xmlns=\"urn:hl7-org:v3\" xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:mif=\"urn:hl7-org:v3/mif\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">")) {
+
+                    if (!backwardsACK.isSelected()) {
+
+                        JOptionPane.showMessageDialog(null, "<html>Your input file   " + file.getName() +
+                                "   is an Acknowledgement's file in R3 format" +
+                                "<br/><br/>What to do?<br/>" +
+                                "<br/>Either select your conversion type to be:     Acknowledgement's Backwards" +
+                                "<br/> Or change your input file to match your selected conversion type<html/>");
+                    } else {
+
+
+                        try {
+                            model.transformerDownAck();
+                            JOptionPane.showMessageDialog(null, "Conversion is successful!");
+                            progressBar.setValue(100);
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (TransformerException e1) {
+                            e1.printStackTrace();
+                        } catch (SAXException e1) {
+                            e1.printStackTrace();
+                        } catch (ParserConfigurationException e1) {
+                            e1.printStackTrace();
+                        }
+
                     }
+                } else if (line.contains("ich-icsrack-v1_1.dtd")) {
+                    if (!forwardsACK.isSelected()) {
+                        JOptionPane.showMessageDialog(null, "<html>Your input file   " + file.getName() +
+                                "   is an Acknowledgement's file in R2 format" +
+                                "<br/><br/>What to do?<br/>" +
+                                "<br/>Either select your conversion type to be:     Acknowledgement Forwards" +
+                                "<br/> Or change your input file to match your selected conversion type<html/>");
+                    } else {
 
+                        try {
+                            model.transformerUpAck();
+                            JOptionPane.showMessageDialog(null, "Conversion is successful!");
+                            progressBar.setValue(100);
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (TransformerException e1) {
+                            e1.printStackTrace();
+                        } catch (SAXException e1) {
+                            e1.printStackTrace();
+                        } catch (ParserConfigurationException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                } else if (line.contains("ich-icsr-v2-1.dtd")) {
+                    if (!forwardsICSR.isSelected()) {
+                        JOptionPane.showMessageDialog(null, "<html>Your input file   " + file.getName() +
+                                "   is an ICSR file in R2 format" +
+                                "<br/><br/>What to do?<br/>" +
+                                "<br/>Either select your conversion type to be:     ICSR Forwards" +
+                                "<br/> Or change your input file to match your selected conversion type<html/>");
+                    } else {
+
+                        try {
+                            model.transformerUpICSR();
+                            JOptionPane.showMessageDialog(null, "Conversion is successful!");
+                            progressBar.setValue(100);
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (TransformerException e1) {
+                            e1.printStackTrace();
+                        } catch (SAXException e1) {
+                            e1.printStackTrace();
+                        } catch (ParserConfigurationException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+                    }
+                } else if (line.contains("<MCCI_IN200100UV01 ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 multicacheschemas/MCCI_IN200100UV01.xsd\" xmlns=\"urn:hl7-org:v3\" xmlns:mif=\"urn:hl7-org:v3/mif\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">")) {
+                    if (!backwardsICSR.isSelected()) {
+                        JOptionPane.showMessageDialog(null, "<html>Your input file   " + file.getName() +
+                                "   is an ISCR file in R3 format" +
+                                "<br/><br/>What to do?<br/>" +
+                                "<br/>Either select your conversion type to be:     ICSR Backwards" +
+                                "<br/> Or change your input file to match your selected conversion type<html/>");
+                    } else {
+
+                        try {
+                            model.transformerDownICSR();
+                            JOptionPane.showMessageDialog(null, "Conversion is successful!");
+                            progressBar.setValue(100);
+                        } catch (TransformerException e1) {
+                            e1.printStackTrace();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (SAXException e1) {
+                            e1.printStackTrace();
+                        } catch (ParserConfigurationException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+                    }
                 }
             }
-
-            else if (line.contains("ich-icsrack-v1_1.dtd")) {
-                if (!forwardsACK.isSelected()){
-                    JOptionPane.showMessageDialog(null, "<html>Your input file   " + model.getChosenInputFileName() +
-                            "   is an Acknowledgement's file in R2 format" +
-                            "<br/><br/>What to do?<br/>" +
-                            "<br/>Either select your conversion type to be:     Acknowledgement Forwards" +
-                            "<br/> Or change your input file to match your selected conversion type<html/>");}
-                            else{
-
-                    try {
-                        model.transformerUpAck();
-                        JOptionPane.showMessageDialog(null, "Conversion is successful!");
-                        progressBar.setValue(100);
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (TransformerException e1) {
-                        e1.printStackTrace();
-                    } catch (SAXException e1) {
-                        e1.printStackTrace();
-                    } catch (ParserConfigurationException e1) {
-                        e1.printStackTrace();
-                    }
-
-                }
-            }
-            else if (line.contains("ich-icsr-v2-1.dtd")) {
-                if(!forwardsICSR.isSelected()){
-                    JOptionPane.showMessageDialog(null, "<html>Your input file   " + model.getChosenInputFileName() +
-                            "   is an ICSR file in R2 format" +
-                            "<br/><br/>What to do?<br/>" +
-                            "<br/>Either select your conversion type to be:     ICSR Forwards" +
-                            "<br/> Or change your input file to match your selected conversion type<html/>");}
-
-                            else {
-
-                    try {
-                        model.transformerUpICSR();
-                        JOptionPane.showMessageDialog(null, "Conversion is successful!");
-                        progressBar.setValue(100);
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (TransformerException e1) {
-                        e1.printStackTrace();
-                    } catch (SAXException e1) {
-                        e1.printStackTrace();
-                    } catch (ParserConfigurationException e1) {
-                        e1.printStackTrace();
-                    }
-
-
-                }
-                }
-
-            else if(line.contains("<MCCI_IN200100UV01 ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 multicacheschemas/MCCI_IN200100UV01.xsd\" xmlns=\"urn:hl7-org:v3\" xmlns:mif=\"urn:hl7-org:v3/mif\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">")){
-                if(!backwardsICSR.isSelected()){
-                    JOptionPane.showMessageDialog(null, "<html>Your input file   " + model.getChosenInputFileName() +
-                            "   is an ISCR file in R3 format" +
-                            "<br/><br/>What to do?<br/>" +
-                            "<br/>Either select your conversion type to be:     ICSR Backwards" +
-                            "<br/> Or change your input file to match your selected conversion type<html/>");}
-
-                            else {
-
-                    try {
-                        model.transformerDownICSR();
-                        JOptionPane.showMessageDialog(null, "Conversion is successful!");
-                        progressBar.setValue(100);
-                    } catch (TransformerException e1) {
-                        e1.printStackTrace();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (SAXException e1) {
-                        e1.printStackTrace();
-                    } catch (ParserConfigurationException e1) {
-                        e1.printStackTrace();
-                    }
-
-
-                }
-            }
+            reader.close();
         }
-        reader.close();
+
         return false;
 
-        }
-
-        public int getConvertClicked(){
-        return convertClicked;
-        }
-
     }
+
+
+    public int getConvertClicked() {
+        return convertClicked;
+    }
+
+}
 
