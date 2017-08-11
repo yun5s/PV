@@ -44,6 +44,7 @@ public class View {
     private Model model;
     private Controller controller;
     private int convertClicked;
+    private boolean successCheck;
 
     public ButtonGroup getRadioGroup() {
         return radioGroup;
@@ -306,6 +307,8 @@ public class View {
 
     public boolean readInputFiles() throws IOException {
 
+        successCheck = false;
+
         for (File file : model.getInputFiles()) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 
@@ -339,20 +342,27 @@ public class View {
                         } catch (ParserConfigurationException e1) {
                             e1.printStackTrace();
                         }
+                            successCheck = true;
 
                     }
-                } else if (line.contains("ich-icsrack-v1_1.dtd")) {
+                }
+
+
+
+                else if (line.contains("ich-icsrack-v1_1.dtd")) {
                     if (!forwardsACK.isSelected()) {
+
                         JOptionPane.showMessageDialog(null, "<html>Your input file   " + file.getName() +
                                 "   is an Acknowledgement's file in R2 format" +
                                 "<br/><br/>What to do?<br/>" +
                                 "<br/>Either select your conversion type to be:     Acknowledgement Forwards" +
                                 "<br/> Or change your input file to match your selected conversion type<html/>");
+
+                        break;
                     } else {
 
                         try {
                             model.transformerUpAck();
-                            JOptionPane.showMessageDialog(null, "Conversion is successful!");
                             progressBar.setValue(100);
                         } catch (IOException e1) {
                             e1.printStackTrace();
@@ -363,8 +373,10 @@ public class View {
                         } catch (ParserConfigurationException e1) {
                             e1.printStackTrace();
                         }
+                        successCheck = true;
 
                     }
+
                 } else if (line.contains("ich-icsr-v2-1.dtd")) {
                     if (!forwardsICSR.isSelected()) {
                         JOptionPane.showMessageDialog(null, "<html>Your input file   " + file.getName() +
@@ -387,6 +399,7 @@ public class View {
                         } catch (ParserConfigurationException e1) {
                             e1.printStackTrace();
                         }
+                        successCheck = true;
 
 
                     }
@@ -412,14 +425,19 @@ public class View {
                         } catch (ParserConfigurationException e1) {
                             e1.printStackTrace();
                         }
-
+                        successCheck = true;
 
                     }
                 }
+
+
             }
             reader.close();
         }
 
+        if(successCheck==true){
+            JOptionPane.showMessageDialog(null, "Conversion is successful!");
+        }
         return false;
 
     }
