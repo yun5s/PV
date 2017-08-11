@@ -361,6 +361,7 @@ public class View {
                         break;
                     } else {
 
+
                         try {
                             model.transformerUpAck();
                             progressBar.setValue(100);
