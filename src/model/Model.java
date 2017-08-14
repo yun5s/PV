@@ -40,6 +40,10 @@ public class Model {
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd.HH.mm");
 
 
+    public Model(){
+
+
+    }
     public void pickInputFile() throws Exception {
 
         inputFiles = new ArrayList<File>();
@@ -80,13 +84,15 @@ public class Model {
 
         int numbers = 0;
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        folderFilePaths = new ArrayList<String>();
         namesIterator = names.iterator();
         inputFilesIterator = inputFiles.iterator();
+        folderFilePaths = new ArrayList<String>();
+
+
 
 
         if (inputFiles.size() > 1) {
-            JOptionPane.showMessageDialog(null, "<html>PLEASE NOTE:    If you have chosen to convert multiple inputFiles: <br/><br/>" +
+            JOptionPane.showMessageDialog(null, "<html>PLEASE NOTE:    You have chosen to convert multiple inputFiles: <br/><br/>" +
                     "then please continue pressing ok to save each file to your output folder.<br/> You do not have to name your file unless you wish to<html/>");
         }
 
@@ -163,78 +169,134 @@ public class Model {
 
         return String.valueOf(names);
 
-//        while (true){
-//            for(int i = 0; i = names.size(); i++){
-//
-//                return names.get(i+1);
-//            }
-//        }
 
-//
-//        for(int i=0;i<names.size()-1;i++) {
-//            String curr = names.get(i);
-//            String next = names.get(i + 1);
-//
-//
-//            for (String next : names) {
-//                if (curr != null) {
-//                    // compare
-//                }
-//                curr = next;
-//            }
-//        }
     }
 
 
     public void transformerDownICSR() throws ParserConfigurationException, IOException, TransformerException, SAXException {
 
+        pathsIterator = folderFilePaths.iterator();
 
-        TransformerFactory factory = TransformerFactory.newInstance();
-        Source xslt = new StreamSource(new File("downgrade-icsr.xsl"));
-        Transformer transformer = factory.newTransformer(xslt);
+        if(inputFiles.size()==1) {
 
-
-        Source text = new StreamSource(new File(getChosenInputFile()));
-
-        transformer.transform(text, new StreamResult(new File(String.valueOf(folderFilePaths))));
-    }
+            TransformerFactory factory = TransformerFactory.newInstance();
+            Source xslt = new StreamSource(new File("downgrade-icsr.xsl"));
+            Transformer transformer = factory.newTransformer(xslt);
 
 
-    public void transformerUpICSR() throws ParserConfigurationException, IOException, TransformerException, SAXException {
+            Source text = new StreamSource(new File(getChosenInputFile()));
+            transformer.transform(text, new StreamResult(new File(String.valueOf(fileToSave.getAbsolutePath()))));
 
-        ignoreDOCTYPE();
-        Document doc = db.parse(new FileInputStream(getChosenInputFile()));
 
-        TransformerFactory factory = TransformerFactory.newInstance();
-        Source xslt = new StreamSource(new File("upgrade-icsr.xsl"));
-        Transformer transformer = factory.newTransformer(xslt);
+        } else{
+            System.out.println("number of files are..." + inputFiles);
 
-        transformer.transform(
-                new DOMSource(doc.getDocumentElement()),
-                new StreamResult(new File(String.valueOf(folderFilePaths))));
+            for (File file : inputFiles) {
+
+                System.out.println("this is chosen input..." + file.getName());
+
+                TransformerFactory factory = TransformerFactory.newInstance();
+                Source xslt = new StreamSource(new File("downgrade-icsr.xsl"));
+                Transformer transformer = factory.newTransformer(xslt);
+
+
+                if (pathsIterator.hasNext()) {
+                    Source text = new StreamSource(new File(String.valueOf(file)));
+                    transformer.transform(text, new StreamResult(new File(String.valueOf(pathsIterator.next()))));
+                }
+            }
+        }
     }
 
 
     public void transformerDownAck() throws ParserConfigurationException, IOException, TransformerException, SAXException {
 
+        pathsIterator = folderFilePaths.iterator();
 
-        TransformerFactory factory = TransformerFactory.newInstance();
-        Source xslt = new StreamSource(new File("downgrade-ack.xsl"));
-        Transformer transformer = factory.newTransformer(xslt);
+        if(inputFiles.size()==1) {
+
+            TransformerFactory factory = TransformerFactory.newInstance();
+            Source xslt = new StreamSource(new File("downgrade-ack.xsl"));
+            Transformer transformer = factory.newTransformer(xslt);
 
 
-        Source text = new StreamSource(new File(getChosenInputFile()));
+            Source text = new StreamSource(new File(getChosenInputFile()));
 
-        transformer.transform(text, new StreamResult(new File(String.valueOf(folderFilePaths))));
+            transformer.transform(text, new StreamResult(new File(String.valueOf(fileToSave.getAbsolutePath()))));
+
+        } else{
+
+            System.out.println("number of files are..." + inputFiles);
+
+            for (File file : inputFiles) {
+
+                System.out.println("this is chosen input..." + file.getName());
+
+                TransformerFactory factory = TransformerFactory.newInstance();
+                Source xslt = new StreamSource(new File("downgrade-ack.xsl"));
+                Transformer transformer = factory.newTransformer(xslt);
+
+
+                if (pathsIterator.hasNext()) {
+                    Source text = new StreamSource(new File(String.valueOf(file)));
+                    transformer.transform(text, new StreamResult(new File(String.valueOf(pathsIterator.next()))));
+                }
+            }
+        }
     }
 
 
-    public void transformerUpAck() throws ParserConfigurationException, IOException, TransformerException, SAXException {
+
+
+    public void transformerUpICSR() throws ParserConfigurationException, IOException, TransformerException, SAXException {
+
         pathsIterator = folderFilePaths.iterator();
 
         if (inputFiles.size() == 1) {
 
-            System.out.println("Single file iysss..." + getChosenInputFile());
+            ignoreDOCTYPE();
+            Document doc = db.parse(new FileInputStream(getChosenInputFile()));
+
+            TransformerFactory factory = TransformerFactory.newInstance();
+            Source xslt = new StreamSource(new File("upgrade-icsr.xsl"));
+            Transformer transformer = factory.newTransformer(xslt);
+
+            transformer.transform(
+                    new DOMSource(doc.getDocumentElement()),
+                    new StreamResult(new File(String.valueOf(fileToSave.getAbsolutePath()))));
+
+        } else{
+
+            System.out.println("number of files are..." + inputFiles);
+
+            for (File file : inputFiles) {
+
+                System.out.println("this is chosen input..." + file.getName());
+
+                ignoreDOCTYPE();
+                Document doc = db.parse(new FileInputStream(file));
+
+                TransformerFactory factory = TransformerFactory.newInstance();
+                Source xslt = new StreamSource(new File("upgrade-icsr.xsl"));
+                Transformer transformer = factory.newTransformer(xslt);
+
+                if (pathsIterator.hasNext()) {
+                    transformer.transform(
+                            new DOMSource(doc.getDocumentElement()),
+                            new StreamResult(new File(pathsIterator.next())));
+                }
+            }
+
+        }
+    }
+
+
+
+    public void transformerUpAck() throws ParserConfigurationException, IOException, TransformerException, SAXException {
+
+        pathsIterator = folderFilePaths.iterator();
+
+        if (inputFiles.size() == 1) {
 
             ignoreDOCTYPE();
             Document doc = db.parse(new FileInputStream(getChosenInputFile()));
@@ -258,17 +320,11 @@ public class Model {
                 ignoreDOCTYPE();
                 Document doc = db.parse(new FileInputStream(file));
 
-
                 TransformerFactory factory = TransformerFactory.newInstance();
                 Source xslt = new StreamSource(new File("upgrade-ack.xsl"));
                 Transformer transformer = factory.newTransformer(xslt);
 
-                //for loop, if the path equals i, then use i as the output folder
-                if (pathsIterator.equals(folderFilePaths.get(0))) {
-                    transformer.transform(
-                            new DOMSource(doc.getDocumentElement()),
-                            new StreamResult(new File(folderFilePaths.get(0))));
-                } else if (pathsIterator.hasNext()) {
+                    if (pathsIterator.hasNext()) {
                     transformer.transform(
                             new DOMSource(doc.getDocumentElement()),
                             new StreamResult(new File(pathsIterator.next())));
@@ -276,6 +332,17 @@ public class Model {
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
     public void ignoreDOCTYPE() throws ParserConfigurationException {

@@ -32,7 +32,6 @@ public class View {
     private JProgressBar progressBar;
     private JRadioButton backwardsICSR;
     private JRadioButton forwardsICSR;
-    private JLabel chooseConversion;
     private JTabbedPane tabbedPane1;
     private JRadioButton backwardsACK;
     private JRadioButton forwardsACK;
@@ -45,6 +44,7 @@ public class View {
     private Controller controller;
     private int convertClicked;
     private boolean successCheck;
+    private boolean noticeCheck;
 
     public ButtonGroup getRadioGroup() {
         return radioGroup;
@@ -309,6 +309,7 @@ public class View {
 
         successCheck = false;
 
+
         for (File file : model.getInputFiles()) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 
@@ -326,13 +327,13 @@ public class View {
                                 "<br/><br/>What to do?<br/>" +
                                 "<br/>Either select your conversion type to be:     Acknowledgement's Backwards" +
                                 "<br/> Or change your input file to match your selected conversion type<html/>");
+
+                        noticeCheck = true;
                     } else {
 
 
                         try {
                             model.transformerDownAck();
-                            JOptionPane.showMessageDialog(null, "Conversion is successful!");
-                            progressBar.setValue(100);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         } catch (TransformerException e1) {
@@ -357,14 +358,13 @@ public class View {
                                 "<br/><br/>What to do?<br/>" +
                                 "<br/>Either select your conversion type to be:     Acknowledgement Forwards" +
                                 "<br/> Or change your input file to match your selected conversion type<html/>");
+                        noticeCheck = true;
 
-                        break;
                     } else {
 
 
                         try {
                             model.transformerUpAck();
-                            progressBar.setValue(100);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         } catch (TransformerException e1) {
@@ -385,12 +385,12 @@ public class View {
                                 "<br/><br/>What to do?<br/>" +
                                 "<br/>Either select your conversion type to be:     ICSR Forwards" +
                                 "<br/> Or change your input file to match your selected conversion type<html/>");
+                        noticeCheck = true;
+
                     } else {
 
                         try {
                             model.transformerUpICSR();
-                            JOptionPane.showMessageDialog(null, "Conversion is successful!");
-                            progressBar.setValue(100);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         } catch (TransformerException e1) {
@@ -411,12 +411,12 @@ public class View {
                                 "<br/><br/>What to do?<br/>" +
                                 "<br/>Either select your conversion type to be:     ICSR Backwards" +
                                 "<br/> Or change your input file to match your selected conversion type<html/>");
+                        noticeCheck = true;
+
                     } else {
 
                         try {
                             model.transformerDownICSR();
-                            JOptionPane.showMessageDialog(null, "Conversion is successful!");
-                            progressBar.setValue(100);
                         } catch (TransformerException e1) {
                             e1.printStackTrace();
                         } catch (IOException e1) {
@@ -434,10 +434,15 @@ public class View {
 
             }
             reader.close();
-        }
+
 
         if(successCheck==true){
-            JOptionPane.showMessageDialog(null, "Conversion is successful!");
+            progressBar.setValue(100);
+            JOptionPane.showMessageDialog(null, "Conversion is successful!");}
+
+            if(noticeCheck == true){
+                break;}
+
         }
         return false;
 

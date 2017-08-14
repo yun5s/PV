@@ -41,7 +41,10 @@ public class Main {
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 
-                    if (view.getConvertClicked() == 0 && !(model.getfolderFilePath() == null)) {
+                    if(view.getConvertClicked() == 0){
+                        System.exit(0);
+                    }
+                    else if (view.getConvertClicked() == 0 && !(model.getfolderFilePath() == null)) {
 
                         File f = model.getFileToSave().getAbsoluteFile();
 
