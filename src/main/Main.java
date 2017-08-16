@@ -26,10 +26,10 @@ public class Main {
 
         JFrame frame = new JFrame("Backwards and Forwards E2B Converter");
         frame.setContentPane(view.getPanel1());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMaximumSize(new Dimension(700, 460));
         frame.setVisible(true);
         frame.setMinimumSize(new Dimension(700, 460));
+        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();
 
 
@@ -37,27 +37,26 @@ public class Main {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(frame,
-                        "Are you sure to close this window?", "Really Closing?",
+                        "Are you sure you want to close this window?", "Really Closing?",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 
-                    if(view.getConvertClicked() == 0){
+
+                    if (view.getConvertClicked() == 0 && !(model.getfolderFilePath() == null)) {
+
+
+                        for (File file : model.getOutputFiles()) {
+
+                            file.delete();
+                        }
+
                         System.exit(0);
-                    }
-                    else if (view.getConvertClicked() == 0 && !(model.getfolderFilePath() == null)) {
-
-                        File f = model.getFileToSave().getAbsoluteFile();
-
-                        f.delete();
-                        System.exit(0);
 
                     }
-                    System.exit(0);
                 }
-
-
             }
         });
+
     }
 }
 

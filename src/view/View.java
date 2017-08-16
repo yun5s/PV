@@ -153,6 +153,7 @@ public class View {
                     try {
                         readInputFiles();
                         convertClicked++;
+
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }

@@ -13,6 +13,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+import java.nio.file.Path;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class Model {
     private Iterator<String> namesIterator;
     private Iterator<String> pathsIterator;
     private Iterator<File> inputFilesIterator;
+    private ArrayList<File> outputFiles;
 
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd.HH.mm");
@@ -87,8 +89,8 @@ public class Model {
         namesIterator = names.iterator();
         inputFilesIterator = inputFiles.iterator();
         folderFilePaths = new ArrayList<String>();
-
-
+        outputFiles = new ArrayList<File>();
+        File blankFile = new File("");
 
 
         if (inputFiles.size() > 1) {
@@ -97,17 +99,32 @@ public class Model {
         }
 
 
-        for (File file : inputFiles) {
-
             chooserFolder.setDialogTitle("Specify your save location");
             chooserFolder.setDialogType(JFileChooser.SAVE_DIALOG);
-            chooserFolder.setSelectedFile(new File(namesIterator.next() + " Convert" + ".xml"));
+            chooserFolder.setSelectedFile(new File("CONVERT_"));
+
+
             chooserFolder.setFileFilter(new FileNameExtensionFilter("xml file", "xml"));
 
             if (chooserFolder.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 
-                chooserFolder.setSelectedFile(new File(chooserFolder.getSelectedFile().getAbsolutePath()));
-//             chooserFolder.getSelectedFile().renameTo(new File(chooserFolder.getSelectedFile().getAbsolutePath() + numbers++ + ".xml"));
+                String p = String.valueOf(chooserFolder.getSelectedFile().getAbsolutePath());
+
+                System.out.println("THIS IS PPPPPPPPPPPPPPPPPPPPP" +p);
+
+                for (File file : inputFiles) {
+
+
+//                    chooserFolder.getSelectedFile().getAbsolutePath().replace("ack2-01.xml", "");
+
+                        chooserFolder.setSelectedFile(new File( p +  file.getName()));
+
+//                    chooserFolder.getSelectedFile().getName().replace(file.getName(), "");
+//                    chooserFolder.setSelectedFile(null);
+
+//                    chooserFolder.setSelectedFile(new File(String.valueOf(
+//chooserFolder.setSelectedFile(new File(String.valueOf(chooserFolder.getSelectedFile().renameTo(blankFile))));
+//                    file.getName().replaceAll(".xml", "");
 
                 fileToSave = chooserFolder.getSelectedFile();
 
@@ -120,6 +137,7 @@ public class Model {
                 System.out.println("Save as file: " + fileToSave.getAbsolutePath());
 
                 folderFilePaths.add(fileToSave.getAbsolutePath());
+                outputFiles.add(chooserFolder.getSelectedFile().getAbsoluteFile());
             }
 
         }
@@ -127,6 +145,7 @@ public class Model {
         System.out.println("file paths......" + folderFilePaths.size());
         System.out.println(folderFilePaths);
         System.out.println("inputFiles....." + inputFiles.size());
+        System.out.println("output files..."+outputFiles);
 
     }
 
@@ -134,6 +153,12 @@ public class Model {
     public File getFileToSave() {
         return fileToSave;
     }
+
+    public ArrayList<File> getOutputFiles() {
+        return outputFiles;
+    }
+
+
 
 
     public String getChosenInputFile() {
