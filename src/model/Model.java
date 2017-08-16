@@ -84,13 +84,11 @@ public class Model {
 
     public void pickFolder() throws Exception {
 
-        int numbers = 0;
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
         namesIterator = names.iterator();
         inputFilesIterator = inputFiles.iterator();
         folderFilePaths = new ArrayList<String>();
         outputFiles = new ArrayList<File>();
-        File blankFile = new File("");
 
 
         if (inputFiles.size() > 1) {
@@ -106,25 +104,13 @@ public class Model {
 
             chooserFolder.setFileFilter(new FileNameExtensionFilter("xml file", "xml"));
 
-            if (chooserFolder.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+        if (chooserFolder.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 
-                String p = String.valueOf(chooserFolder.getSelectedFile().getAbsolutePath());
+            String selectedDestination = String.valueOf(chooserFolder.getSelectedFile().getAbsolutePath());
 
-                System.out.println("THIS IS PPPPPPPPPPPPPPPPPPPPP" +p);
+            for (File file : inputFiles) {
 
-                for (File file : inputFiles) {
-
-
-//                    chooserFolder.getSelectedFile().getAbsolutePath().replace("ack2-01.xml", "");
-
-                        chooserFolder.setSelectedFile(new File( p +  file.getName()));
-
-//                    chooserFolder.getSelectedFile().getName().replace(file.getName(), "");
-//                    chooserFolder.setSelectedFile(null);
-
-//                    chooserFolder.setSelectedFile(new File(String.valueOf(
-//chooserFolder.setSelectedFile(new File(String.valueOf(chooserFolder.getSelectedFile().renameTo(blankFile))));
-//                    file.getName().replaceAll(".xml", "");
+                chooserFolder.setSelectedFile(new File(selectedDestination + file.getName()));
 
                 fileToSave = chooserFolder.getSelectedFile();
 

@@ -233,7 +233,7 @@
         <properties>
           <background color="-15481831"/>
           <string value=""/>
-          <value value="10"/>
+          <value value="0"/>
         </properties>
       </component>
       <component id="aebad" class="javax.swing.JLabel" binding="logoLabel">

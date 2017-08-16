@@ -42,7 +42,7 @@ public class Main {
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 
 
-                    if (view.getConvertClicked() == 0 && !(model.getfolderFilePath() == null)) {
+                    if (view.getConvertClicked() == 0 && !(model.getfolderFilePath() == null) || view.getConvertClicked() > 0 && view.getSuccessCheck()==false) {
 
 
                         for (File file : model.getOutputFiles()) {
@@ -50,9 +50,10 @@ public class Main {
                             file.delete();
                         }
 
-                        System.exit(0);
-
                     }
+
+                    System.exit(0);
+
                 }
             }
         });

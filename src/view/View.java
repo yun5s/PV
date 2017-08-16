@@ -441,12 +441,21 @@ public class View {
             progressBar.setValue(100);
             JOptionPane.showMessageDialog(null, "Conversion is successful!");}
 
+            progressBar.setValue(0);
+            outputDestinationMessage.setText("");
+            yourSelectedInputFile.setText("");
+            radioGroup.clearSelection();
+
             if(noticeCheck == true){
                 break;}
 
         }
         return false;
 
+    }
+
+    public boolean getSuccessCheck(){
+        return successCheck;
     }
 
 
