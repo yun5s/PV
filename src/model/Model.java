@@ -31,12 +31,10 @@ public class Model {
     JFileChooser chooserFolder = new JFileChooser();
     private File fileToSave;
     private ArrayList<File> inputFiles;
-    private ArrayList<String> names;
-    private int name;
-    private Iterator<String> namesIterator;
     private Iterator<String> pathsIterator;
-    private Iterator<File> inputFilesIterator;
     private ArrayList<File> outputFiles;
+    private boolean fileExists;
+
 
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd.HH.mm");
@@ -44,21 +42,18 @@ public class Model {
 
     public Model(){
 
-
     }
+
     public void pickInputFile() throws Exception {
 
         inputFiles = new ArrayList<File>();
 
-
         chooserInput = new JFileChooser();
-
         chooserInput.setMultiSelectionEnabled(true);
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "XML inputFiles", "XML", "XSL");
 
-//        java.io.File file = chooserInput.getSelectedFile();
 
         chooserInput.setFileFilter(filter);
         int returnVal = chooserInput.showOpenDialog(null);
@@ -74,8 +69,6 @@ public class Model {
             }
 
             System.out.println("input files be like...." + inputFiles);
-            System.out.println("Your input file: " +
-                    inputFiles.toString());
 
         }
 
@@ -85,17 +78,8 @@ public class Model {
     public void pickFolder() throws Exception {
 
 
-        namesIterator = names.iterator();
-        inputFilesIterator = inputFiles.iterator();
         folderFilePaths = new ArrayList<String>();
         outputFiles = new ArrayList<File>();
-
-
-        if (inputFiles.size() > 1) {
-            JOptionPane.showMessageDialog(null, "<html>PLEASE NOTE:    You have chosen to convert multiple inputFiles: <br/><br/>" +
-                    "then please continue pressing ok to save each file to your output folder.<br/> You do not have to name your file unless you wish to<html/>");
-        }
-
 
             chooserFolder.setDialogTitle("Specify your save location");
             chooserFolder.setDialogType(JFileChooser.SAVE_DIALOG);
@@ -110,6 +94,7 @@ public class Model {
 
             for (File file : inputFiles) {
 
+                fileExists = false;
                 chooserFolder.setSelectedFile(new File(selectedDestination + file.getName()));
 
                 fileToSave = chooserFolder.getSelectedFile();
@@ -117,7 +102,7 @@ public class Model {
                 if (fileToSave.createNewFile()) {
                     System.out.println("File is created!");
                 } else {
-                    JOptionPane.showMessageDialog(null, "File already exists.");
+                    fileExists = true;
                 }
 
                 System.out.println("Save as file: " + fileToSave.getAbsolutePath());
@@ -126,16 +111,37 @@ public class Model {
                 outputFiles.add(chooserFolder.getSelectedFile().getAbsoluteFile());
             }
 
+            if(fileExists == true){
+                JOptionPane.showMessageDialog(null, "File already exists. Program will refresh.");
+            }
         }
 
         System.out.println("file paths......" + folderFilePaths.size());
-        System.out.println(folderFilePaths);
         System.out.println("inputFiles....." + inputFiles.size());
         System.out.println("output files..."+outputFiles);
 
     }
 
 
+//    public String setOutputDestinationMessage(){
+//
+//        if((chooserFolder.mouseExit())){
+//
+//            return "Output Destination Confirmed.";
+//        }
+//        else{             return"Select a valid output folder";
+//
+//        }
+//    }
+
+    public boolean getfileExists(){
+
+        return fileExists;
+    }
+
+    public Integer getNumberOfInputFiles(){
+        return inputFiles.size();
+    }
     public File getFileToSave() {
         return fileToSave;
     }
@@ -145,43 +151,21 @@ public class Model {
     }
 
 
-
-
     public String getChosenInputFile() {
 
         return String.valueOf(chooserInput.getSelectedFile());     //returns file location
     }
 
-//    public String getAllInputFiles(){
-//
-//            return
-//    }
 
     public ArrayList<File> getInputFiles() {
         return inputFiles;
     }
 
 
-    public ArrayList<String> getfolderFilePath() {
+    public ArrayList<String> getfolderFilePaths() {
         return folderFilePaths;
     }
 
-
-    public String getChosenInputFileNames() {
-
-        names = new ArrayList<String>();
-
-
-        for (File file : inputFiles) {           //for number of input inputFiles
-
-            String n = file.getName().replaceAll(".xml", "");
-            names.add(n);      //get the input file names and store in arraylist.
-        }
-
-        return String.valueOf(names);
-
-
-    }
 
 
     public void transformerDownICSR() throws ParserConfigurationException, IOException, TransformerException, SAXException {
@@ -369,6 +353,8 @@ public class Model {
 
         db = dbf.newDocumentBuilder();
     }
+
+
 
 
 }

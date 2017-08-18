@@ -6,8 +6,7 @@ import model.Model;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import javax.swing.JOptionPane;
 
 
@@ -27,27 +26,44 @@ public class Main {
         JFrame frame = new JFrame("Backwards and Forwards E2B Converter");
         frame.setContentPane(view.getPanel1());
         frame.setMaximumSize(new Dimension(700, 460));
-        frame.setVisible(true);
         frame.setMinimumSize(new Dimension(700, 460));
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
 
 
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+
+
                 if (JOptionPane.showConfirmDialog(frame,
                         "Are you sure you want to close this window?", "Really Closing?",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 
 
-                    if (view.getConvertClicked() == 0 && !(model.getfolderFilePath() == null) || view.getConvertClicked() > 0 && view.getSuccessCheck()==false) {
+                    if (view.getConvertClicked() == 0 && !(model.getfolderFilePaths() == null) || view.getConvertClicked() > 0 && view.getSuccessCheck()==false) {
 
 
                         for (File file : model.getOutputFiles()) {
 
-                            file.delete();
+                            BufferedReader br = null;
+                            try {
+                                br = new BufferedReader(new FileReader(file));
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }                                   //if the file is empty, Delete it.
+                            try {
+                                if (br.readLine() == null) {
+                                    file.delete();
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            file.delete();            
                         }
 
                     }
@@ -55,6 +71,7 @@ public class Main {
                     System.exit(0);
 
                 }
+
             }
         });
 

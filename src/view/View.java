@@ -45,18 +45,13 @@ public class View {
     private int convertClicked;
     private boolean successCheck;
     private boolean noticeCheck;
-
-    public ButtonGroup getRadioGroup() {
-        return radioGroup;
-    }
-
     private ButtonGroup radioGroup;
 
 
     public View(Model model, Controller controller) throws IOException {
 
-        Font font = welcomeLabel.getFont();
 
+        Font font = welcomeLabel.getFont();
         Map attributes = font.getAttributes();
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         welcomeLabel.setFont(font.deriveFont(attributes));
@@ -104,7 +99,9 @@ public class View {
                     if (model.getChosenInputFile() == null || (model.getChosenInputFile() != null && ("".equals(model.getChosenInputFile())))) {
                         yourSelectedInputFile.setText("Please Select An Input File");
                     } else {
-                        yourSelectedInputFile.setText(model.getChosenInputFileNames());
+
+                        yourSelectedInputFile.setText("Number Of Files:   " + model.getNumberOfInputFiles());
+
                         progressBar.setValue(40);
                     }
                 } catch (Exception e1) {
@@ -121,14 +118,26 @@ public class View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    model.pickFolder();
+                    model.pickFolder();                                     //firstly create blank output files
+
+//                    outputDestinationMessage.setText(model.setOutputDestinationMessage());
+                    outputDestinationMessage.setText("Output Destination Confirmed");
+
+                    progressBar.setValue(75);
+
+                        if (model.getfileExists() == true) {    //if output file exists, reset the GUI.
+
+                            progressBar.setValue(0);
+                            yourSelectedInputFile.setText("");
+                            radioGroup.clearSelection();
+                            outputDestinationMessage.setText("");
+                        }
+
                     if (!convertButton.isSelected()) {
                         boolean b = model.getFileToSave().createNewFile() == false;
                     }
-                    outputDestinationMessage.setText("You have chosen your output folder");
-                    progressBar.setValue(75);
 
-//                    model.createNewBlankFile();
+
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -144,7 +153,7 @@ public class View {
 
                     JOptionPane.showMessageDialog(null, "Please select your conversion type");
 
-                } else if ((model.getChosenInputFile() == null) || (model.getfolderFilePath() == null)) {
+                } else if ((model.getInputFiles() == null) || (model.getfolderFilePaths() == null)) {
 
                     JOptionPane.showMessageDialog(null, "Please select your input and output files");
 
@@ -306,7 +315,7 @@ public class View {
     }
 
 
-    public boolean readInputFiles() throws IOException {
+    public void readInputFiles() throws IOException {
 
         successCheck = false;
 
@@ -326,8 +335,8 @@ public class View {
                         JOptionPane.showMessageDialog(null, "<html>Your input file   " + file.getName() +
                                 "   is an Acknowledgement's file in R3 format" +
                                 "<br/><br/>What to do?<br/>" +
-                                "<br/>Either select your conversion type to be:     Acknowledgement's Backwards" +
-                                "<br/> Or change your input file to match your selected conversion type<html/>");
+                                "<br/><li>Either select your conversion type to be:     Acknowledgement's Backwards</li>" +
+                                "<br/><li>Or change your input file to match your selected conversion type</li><html/>");
 
                         noticeCheck = true;
                     } else {
@@ -357,8 +366,8 @@ public class View {
                         JOptionPane.showMessageDialog(null, "<html>Your input file   " + file.getName() +
                                 "   is an Acknowledgement's file in R2 format" +
                                 "<br/><br/>What to do?<br/>" +
-                                "<br/>Either select your conversion type to be:     Acknowledgement Forwards" +
-                                "<br/> Or change your input file to match your selected conversion type<html/>");
+                                "<br/><li>Either select your conversion type to be:     Acknowledgement Forwards</li>" +
+                                "<br/><li>Or change your input file to match your selected conversion type</li><html/>");
                         noticeCheck = true;
 
                     } else {
@@ -384,8 +393,8 @@ public class View {
                         JOptionPane.showMessageDialog(null, "<html>Your input file   " + file.getName() +
                                 "   is an ICSR file in R2 format" +
                                 "<br/><br/>What to do?<br/>" +
-                                "<br/>Either select your conversion type to be:     ICSR Forwards" +
-                                "<br/> Or change your input file to match your selected conversion type<html/>");
+                                "<br/><li>Either select your conversion type to be:     ICSR Forwards</li>" +
+                                "<br/><li> Or change your input file to match your selected conversion type</li><html/>");
                         noticeCheck = true;
 
                     } else {
@@ -410,8 +419,8 @@ public class View {
                         JOptionPane.showMessageDialog(null, "<html>Your input file   " + file.getName() +
                                 "   is an ISCR file in R3 format" +
                                 "<br/><br/>What to do?<br/>" +
-                                "<br/>Either select your conversion type to be:     ICSR Backwards" +
-                                "<br/> Or change your input file to match your selected conversion type<html/>");
+                                "<br/><li>Either select your conversion type to be:     ICSR Backwards</li>" +
+                                "<br/><li> Or change your input file to match your selected conversion type</li><html/>");
                         noticeCheck = true;
 
                     } else {
@@ -437,22 +446,27 @@ public class View {
             reader.close();
 
 
+
+
         if(successCheck==true){
             progressBar.setValue(100);
-            JOptionPane.showMessageDialog(null, "Conversion is successful!");}
-
+            JOptionPane.showMessageDialog(null, "Conversion is successful!");
             progressBar.setValue(0);
             outputDestinationMessage.setText("");
             yourSelectedInputFile.setText("");
             radioGroup.clearSelection();
+            break;
+            }
 
             if(noticeCheck == true){
                 break;}
 
         }
-        return false;
 
     }
+
+
+
 
     public boolean getSuccessCheck(){
         return successCheck;
@@ -462,6 +476,7 @@ public class View {
     public int getConvertClicked() {
         return convertClicked;
     }
+
 
 }
 
