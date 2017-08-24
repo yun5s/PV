@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.View">
-  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="5" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="509" y="149" width="700" height="478"/>
+      <xy x="509" y="149" width="1038" height="662"/>
     </constraints>
     <properties>
       <background color="-131585"/>
@@ -156,16 +156,19 @@
           </tabbedpane>
           <component id="adf85" class="javax.swing.JButton" binding="convertButton">
             <constraints>
-              <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false">
+              <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <minimum-size width="200" height="50"/>
                 <preferred-size width="200" height="50"/>
                 <maximum-size width="200" height="50"/>
               </grid>
             </constraints>
             <properties>
-              <background color="-13996600"/>
+              <background color="-12807768"/>
+              <enabled value="true"/>
               <font size="14" style="1"/>
               <foreground color="-13996600"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
               <text value="Convert!"/>
             </properties>
           </component>
@@ -236,7 +239,7 @@
       </grid>
       <component id="e7e62" class="javax.swing.JProgressBar" binding="progressBar">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-15481831"/>
@@ -244,20 +247,9 @@
           <value value="0"/>
         </properties>
       </component>
-      <component id="aebad" class="javax.swing.JLabel" binding="logoLabel">
-        <constraints>
-          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false">
-            <minimum-size width="220" height="90"/>
-            <preferred-size width="220" height="90"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value=""/>
-        </properties>
-      </component>
       <vspacer id="7e41b">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
       <component id="d547b" class="javax.swing.JLabel" binding="welcomeLabel">
@@ -266,17 +258,36 @@
         </constraints>
         <properties>
           <font name="Shree Devanagari 714" size="20" style="1"/>
+          <horizontalAlignment value="2"/>
           <horizontalTextPosition value="11"/>
-          <text value="&lt;html&gt;&lt;u&gt;Welcome To The E2B Conversion Tool&lt;u/&gt;&lt;html/&gt;"/>
-          <verticalAlignment value="1"/>
+          <text value=""/>
+          <verticalAlignment value="0"/>
         </properties>
       </component>
-      <component id="92c9d" class="javax.swing.JLabel" binding="helpLabel">
+      <component id="449bd" class="javax.swing.JButton" binding="logoButton">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
+        </properties>
+      </component>
+      <component id="9f68" class="javax.swing.JLabel" binding="gifLabel">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="f553b" class="javax.swing.JButton" binding="helpButton">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <horizontalAlignment value="2"/>
+          <text value=""/>
+          <verticalAlignment value="1"/>
         </properties>
       </component>
     </children>

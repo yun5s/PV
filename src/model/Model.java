@@ -3,6 +3,7 @@ package model;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.DocumentBuilder;
@@ -12,9 +13,10 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
-import java.nio.file.Path;
-import java.sql.Timestamp;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -123,16 +125,6 @@ public class Model {
     }
 
 
-//    public String setOutputDestinationMessage(){
-//
-//        if((chooserFolder.mouseExit())){
-//
-//            return "Output Destination Confirmed.";
-//        }
-//        else{             return"Select a valid output folder";
-//
-//        }
-//    }
 
     public boolean getfileExists(){
 
@@ -330,13 +322,19 @@ public class Model {
 
 
 
-
-
-
-
-
-
-
+//    public BufferedImage setAppIcon(){
+//
+//        BufferedImage image = null;
+//        try {
+//          image = ImageIO.read(getClass().getResource("/images/bfc_icon.png"));
+//
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return image;
+//    }
 
 
 
