@@ -1,11 +1,8 @@
 package view;
 
 import controller.Controller;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.ProgressBarUI;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.awt.*;
@@ -16,17 +13,12 @@ import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
-
 import model.Model;
-import oracle.jvm.hotspot.jfr.JFR;
 import org.xml.sax.SAXException;
-
-import static com.sun.tools.internal.xjc.reader.Ring.add;
 
 /**
  * Created by MaiwandMaidanwal on 20/07/2017.
@@ -43,21 +35,35 @@ public class View extends JFrame{
     private JRadioButton forwardsICSR;
     private JTabbedPane tabbedPane1;
     private JRadioButton backwardsACK;
-    private JRadioButton forwardsACK;
+    private JRadioButton forwardsACK;               //declare all fields
     private JLabel yourSelectedInputFile;
     private JLabel outputDestinationMessage;
     private JLabel welcomeLabel;
     private JButton logoButton;
-    private JLabel gifLabel;
     private JButton helpButton;
+    private JLabel thumb;
+    private JPanel panelInner;
+    private JLabel chooseCon;
+    private JLabel chooseOut;
+    private JLabel chooseIn;
+    private JLabel clickCon;
+    private JSeparator northSep;
+    private JSeparator eastSep;
+    private JSeparator southSep;
+    private JSeparator westSep;
+    private String count;
+    private JButton keyButton;
+    private JButton transformsImageButton;
     private Model model;
-    private Controller controller;
     private int convertClicked;
     private boolean successCheck;
     private boolean noticeCheck;
     private ButtonGroup radioGroup;
     private JFrame frame;
-    private java.awt.event.WindowEvent event;
+    private Controller controller;
+    private int previousCount;
+
+
 
 
     final URI uri = new URI("https://www.pvpharm.com/");
@@ -72,10 +78,22 @@ public class View extends JFrame{
 
     public View(Model model, Controller controller)  throws IOException, URISyntaxException {
 
+        model.monthlyCleanse();         //clean the conversion count at start of each month.
+
+        controller.openCalendarFile();
+        controller.readCalendarFile();
+        controller.closeFileX();
+
+        previousCount = controller.getCalendarInfo();       //count of conversions that have happened so far.
+
+        System.out.println("previous count is..."+ previousCount);
+
+        count = String.valueOf(controller.getCalendarInfo());
+
+
         ImageIcon imageIcon = new ImageIcon(String.valueOf(Color.getHSBColor(195,41, 100)));
 
         convertButton.setIcon(imageIcon);
-
 
         
         Font font = welcomeLabel.getFont();
@@ -86,6 +104,7 @@ public class View extends JFrame{
         this.model = model;
         this.controller = controller;
 
+
         radioGroup = new ButtonGroup();
         radioGroup.add(forwardsICSR);
         radioGroup.add(backwardsICSR);
@@ -93,10 +112,6 @@ public class View extends JFrame{
         radioGroup.add(backwardsACK);
 
 
-
-//        logo = new Logo();
-//        logo.setPreferredSize(new Dimension(300,100));	//create the size of the boat panel
-//    tabbedPane1.setopaque(true);							//not opaque
         tabbedPane1.setBackground(new Color(226, 235, 220, 80));
 
 
@@ -106,12 +121,10 @@ public class View extends JFrame{
         setHelpImage();
         setConvertRollover();
         setWelcomeImage();
+        setKeyImage();
+        setTransformsImage();
 
 
-//        java.util.Timer t = new Timer()
-
-//        ImageIcon  = new ImageIcon(http://megaicons.net/static/img/icons_sizes/8/178/256/folders-folder-icon.png));
-//        jLabel2.setIcon(imgThisImg);
 
         inputButton.addActionListener(new ActionListener() {
             @Override
@@ -125,7 +138,7 @@ public class View extends JFrame{
 
                         yourSelectedInputFile.setText("Number Of Files:   " + model.getNumberOfInputFiles());
 
-                        progressBar.setValue(40);
+                        progressBar.setValue(50);
                     }
                 } catch (Exception e1) {
                     e1.printStackTrace();
@@ -185,6 +198,13 @@ public class View extends JFrame{
                     try {
                         readInputFiles();
                         convertClicked++;
+                        model.writeToConversionsFile(previousCount);
+                        controller.openCalendarFile();
+                        controller.readCalendarFile();
+                        controller.closeFileX();
+
+                        count = String.valueOf(controller.getCalendarInfo());
+
 
                     } catch (IOException e1) {
                         e1.printStackTrace();
@@ -208,7 +228,7 @@ public class View extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                progressBar.setValue(20);
+                progressBar.setValue(25);
 
             }
         });
@@ -216,7 +236,7 @@ public class View extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                progressBar.setValue(20);
+                progressBar.setValue(25);
 
             }
         });
@@ -224,7 +244,7 @@ public class View extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                progressBar.setValue(20);
+                progressBar.setValue(25);
 
             }
         });
@@ -232,7 +252,7 @@ public class View extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                progressBar.setValue(20);
+                progressBar.setValue(25);
 
             }
         });
@@ -252,10 +272,10 @@ public class View extends JFrame{
                         "<br>you are converting ICSR files or Acknowledgement files. Next you should know if you" +
                         "<br> want forwards or backwards conversion.<br><br> <b>e.g.</b>" +
                         "    If you wish to convert an ICSR file from R2 to R3 files you must select 'ICSR Forwards.'</li>" +
-                        "<br><br><li> <b>Choosing you input file:</b> <br><br> select the files that you want to convert, they will most likely be in <b>XML</b> format." +
+                        "<br><br><li> <b>Choosing your input file:</b> <br><br> Select the files that you want to convert, they will most likely be in <b>XML</b> format." +
                         "<br>Bear in mind that all your input files MUST be of the same file type.Otherwise <br>Incorrect conversions will occur.</li>" +
                         "<br><br><li><b>Choose Output Destination:</b><br><br>" +
-                        "once you select the folder icon you can then navigate to your desired output location." +
+                        "Once you select the folder icon you can then navigate to your desired output location." +
                         "<br>This is where your output files will be created and stored<br<br><b>e.g.</b>  There is a default name 'CONVERT_' followed by your input file name" +
                         "<br>(you may change this if you wish)" +
                         "<br>If you want to save your output files to 'Desktop', you should navigate to that folder and press ok.</li>" +
@@ -269,39 +289,49 @@ public class View extends JFrame{
         frame = new JFrame("Backwards and Forwards E2B Converter");
 
 
-        setIconImage(Toolkit.getDefaultToolkit().getImage(View.class.getResource("/images/pvpharmIcon.png")));
-
-
-
+        try {
+            URL resource = frame.getClass().getResource("/GUI_images/pvpharmIcon.png");
+            BufferedImage image = ImageIO.read(resource);
+            frame.setIconImage(image);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         frame.setContentPane(getPanel1());
-        frame.setMaximumSize(new Dimension(700, 460));
-        frame.setMinimumSize(new Dimension(700, 460));
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setResizable(false);
         exitingFrame();
 
 
+
+
+        keyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                LicenseFrame licenseFrame = new LicenseFrame();
+
+                licenseFrame.setContentPane(licenseFrame.getPanel1());
+                licenseFrame.isOpaque();
+                licenseFrame.pack();
+                licenseFrame.setLocationRelativeTo(null);
+                licenseFrame.setResizable(false);
+                licenseFrame.setVisible(true);
+
+            }
+        });
+        transformsImageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JOptionPane.showMessageDialog(null, "Files transformed this month:   "+ count);
+
+            }
+        });
     }
-
-
-//    public void changingIcon() throws IOException {
-//
-//
-//        URL url = new URL("com/xyz/resources/camera.png");
-//
-//
-////        URL url = ClassLoader.getSystemResource("/images/pvpharmIcon.png");
-//
-//        Toolkit kit = Toolkit.getDefaultToolkit();
-//        Image img = kit.createImage(url);
-//        frame.setIconImage(img);
-//
-//    }
-
-
 
 
 
@@ -310,27 +340,17 @@ public class View extends JFrame{
         return panel1;
     }
 
-    public JButton getConvertButton() {
-        return convertButton;
-    }
 
-
-//
-//            public void setBackgroundImage() throws IOException {
-//
-//
-//                JLabel label = new JLabel(new ImageIcon(ImageIO.read()));
-//                label.setLayout(new BorderLayout());
-//                panel1.add(label);
-//
-//            }
-//
 
     public void setLogoImage() {
 
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("src/images/pvpharm.png"));
+
+//            img = ImageIO.read(new File(getClass().getResourceAsStream("/GUI_images/pvpharm.png").toURI()));
+
+            img = ImageIO.read(View.class.getResource("/GUI_images/pvpharm.png"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -354,7 +374,8 @@ public class View extends JFrame{
 
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("src/images/welcome.png"));
+            img = ImageIO.read(View.class.getResource("/GUI_images/welcome.png"));
+
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -376,8 +397,11 @@ public class View extends JFrame{
         BufferedImage img1 = null;
 
         try {
-            img = ImageIO.read(new File("src/images/convert.png"));
-            img1 = ImageIO.read(new File("src/images/convert copy.png"));
+            img = ImageIO.read(View.class.getResource("/GUI_images/convert.png"));
+
+            img1 = ImageIO.read(View.class.getResource("/GUI_images/convert copy.png"));
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -401,8 +425,11 @@ public class View extends JFrame{
         BufferedImage img = null;
         BufferedImage img1 = null;
         try {
-            img = ImageIO.read(new File("src/images/input.png"));
-            img1 = ImageIO.read(new File("src/images/input copy.png"));
+
+            img = ImageIO.read(View.class.getResource("/GUI_images/input.png"));
+
+            img1 = ImageIO.read(View.class.getResource("/GUI_images/input copy.png"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -425,8 +452,11 @@ public class View extends JFrame{
         BufferedImage img = null;
         BufferedImage img1 = null;
         try {
-            img = ImageIO.read(new File("src/images/folder.png"));
-            img1 = ImageIO.read(new File("src/images/folder copy.png"));
+
+            img = ImageIO.read(View.class.getResource("/GUI_images/folder.png"));
+
+            img1 = ImageIO.read(View.class.getResource("/GUI_images/folder copy.png"));
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -447,12 +477,15 @@ public class View extends JFrame{
 
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("src/images/help.png"));
+
+            img = ImageIO.read(View.class.getResource("/GUI_images/help.png"));
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        helpButton.setSize(30, 30);
+        helpButton.setSize(20, 20);
         Image dimg = img.getScaledInstance(helpButton.getWidth(), helpButton.getHeight(),
                 Image.SCALE_SMOOTH);
 
@@ -462,6 +495,55 @@ public class View extends JFrame{
         helpButton.setBorderPainted(false);
 
     }
+
+
+    public void setKeyImage() {
+
+        BufferedImage img = null;
+        try {
+
+            img = ImageIO.read(View.class.getResource("/GUI_images/key.png"));
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        keyButton.setSize(20, 20);
+        Image dimg = img.getScaledInstance(keyButton.getWidth(), keyButton.getHeight(),
+                Image.SCALE_SMOOTH);
+
+        ImageIcon imageIcon = new ImageIcon(dimg);
+
+        keyButton.setIcon(imageIcon);
+        keyButton.setBorderPainted(false);
+
+    }
+
+    public void setTransformsImage() {
+
+        BufferedImage img = null;
+        try {
+
+            img = ImageIO.read(View.class.getResource("/GUI_images/transforms.png"));
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        transformsImageButton.setSize(20, 20);
+        Image dimg = img.getScaledInstance(transformsImageButton.getWidth(), transformsImageButton.getHeight(),
+                Image.SCALE_SMOOTH);
+
+        ImageIcon imageIcon = new ImageIcon(dimg);
+
+        transformsImageButton.setIcon(imageIcon);
+        transformsImageButton.setBorderPainted(false);
+
+    }
+
+
 
 
 
@@ -504,7 +586,8 @@ public class View extends JFrame{
                         } catch (ParserConfigurationException e1) {
                             e1.printStackTrace();
                         }
-                            successCheck = true;
+
+                        successCheck = true;
 
                     }
                 }
@@ -589,6 +672,7 @@ public class View extends JFrame{
                         }
                         successCheck = true;
 
+
                     }
                 }
 
@@ -600,6 +684,9 @@ public class View extends JFrame{
 
 
         if(successCheck==true){
+
+             model.deletingWrongConversions();
+
             progressBar.setValue(100);
             JOptionPane.showMessageDialog(null, "Conversion is successful!");
             progressBar.setValue(0);
@@ -638,6 +725,8 @@ public class View extends JFrame{
     }
 
 
+
+
     public void exitingFrame(){
 
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -657,11 +746,14 @@ public class View extends JFrame{
                         for (File file : model.getOutputFiles()) {
 
                             BufferedReader br = null;
+
                             try {
                                 br = new BufferedReader(new FileReader(file));
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
-                            }                                   //if the file is empty, Delete it.
+                            }
+
+                            //if the file is empty, Delete it.
                             try {
                                 if (br.readLine() == null) {
                                     file.delete();
@@ -669,15 +761,13 @@ public class View extends JFrame{
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            file.delete();
+
                         }
 
                     }
-
                     System.exit(0);
 
                 }
-
             }
         });
     }

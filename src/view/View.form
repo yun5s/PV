@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.View">
-  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="5" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="509" y="149" width="1038" height="662"/>
+      <xy x="569" y="287" width="660" height="417"/>
     </constraints>
     <properties>
       <background color="-131585"/>
     </properties>
-    <border type="none" title="e2b Conversion tool | ©2017 All Rights Reserved" title-justification="3" title-position="6"/>
+    <border type="none" title="e2b Conversion tool | ©2017 All Rights Reserved" title-justification="3" title-position="4"/>
     <children>
-      <grid id="f1349" layout-manager="GridLayoutManager" row-count="8" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="f1349" binding="panelInner" layout-manager="GridLayoutManager" row-count="7" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-1050881"/>
@@ -21,18 +21,10 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="4a54" class="javax.swing.JSeparator">
+          <component id="d1792" class="javax.swing.JLabel" binding="chooseIn">
             <constraints>
-              <grid row="0" column="1" row-span="3" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <orientation value="1"/>
-            </properties>
-          </component>
-          <component id="d1792" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false">
-                <preferred-size width="300" height="49"/>
+              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false">
+                <preferred-size width="250" height="49"/>
               </grid>
             </constraints>
             <properties>
@@ -40,18 +32,10 @@
               <text value="&lt;HTML&gt;&lt;U&gt;2.      Choose Input File:&lt;/U&gt;&lt;/HTML&gt; "/>
             </properties>
           </component>
-          <component id="aa050" class="javax.swing.JSeparator">
+          <component id="3ba38" class="javax.swing.JLabel" binding="chooseCon">
             <constraints>
-              <grid row="3" column="1" row-span="5" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <orientation value="1"/>
-            </properties>
-          </component>
-          <component id="3ba38" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false">
-                <preferred-size width="300" height="49"/>
+              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false">
+                <preferred-size width="270" height="49"/>
               </grid>
             </constraints>
             <properties>
@@ -59,45 +43,41 @@
               <text value="&lt;HTML&gt;&lt;U&gt; 1.         Choose Conversion Type:&lt;/U&gt;&lt;/HTML&gt;"/>
             </properties>
           </component>
-          <component id="4dfda" class="javax.swing.JSeparator">
+          <component id="4dfda" class="javax.swing.JSeparator" binding="eastSep">
             <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="ae1c8" class="javax.swing.JSeparator">
+          <component id="ae1c8" class="javax.swing.JSeparator" binding="westSep">
             <constraints>
-              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <vspacer id="faa5a">
-            <constraints>
-              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
-                <preferred-size width="-1" height="20"/>
-              </grid>
-            </constraints>
-          </vspacer>
           <tabbedpane id="f6a75" binding="tabbedPane1" default-binding="true">
             <constraints>
-              <grid row="1" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="200" height="100"/>
+              <grid row="1" column="0" row-span="2" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="270" height="95"/>
               </grid>
             </constraints>
             <properties>
-              <background color="-12828863"/>
+              <background color="-855826"/>
               <enabled value="true"/>
+              <foreground color="-16777216"/>
               <tabLayoutPolicy value="0"/>
               <tabPlacement value="1"/>
             </properties>
             <border type="none"/>
             <children>
-              <grid id="b7fd6" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="b7fd6" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <tabbedpane title="ICSR"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-855826"/>
+                </properties>
                 <border type="none"/>
                 <children>
                   <component id="a2524" class="javax.swing.JRadioButton" binding="backwardsICSR">
@@ -107,31 +87,34 @@
                       </grid>
                     </constraints>
                     <properties>
-                      <background color="-12828863"/>
+                      <background color="-855826"/>
                       <foreground color="-16777216"/>
                       <text value="Backwards (R3 to R2)"/>
                     </properties>
                   </component>
                   <component id="18b32" class="javax.swing.JRadioButton" binding="forwardsICSR">
                     <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="4" hsize-policy="3" anchor="8" fill="0" indent="2" use-parent-layout="false">
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="4" hsize-policy="3" anchor="8" fill="0" indent="2" use-parent-layout="false">
                         <preferred-size width="168" height="25"/>
                       </grid>
                     </constraints>
                     <properties>
-                      <background color="-12828864"/>
+                      <background color="-855826"/>
                       <foreground color="-16777216"/>
                       <text value="Forwards (R2 to R3)"/>
                     </properties>
                   </component>
                 </children>
               </grid>
-              <grid id="e81d7" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="e81d7" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <tabbedpane title="Acknowledgement's"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-855826"/>
+                  <foreground color="-16777216"/>
+                </properties>
                 <border type="none"/>
                 <children>
                   <component id="4c1e" class="javax.swing.JRadioButton" binding="forwardsACK" default-binding="true">
@@ -139,14 +122,18 @@
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <background color="-855826"/>
+                      <foreground color="-16777216"/>
                       <text value="Forwards (R2 to R3)"/>
                     </properties>
                   </component>
                   <component id="f77dd" class="javax.swing.JRadioButton" binding="backwardsACK" default-binding="true">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <background color="-855826"/>
+                      <foreground color="-16777216"/>
                       <text value="Backwards (R3 to R2)"/>
                     </properties>
                   </component>
@@ -156,48 +143,34 @@
           </tabbedpane>
           <component id="adf85" class="javax.swing.JButton" binding="convertButton">
             <constraints>
-              <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+              <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <minimum-size width="200" height="50"/>
                 <preferred-size width="200" height="50"/>
                 <maximum-size width="200" height="50"/>
               </grid>
             </constraints>
             <properties>
-              <background color="-12807768"/>
+              <background color="-131585"/>
               <enabled value="true"/>
               <font size="14" style="1"/>
-              <foreground color="-13996600"/>
+              <foreground color="-16051409"/>
               <horizontalAlignment value="0"/>
               <horizontalTextPosition value="0"/>
               <text value="Convert!"/>
             </properties>
           </component>
-          <component id="f8731" class="javax.swing.JLabel">
+          <component id="f8731" class="javax.swing.JLabel" binding="clickCon">
             <constraints>
-              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+              <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font style="1"/>
               <text value="&lt;HTML&gt;&lt;U&gt;4.        Click To Convert Below:&lt;/U&gt;&lt;/HTML&gt;"/>
             </properties>
           </component>
-          <component id="df78" class="javax.swing.JButton" binding="inputButton">
+          <component id="6d049" class="javax.swing.JLabel" binding="chooseOut">
             <constraints>
-              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-6962476"/>
-              <foreground color="-16777216"/>
-              <horizontalAlignment value="0"/>
-              <horizontalTextPosition value="11"/>
-              <text value=""/>
-              <verticalAlignment value="0"/>
-              <verticalTextPosition value="0"/>
-            </properties>
-          </component>
-          <component id="6d049" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+              <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font style="1"/>
@@ -206,90 +179,154 @@
           </component>
           <component id="94013" class="javax.swing.JButton" binding="outputFolderButton">
             <constraints>
-              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <background color="-6962476"/>
+              <background color="-131585"/>
               <enabled value="true"/>
               <text value=""/>
             </properties>
           </component>
           <component id="a8c31" class="javax.swing.JLabel" binding="outputDestinationMessage">
             <constraints>
-              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font style="2"/>
+              <text value="       "/>
+            </properties>
+          </component>
+          <component id="166f1" class="javax.swing.JLabel" binding="thumb">
+            <constraints>
+              <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
               <text value=""/>
+            </properties>
+          </component>
+          <component id="df78" class="javax.swing.JButton" binding="inputButton">
+            <constraints>
+              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-131585"/>
+              <foreground color="-16777216"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="11"/>
+              <text value=""/>
+              <verticalAlignment value="0"/>
+              <verticalTextPosition value="0"/>
             </properties>
           </component>
           <component id="37489" class="javax.swing.JLabel" binding="yourSelectedInputFile">
             <constraints>
-              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <maximum-size width="300" height="-1"/>
-              </grid>
+              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font style="2"/>
+              <horizontalAlignment value="2"/>
               <horizontalTextPosition value="4"/>
-              <text value=""/>
+              <text value="         "/>
+            </properties>
+          </component>
+          <component id="aa050" class="javax.swing.JSeparator" binding="southSep">
+            <constraints>
+              <grid row="3" column="2" row-span="4" col-span="1" vsize-policy="6" hsize-policy="6" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <orientation value="1"/>
+            </properties>
+          </component>
+          <component id="4a54" class="javax.swing.JSeparator" binding="northSep">
+            <constraints>
+              <grid row="0" column="2" row-span="3" col-span="1" vsize-policy="6" hsize-policy="6" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <orientation value="1"/>
             </properties>
           </component>
         </children>
       </grid>
-      <component id="e7e62" class="javax.swing.JProgressBar" binding="progressBar">
-        <constraints>
-          <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <background color="-15481831"/>
-          <string value=""/>
-          <value value="0"/>
-        </properties>
-      </component>
-      <vspacer id="7e41b">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
       <component id="d547b" class="javax.swing.JLabel" binding="welcomeLabel">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Shree Devanagari 714" size="20" style="1"/>
           <horizontalAlignment value="2"/>
           <horizontalTextPosition value="11"/>
           <text value=""/>
-          <verticalAlignment value="0"/>
+          <verticalAlignment value="3"/>
         </properties>
       </component>
       <component id="449bd" class="javax.swing.JButton" binding="logoButton">
         <constraints>
-          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-131585"/>
           <text value=""/>
         </properties>
       </component>
-      <component id="9f68" class="javax.swing.JLabel" binding="gifLabel">
+      <component id="e7e62" class="javax.swing.JProgressBar" binding="progressBar">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value=""/>
+          <background color="-2883595"/>
+          <foreground color="-6831671"/>
+          <string value=""/>
+          <value value="0"/>
         </properties>
       </component>
-      <component id="f553b" class="javax.swing.JButton" binding="helpButton">
+      <grid id="3a76b" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="true">
+            <minimum-size width="-1" height="30"/>
+            <preferred-size width="-1" height="30"/>
+            <maximum-size width="-1" height="30"/>
+          </grid>
         </constraints>
         <properties>
-          <horizontalAlignment value="2"/>
-          <text value=""/>
-          <verticalAlignment value="1"/>
+          <background color="-131585"/>
+          <enabled value="true"/>
+          <foreground color="-131585"/>
         </properties>
-      </component>
+        <border type="none"/>
+        <children>
+          <component id="526a8" class="javax.swing.JButton" binding="transformsImageButton">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-131585"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="88109" class="javax.swing.JButton" binding="keyButton">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-131585"/>
+              <horizontalAlignment value="2"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="f553b" class="javax.swing.JButton" binding="helpButton">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-131585"/>
+              <horizontalAlignment value="2"/>
+              <text value=""/>
+              <verticalAlignment value="1"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>
