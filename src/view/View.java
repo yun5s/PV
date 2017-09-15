@@ -23,6 +23,11 @@ import org.xml.sax.SAXException;
 /**
  * Created by MaiwandMaidanwal on 20/07/2017.
  */
+
+
+/**
+ * This is the View class, where everything to do with the Interface for the user is created and done.
+ */
 public class View extends JFrame{
 
 
@@ -66,6 +71,7 @@ public class View extends JFrame{
 
 
 
+    //URL link to the pvpharm website, when you click the logo.
     final URI uri = new URI("https://www.pvpharm.com/");
 
     class OpenUrlAction implements ActionListener {
@@ -75,7 +81,12 @@ public class View extends JFrame{
     }
 
 
-
+    /**
+     * There are several methods being called here in the constructor. I also have many listeners here
+     * I understand that this is not strictly following the orthodox MVC style, (since they should all be in the controller class)
+     * but during the development of the application I found it to be easier and the code to work better if I had the listeners
+     * here in the constructor.
+     */
     public View(Model model, Controller controller)  throws IOException, URISyntaxException {
 
         model.monthlyCleanse();         //clean the conversion count at start of each month.
@@ -105,7 +116,7 @@ public class View extends JFrame{
         this.controller = controller;
 
 
-        radioGroup = new ButtonGroup();
+        radioGroup = new ButtonGroup();            //grouping buttons, so only 1 is selected at a time.
         radioGroup.add(forwardsICSR);
         radioGroup.add(backwardsICSR);
         radioGroup.add(forwardsACK);
@@ -115,7 +126,7 @@ public class View extends JFrame{
         tabbedPane1.setBackground(new Color(226, 235, 220, 80));
 
 
-        setLogoImage();
+        setLogoImage();                     //all image setting methods are called here.
         setInputImage();
         setFolderImage();
         setHelpImage();
@@ -125,17 +136,25 @@ public class View extends JFrame{
         setTransformsImage();
 
 
-
+        /**
+         * Do what is inside following the click of the input button.
+         */
         inputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 try {
+
+                    //Calling this method for picking the inputs.
                     model.pickInputFile();
+
+                    //I have conditions in place, below saying basically if no input file is selected.
                     if (model.getChosenInputFile() == null || (model.getChosenInputFile() != null && ("".equals(model.getChosenInputFile())))) {
                         yourSelectedInputFile.setText("Please Select An Input File");
                     } else {
 
+
+                        //but if it is selected then.... state the number of files.
                         yourSelectedInputFile.setText("Number Of Files:   " + model.getNumberOfInputFiles());
 
                         progressBar.setValue(50);
@@ -156,7 +175,6 @@ public class View extends JFrame{
                 try {
                     model.pickFolder();                                     //firstly create blank output files
 
-//                    outputDestinationMessage.setText(model.setOutputDestinationMessage());
                     outputDestinationMessage.setText("Output Destination Confirmed");
 
                     progressBar.setValue(75);
@@ -181,23 +199,34 @@ public class View extends JFrame{
         });
 
 
+        /**
+         * there are a few conditions which I have set, before the actual conversion happens.
+         */
         convertButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+
+                //First at least one of the radio buttons must be selected.
 
                 if (!(backwardsICSR.isSelected() || forwardsICSR.isSelected() || backwardsACK.isSelected() || forwardsACK.isSelected())) {
 
                     JOptionPane.showMessageDialog(null, "Please select your conversion type");
 
+
+                    //also the input files must be selected, and the selected output place must exist.
                 } else if ((model.getInputFiles() == null) || (model.getfolderFilePaths() == null)) {
 
                     JOptionPane.showMessageDialog(null, "Please select your input and output files");
 
                 } else {
 
+                    //now you can convert.
                     try {
                         readInputFiles();
                         convertClicked++;
+
+                        //calling these methods, make sure the conversion count is kept accurate.
                         model.writeToConversionsFile(previousCount);
                         controller.openCalendarFile();
                         controller.readCalendarFile();
@@ -216,12 +245,16 @@ public class View extends JFrame{
         });
 
 
+        //set the look and feel to the default way, of the operating system this application is being run on.
+        //I spent more time on the actual program, than the GUI, so this is helpful.
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+
+        //setting the progress bar after an option is clicked
 
         backwardsICSR.addMouseListener(new MouseAdapter() {
             @Override
@@ -289,6 +322,8 @@ public class View extends JFrame{
         frame = new JFrame("Backwards and Forwards E2B Converter");
 
 
+        // must use this way for getting an image, so that it also loads with ought issue in JAR
+
         try {
             URL resource = frame.getClass().getResource("/GUI_images/pvpharmIcon.png");
             BufferedImage image = ImageIO.read(resource);
@@ -298,16 +333,21 @@ public class View extends JFrame{
         }
 
         frame.setContentPane(getPanel1());
+
+        //so that clicking "No" and the X button wont close the application
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.pack();
+
+        //to open application in centre screen
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setResizable(false);
         exitingFrame();
 
 
-
-
+        /**
+         * Open up the JFrame for asking user for their license key.
+         */
         keyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -346,15 +386,13 @@ public class View extends JFrame{
 
         BufferedImage img = null;
         try {
-
-//            img = ImageIO.read(new File(getClass().getResourceAsStream("/GUI_images/pvpharm.png").toURI()));
-
             img = ImageIO.read(View.class.getResource("/GUI_images/pvpharm.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        //make sure the image is relative to the button dimensions, and scaled accordingly.
         logoButton.setSize(220, 90);
         Image dimg = img.getScaledInstance(logoButton.getWidth(), logoButton.getHeight(),
                 Image.SCALE_SMOOTH);
@@ -544,9 +582,16 @@ public class View extends JFrame{
     }
 
 
-
-
-
+    /**
+     * This method is important because it reads the input files and is responsible for sorting them and giving the user the output message.
+     *
+     * It checks the specific lines I have set with which it can tell if its an R2 or R3 file, ICSR or Acknowdedgement.
+     *
+     * currently I have set it so that if the user selects the incorrect option e.g ICSR forward....but a few of the files
+     * are in ICSR backwards... then it will only display the message one time, for one of the files.
+     * I trust that the user should know which file is which format and what they wish to convert.
+     * * @throws IOException
+     */
 
     public void readInputFiles() throws IOException {
 
@@ -561,8 +606,11 @@ public class View extends JFrame{
 
             while ((line = reader.readLine()) != null) {
 
+                //check this specific line, because then it is a backwards acknowledgement file.
+
                 if (line.contains("<MCCI_IN200101UV01 ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 multicacheschemas/MCCI_IN200101UV01.xsd\" xmlns=\"urn:hl7-org:v3\" xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:mif=\"urn:hl7-org:v3/mif\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">")) {
 
+                    //but if that button isnt selected
                     if (!backwardsACK.isSelected()) {
 
                         JOptionPane.showMessageDialog(null, "<html>Your input file   " + file.getName() +
@@ -571,9 +619,12 @@ public class View extends JFrame{
                                 "<br/><li>Either select your conversion type to be:     Acknowledgement's Backwards</li>" +
                                 "<br/><li>Or change your input file to match your selected conversion type</li><html/>");
 
+                        //we only need the notice one time, for usability purposes
                         noticeCheck = true;
                     } else {
 
+
+                        //but if its all good, then run the transformation.
 
                         try {
                             model.transformerDownAck();
@@ -593,6 +644,7 @@ public class View extends JFrame{
                 }
 
 
+                // The exact same way has been done for the other 3 types of files.
 
                 else if (line.contains("ich-icsrack-v1_1.dtd")) {
                     if (!forwardsACK.isSelected()) {
@@ -682,10 +734,14 @@ public class View extends JFrame{
 
 
 
+            //if the transformation was a success, delete the incorrect (blank files) conversions.
 
         if(successCheck==true){
 
              model.deletingWrongConversions();
+
+
+             // reset everything
 
             progressBar.setValue(100);
             JOptionPane.showMessageDialog(null, "Conversion is successful!");
@@ -725,7 +781,13 @@ public class View extends JFrame{
     }
 
 
-
+    /**
+     * This method is for the closing of the program and making sure that when closing,
+     * the program will automatically delete the blank files that in has created in the output destination
+     * ONLY when those files have not been converted.
+     *
+     * This way it will NEVER delete the converted files.
+     */
 
     public void exitingFrame(){
 
@@ -739,6 +801,8 @@ public class View extends JFrame{
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 
+                    // If the convert button hasnt even been clicked and the user is exiting...
+                    //or if the convert button has been clicked, but the conversion has failed... then do this
 
                     if (getConvertClicked() == 0 && !(model.getfolderFilePaths() == null) || getConvertClicked() > 0 && getSuccessCheck()==false) {
 

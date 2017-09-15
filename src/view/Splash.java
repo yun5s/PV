@@ -12,6 +12,12 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.SplashScreen;
 
+
+/**
+ * This class is for the introductory splash screen... It is fairly simplistic, and I thought it would make the
+ * application more professional, and is a good starting point from a development point of view.
+ */
+
 public class Splash {
 
 
@@ -24,7 +30,7 @@ public class Splash {
 
     public Splash() {
 
-        splashInit();
+        splashInit();           //calling methods below within constructor.
 
         appInit();
 
@@ -36,6 +42,11 @@ public class Splash {
     }
 
 
+    /**
+     * I wanted to give the application a quick loading effect, and this was achieved by the
+     * for loop in this method and by the quick delay. The numbers that I have set give
+     * the sense of a quick loading animation.
+     */
     private static void appInit()
     {
         for (int i = 1; i <= 30; i++)
@@ -45,7 +56,7 @@ public class Splash {
             splashProgress(j);
             try
             {
-                Thread.sleep(80);
+                Thread.sleep(80);                                   //quick delay
             }
             catch (InterruptedException localInterruptedException)
             {
@@ -54,6 +65,9 @@ public class Splash {
         }
     }
 
+    /**
+     * //Init's for the splash screen, basic outline for it.
+     */
     private static void splashInit()
     {
         mySplash = SplashScreen.getSplashScreen();
@@ -72,6 +86,11 @@ public class Splash {
         }
     }
 
+
+    /**
+     * Setting up the text box for the splash screen.
+     * @param paramString
+     */
     public static void splashText(String paramString)
     {
         if ((mySplash != null) && (mySplash.isVisible()))
@@ -84,6 +103,11 @@ public class Splash {
         }
     }
 
+
+    /**
+     * designing the progress bar below, and the style of progression.
+     * @param paramInt
+     */
     public static void splashProgress(int paramInt)
     {
         if ((mySplash != null) && (mySplash.isVisible()))

@@ -23,6 +23,9 @@ public class Main {
      *   I have documented all the code that I have written for this project, This has been fully explained and documented
      *   so that whoever may continue from this point onwards will understand the purpose and relevance of all written code.
      *
+     *   Also I have not commented every single line, as that is unnecessary but only the relevant parts that need
+     *   explaining.
+     *
      * I have used the MVC (Model, View, Controller) structure to code, as I believe this was the most effective
      * approach for this project.
      */

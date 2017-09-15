@@ -18,6 +18,11 @@ import java.net.URL;
 /**
  * Created by MaiwandMaidanwal on 08/09/2017.
  */
+
+/**
+ * This is another class for the JFrame that is called when the key icon is selected on the main JFrame.
+ * This class is for license key validation, but is incomplete.
+ */
 public class LicenseFrame extends JFrame{
     private JButton activateButton;
     private JPanel panel1;
