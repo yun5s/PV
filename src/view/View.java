@@ -17,6 +17,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
+
+import db.Registration;
 import model.Model;
 import org.xml.sax.SAXException;
 
@@ -29,7 +31,6 @@ import org.xml.sax.SAXException;
  * This is the View class, where everything to do with the Interface for the user is created and done.
  */
 public class View extends JFrame{
-
 
     private JButton convertButton;
     private JPanel panel1;
@@ -59,6 +60,7 @@ public class View extends JFrame{
     private String count;
     private JButton keyButton;
     private JButton transformsImageButton;
+    private JButton loginButton;
     private Model model;
     private int convertClicked;
     private boolean successCheck;

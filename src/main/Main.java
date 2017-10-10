@@ -1,5 +1,6 @@
 package main;
 
+import db.DBconnect;
 import it.sauronsoftware.junique.AlreadyLockedException;
 import it.sauronsoftware.junique.JUnique;
 import view.Splash;
@@ -32,7 +33,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
 
-
+        DBconnect connect = new DBconnect();
+        Boolean log = connect.loggedIn();
         /*below I have the code where only one instance of this application can be opened on desktop at the same time
          * this avoids multiple instances being open each time you click on the application.
          */
@@ -46,7 +48,7 @@ public class Main {
         } catch (AlreadyLockedException e) {                    // If it has been already opened (locked), then exit.
             alreadyRunning = true;
 
-            JOptionPane.showMessageDialog(null, "Application already running");
+            JOptionPane.showMessageDialog(null, "Application is already running");
             System.exit(1);
         }
         if (!alreadyRunning) {
@@ -57,7 +59,6 @@ public class Main {
         //Everything is run from here.
 
         Splash splash = new Splash();           //load splash screen first.
-
         Model model = new Model();
         Controller controller = new Controller(model);
         View view = new View(model, controller);
