@@ -1,6 +1,9 @@
 package db;
 
 
+import License.Cryptography;
+import License.LicenseGen;
+
 import java.awt.EventQueue;
 //import java.awt.Window;
 
@@ -17,6 +20,7 @@ import java.awt.event.ActionEvent;
 
 public class Registration {
 	DBconnect connect = new DBconnect();
+	LicenseGen generate = new LicenseGen();
 
 	public JFrame frame;
 	private JTextField firstnameField;
@@ -25,21 +29,14 @@ public class Registration {
 	//private JTextField userField;
 	private JPasswordField passwordField;
 
+
+	Testing email1 = new Testing();
+	Cryptography crypto = new Cryptography();
 	/**
+	 *
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Registration window = new Registration();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
@@ -52,6 +49,8 @@ public class Registration {
 	 * Initialise the contents of the frame.
 	 */
 	private ButtonGroup group = new ButtonGroup();
+
+
 
 	private void initialize() {
 		frame = new JFrame();
@@ -162,12 +161,27 @@ public class Registration {
 				if(connect.checkUser(email)==false) {
 					JOptionPane.showMessageDialog(null, "Submitted!");
 					frame.dispose();
+
 					connect.register(fname,sname,email,pass,type,days);
+					String val = connect.getValues(email);
+					val = generate.createLicenseKey(val,fname,type);
+					connect.updateData(email,val);
+					System.out.println(val);
+					email1.sendmail(email,"Thank you for using PVpharm Converter ","Dear "+fname
+							+ "\n\nThank you for purchasing our product, you License key is "+val
+							+ "The license wil expire on "+ connect.getDate(email)
+							+ "for anyother enquires, please visit www.pvpharm.com or Email yun@PVpharm.com"
+							+ "\n\n\n"
+							+ "\n Yun \n  PVpharm Technology Team"
+					);
+
 
 				}else {
 					JOptionPane.showConfirmDialog(null, "Invalid input Details", "Registration Error", JOptionPane.ERROR_MESSAGE);
+
 					emailField.setText(null);
 					passwordField.setText(null);
+
 				}				
 			}
 		});

@@ -3,14 +3,9 @@ package db;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.*;
 //import javax.swing.event.DocumentEvent;
 //import javax.swing.event.DocumentListener;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
@@ -111,7 +106,13 @@ public class Login {
 					});*/
 				//------------------------------------------------------------
 				
-				connect.checkLogin(username,password);
+				if(connect.checkLogin(username,password)== true) {
+					JOptionPane.showMessageDialog(null, "You have logged in!");
+				}else{
+					JOptionPane.showMessageDialog(null, "Wrong Email or Password, please try again?!");
+
+
+				}
 
 			}
 		});

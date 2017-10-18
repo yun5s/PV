@@ -1,56 +1,57 @@
 package db;
 
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
 
 public class Testing {
 
+    private static String USER_NAME = "";  //  user name (just the part before "@pvpharm.com")
+    private static String PASSWORD = ""; //  password
 
-public void main (String args []){
-    final String username = "";
-    final String password = "";
-    Properties props = new Properties();
-    props.put("mail.smtp.auth", "true");
-    props.put("mail.smtp.starttls.enable", "true");
-    props.put("mail.smtp.host", "smtp.gmail.com");
-    props.put("mail.smtp.port", "587");
+    private static String from = USER_NAME;
+    private static String pass = PASSWORD;
 
-    Session session = Session.getInstance(props,
-            new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
-                }
-            });
-		try {
 
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(""));
-			message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse(""));
-			message.setSubject("PVpharm License Key");
-			message.setText("Dear customer,"
-				+ "\n\n Thank you for purchase our product, you License key is XXX-XXX-XXX."
-				+ "The license wil expire on 01-11-2017 "
-				+ "for anyother enquires, please visit www.pvpharm.com. Email yun@PVpharm.com"
-				+ "Thank you."
-				+ "\n\n\n"
-				+ "\n Yun \n Lead developer in PVpharm Technology Team");
+    public static void sendmail(String RECIPIENT,  String subject, String body) {
+        String[] to = { RECIPIENT };
+        Properties props = System.getProperties();
+        String host = "";
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.user", from);
+        props.put("mail.smtp.password", pass);
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
 
-			Transport.send(message);
+        Session session = Session.getDefaultInstance(props);
+        MimeMessage message = new MimeMessage(session);
 
-			System.out.println("Done");
+        try {
+            message.setFrom(new InternetAddress(from));
+            InternetAddress[] toAddress = new InternetAddress[to.length];
 
-		} catch (MessagingException e) {
+            // To get the array of addresses
+            for( int i = 0; i < to.length; i++ ) {
+                toAddress[i] = new InternetAddress(to[i]);
+            }
 
-            System.out.println("nope");
-		}
+            for( int i = 0; i < toAddress.length; i++) {
+                message.addRecipient(Message.RecipientType.TO, toAddress[i]);
+            }
 
-	}
+            message.setSubject(subject);
+            message.setText(body);
+            Transport transport = session.getTransport("smtp");
+            transport.connect(host, from, pass);
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+        }
+        catch (AddressException ae) {
+            ae.printStackTrace();
+        }
+        catch (MessagingException me) {
+            me.printStackTrace();
+        }
+    }
 }

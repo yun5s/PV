@@ -207,17 +207,24 @@ public class View extends JFrame{
         convertButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            int i = 0;//get value from database
 
+            //TODO*****
 
                 //First at least one of the radio buttons must be selected.
+                if(i ==0 ){
+                    JOptionPane.showMessageDialog(null, "Please Login!");
 
-                if (!(backwardsICSR.isSelected() || forwardsICSR.isSelected() || backwardsACK.isSelected() || forwardsACK.isSelected())) {
+                }
+                else if (!(backwardsICSR.isSelected() || forwardsICSR.isSelected() || backwardsACK.isSelected() || forwardsACK.isSelected())) {
 
                     JOptionPane.showMessageDialog(null, "Please select your conversion type");
 
 
                     //also the input files must be selected, and the selected output place must exist.
-                } else if ((model.getInputFiles() == null) || (model.getfolderFilePaths() == null)) {
+
+
+                }else if ((model.getInputFiles() == null) || (model.getfolderFilePaths() == null)) {
 
                     JOptionPane.showMessageDialog(null, "Please select your input and output files");
 
