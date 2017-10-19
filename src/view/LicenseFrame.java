@@ -1,6 +1,9 @@
 package view;
 
 import com.oracle.tools.packager.IOUtils;
+import db.DBconnect;
+import db.Filewr;
+import jdk.nashorn.internal.scripts.JO;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -8,10 +11,7 @@ import org.jsoup.nodes.Element;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -23,16 +23,64 @@ import java.net.URL;
  * This is another class for the JFrame that is called when the key icon is selected on the main JFrame.
  * This class is for license key validation, but is incomplete.
  */
+
+
+
 public class LicenseFrame extends JFrame{
     private JButton activateButton;
     private JPanel panel1;
     private JTextField textField1;
+    DBconnect db = new DBconnect();
+    Filewr ff = new Filewr();
+
 
 
     public LicenseFrame() {
         activateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+             String email = ff.mRead();
+             String dd = db.getActKey(email);
+             String tt = textField1.getText();
+
+             try {
+                 try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                         new FileOutputStream("conversionCount.txt"), "utf-8"))) {
+
+                     if ("conversionCount.txt".isEmpty()) {          //file is empty, write out the total you currently have to it.
+                         writer.write("" + dd);
+                     } else {
+                         tt = ff.fRead();
+                     }
+                 }
+             } catch (IOException e1) {
+                 e1.printStackTrace();
+             }
+
+
+             if (tt.equals(dd)) {
+
+                 JOptionPane.showMessageDialog(null, "correct");
+                 dispose();
+             } else {
+                 JOptionPane.showMessageDialog(null, "incorrect");
+             }
+
+         }}
+        );
+    }
+     public JPanel getPanel1() {
+                                                 return panel1;
+                                             }
+
+
+
+}
+
+
+
+
+
 
 
                 /** below is code, where I tried to use JSoup to read from and write to an online text file, on
@@ -69,17 +117,4 @@ public class LicenseFrame extends JFrame{
 //                        System.out.println("reading has failed.");}
 
 
-                JOptionPane.showMessageDialog(null, "Unique license key system is currently" +
-                        " in development, coming soon.");
 
-
-            }
-        });
-    }
-
-    public JPanel getPanel1(){
-        return panel1;
-    }
-
-
-}

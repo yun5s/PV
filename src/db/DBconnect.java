@@ -23,7 +23,7 @@ public class DBconnect {
 			Class.forName("com.mysql.jdbc.Driver");
 
 			//jdbc:mysql://address:port/yourdatabase
-			myConn = DriverManager.getConnection();
+			myConn = DriverManager.getConnection("");
 			System.out.println("connected to database");
 
 			myStmt = myConn.createStatement();
@@ -33,18 +33,28 @@ public class DBconnect {
 			System.out.println(" Error "+ ex);
 		}
 	}
-	//getters
-	public void getActKey() {
+
+
+
+	// a bunch of setters
+	public void setActivate(String email){
+
+	}
+
+
+	//a bunch of getters
+
+	public String getActKey(String email) {
 		try {
-			String query = "select * from Membership";
+			String query = "select ActKey from Membership where email ='"+email+"' ";
 			myRs = myStmt.executeQuery(query);
 			while (myRs.next()) {
-			    System.out.println(myRs.getString("ActKey"));
-			   }
-			
+				return myRs.getString("ActKey");
+			}
 			}catch(Exception ex){
 				System.out.println(ex);
 		}
+		return null;
 	}
 	
 	public Boolean checkLogin(String email, String pass) {

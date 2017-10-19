@@ -3,6 +3,7 @@ package db;
 
 import License.Cryptography;
 import License.LicenseGen;
+import view.LicenseFrame;
 
 import java.awt.EventQueue;
 //import java.awt.Window;
@@ -17,6 +18,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 public class Registration {
 	DBconnect connect = new DBconnect();
@@ -29,7 +31,7 @@ public class Registration {
 	//private JTextField userField;
 	private JPasswordField passwordField;
 
-
+	Filewr ff = new Filewr();
 	Testing email1 = new Testing();
 	Cryptography crypto = new Cryptography();
 	/**
@@ -174,6 +176,9 @@ public class Registration {
 							+ "\n\n\n"
 							+ "\n Yun \n  PVpharm Technology Team"
 					);
+					ff.mWrite(email);
+					ff.fWrite(email);
+
 
 
 				}else {

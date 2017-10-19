@@ -18,6 +18,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 
+import db.Login;
 import db.Registration;
 import model.Model;
 import org.xml.sax.SAXException;
@@ -207,47 +208,57 @@ public class View extends JFrame{
         convertButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            int i = 0;//get value from database
+
+            int i = 0;//get value from database, checks for the data file here. if found, use the data for validation
 
             //TODO*****
 
-                //First at least one of the radio buttons must be selected.
-                if(i ==0 ){
-                    JOptionPane.showMessageDialog(null, "Please Login!");
+                if(i ==0 ) {
+                    LicenseFrame licenseFrame = new LicenseFrame();
 
-                }
-                else if (!(backwardsICSR.isSelected() || forwardsICSR.isSelected() || backwardsACK.isSelected() || forwardsACK.isSelected())) {
+                    licenseFrame.setContentPane(licenseFrame.getPanel1());
+                    licenseFrame.isOpaque();
+                    licenseFrame.pack();
+                    licenseFrame.setLocationRelativeTo(null);
+                    licenseFrame.setResizable(false);
+                    licenseFrame.setVisible(true);
+                    i=1;
+                }else{
 
-                    JOptionPane.showMessageDialog(null, "Please select your conversion type");
+                    //First at least one of the radio buttons must be selected.
+                    if (!(backwardsICSR.isSelected() || forwardsICSR.isSelected() || backwardsACK.isSelected() || forwardsACK.isSelected())) {
 
-
-                    //also the input files must be selected, and the selected output place must exist.
-
-
-                }else if ((model.getInputFiles() == null) || (model.getfolderFilePaths() == null)) {
-
-                    JOptionPane.showMessageDialog(null, "Please select your input and output files");
-
-                } else {
-
-                    //now you can convert.
-                    try {
-                        readInputFiles();
-                        convertClicked++;
-
-                        //calling these methods, make sure the conversion count is kept accurate.
-                        model.writeToConversionsFile(previousCount);
-                        controller.openCalendarFile();
-                        controller.readCalendarFile();
-                        controller.closeFileX();
-
-                        count = String.valueOf(controller.getCalendarInfo());
+                        JOptionPane.showMessageDialog(null, "Please select your conversion type");
 
 
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
+                        //also the input files must be selected, and the selected output place must exist.
+
+
+                    } else if ((model.getInputFiles() == null) || (model.getfolderFilePaths() == null)) {
+
+                        JOptionPane.showMessageDialog(null, "Please select your input and output files");
+
+                    } else {
+
+                        //now you can convert.
+                        try {
+                            readInputFiles();
+                            convertClicked++;
+
+                            //calling these methods, make sure the conversion count is kept accurate.
+                            model.writeToConversionsFile(previousCount);
+                            controller.openCalendarFile();
+                            controller.readCalendarFile();
+                            controller.closeFileX();
+
+                            count = String.valueOf(controller.getCalendarInfo());
+
+
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+
                     }
-
                 }
             }
 
@@ -378,6 +389,15 @@ public class View extends JFrame{
 
                 JOptionPane.showMessageDialog(null, "Files transformed this month:   "+ count);
 
+            }
+        });
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Login log = new Login();
+                log.frame.setVisible(true);
+                log.frame.setLocationRelativeTo(null);
+                log.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }
         });
     }

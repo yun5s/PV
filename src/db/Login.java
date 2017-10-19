@@ -15,7 +15,6 @@ public class Login {
 	public JFrame frame;
 	private JTextField userField;
 	private JPasswordField passwordField;
-
 	/**
 	 * Launch the application.
 	 */
@@ -108,6 +107,7 @@ public class Login {
 				
 				if(connect.checkLogin(username,password)== true) {
 					JOptionPane.showMessageDialog(null, "You have logged in!");
+					frame.dispose();
 				}else{
 					JOptionPane.showMessageDialog(null, "Wrong Email or Password, please try again?!");
 
