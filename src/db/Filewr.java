@@ -29,6 +29,18 @@ public class Filewr {
         return null;
     }
 
+    public void kWrite(String key ){
+        FileWriter fw = null;
+
+        try {
+            fw = new FileWriter("data.txt");
+            PrintWriter pw = new PrintWriter(fw);
+            pw.println(key);
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public  void mWrite(String email){
         FileWriter fw = null;
         try {

@@ -18,6 +18,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 
+import db.DBconnect;
+import db.Filewr;
 import db.Login;
 import db.Registration;
 import model.Model;
@@ -62,6 +64,7 @@ public class View extends JFrame{
     private JButton keyButton;
     private JButton transformsImageButton;
     private JButton loginButton;
+    private JPanel bpanel;
     private Model model;
     private int convertClicked;
     private boolean successCheck;
@@ -71,7 +74,7 @@ public class View extends JFrame{
     private Controller controller;
     private int previousCount;
 
-
+    Filewr ff = new Filewr();
 
 
     //URL link to the pvpharm website, when you click the logo.
@@ -208,21 +211,52 @@ public class View extends JFrame{
         convertButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-            int i = 0;//get value from database, checks for the data file here. if found, use the data for validation
+                DBconnect db = new DBconnect();
+                int i = db.getActStatus(ff.mRead());//get value from database, checks for the data file here. if found, use the data for validation
+                int j = db.getKeyStatus(ff.fRead());
 
             //TODO*****
 
-                if(i ==0 ) {
-                    LicenseFrame licenseFrame = new LicenseFrame();
+                if(i ==0 && j ==0) {
 
-                    licenseFrame.setContentPane(licenseFrame.getPanel1());
-                    licenseFrame.isOpaque();
-                    licenseFrame.pack();
-                    licenseFrame.setLocationRelativeTo(null);
-                    licenseFrame.setResizable(false);
-                    licenseFrame.setVisible(true);
-                    i=1;
+                    if(i ==0 ) {
+
+                        JTextField xField = new JTextField(5);
+                        JTextField yField = new JTextField(5);
+
+                        JPanel myPanel = new JPanel();
+                        myPanel.add(new JLabel("To activate the product, please enter the activation key"));
+                        myPanel.add(xField);
+                        myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+                        myPanel.add(new JLabel("Please verify your email:"));
+                        myPanel.add(yField);
+
+                        int result = JOptionPane.showConfirmDialog(null, myPanel,
+                                "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+                        String key = xField.getText();
+                        String email = yField.getText();
+
+                        System.out.println(key);
+                        System.out.println(email);
+
+
+
+                        if (db.checkKeymail(key, email) == true) {
+                            i = 1;
+                            JOptionPane.showMessageDialog(frame,
+                                    "Verified.",
+                                    "Verification",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            ff.kWrite(key);
+                        } else {
+                            JOptionPane.showMessageDialog(frame,
+                                    "Invalid key or email address!",
+                                    "Verification",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+
+                        i=1;
                 }else{
 
                     //First at least one of the radio buttons must be selected.
@@ -371,17 +405,21 @@ public class View extends JFrame{
         keyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                LicenseFrame licenseFrame = new LicenseFrame();
-
-                licenseFrame.setContentPane(licenseFrame.getPanel1());
-                licenseFrame.isOpaque();
-                licenseFrame.pack();
-                licenseFrame.setLocationRelativeTo(null);
-                licenseFrame.setResizable(false);
-                licenseFrame.setVisible(true);
-
+                DBconnect db = new DBconnect();
+                String ss = JOptionPane.showInputDialog(frame, "To activate the product, please enter the activation key");
+                if (db.checkKey(ss) == true) {
+                    JOptionPane.showMessageDialog(frame,
+                            "Verified.",
+                            "Verification",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(frame,
+                            "Invalid!.",
+                            "Verification",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
             }
+
         });
         transformsImageButton.addActionListener(new ActionListener() {
             @Override
@@ -397,7 +435,12 @@ public class View extends JFrame{
                 Login log = new Login();
                 log.frame.setVisible(true);
                 log.frame.setLocationRelativeTo(null);
-                log.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                log.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                //TODO*
+                // if correct, remove log , add "welcome - user" , else
+                if(log.getLog()){
+                    loginButton.setVisible(false);
+                }
             }
         });
     }

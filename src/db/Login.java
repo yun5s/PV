@@ -1,6 +1,8 @@
 
 package db;
 
+import view.View;
+
 import java.awt.EventQueue;
 
 import javax.swing.*;
@@ -9,7 +11,8 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 public class Login {
 
 	public JFrame frame;
@@ -20,7 +23,6 @@ public class Login {
 	 */
 	//DBconnect connect1 = new DBconnect();
 	public DBconnect connect =new DBconnect();
-    Boolean Keya = false;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -44,10 +46,21 @@ public class Login {
 	/**
 	 * Initialise the contents of the frame.
 	 */
+	private Boolean a  ;
+
+    public void setA(Boolean a) {
+        this.a = a;
+    }
+
+
+    public Boolean getLog(){
+	    return a;
+    }
+
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(200, 200, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	//	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel logining_in = new JLabel("Please Login");
@@ -79,8 +92,16 @@ public class Login {
 				@SuppressWarnings("deprecation")
 				String password = passwordField.getText();
 				String username = userField.getText();
-				//------------------------------------------------------------
 
+
+				String regex = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$";
+				Pattern pattern = Pattern.compile(regex);
+				Matcher matcher = pattern.matcher(username);
+				if (!matcher.matches()) {
+					JOptionPane.showMessageDialog(null,"Email not valid ");
+
+				}
+				//------------------------------------------------------------
 				//disable/ enable login button
 		/*		userField.getDocument().addDocumentListener(new DocumentListener() {
 					  public void changedUpdate(DocumentEvent e) {
@@ -104,21 +125,19 @@ public class Login {
 					  }
 					});*/
 				//------------------------------------------------------------
-				
 				if(connect.checkLogin(username,password)== true) {
 					JOptionPane.showMessageDialog(null, "You have logged in!");
+					setA(true);
 					frame.dispose();
 				}else{
+				    setA(false);
 					JOptionPane.showMessageDialog(null, "Wrong Email or Password, please try again?!");
-
-
 				}
-
 			}
 		});
-		
 
-		
+
+
 		btnLogin.setBounds(173, 165, 117, 29);
 		frame.getContentPane().add(btnLogin);
 		
@@ -138,7 +157,7 @@ public class Login {
 				Registration rgf = new Registration();
 				rgf.frame.setVisible(true);
 				rgf.frame.setLocationRelativeTo(null);
-				rgf.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				rgf.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
 		});
 		btnRegister.setBounds(67, 217, 117, 29);

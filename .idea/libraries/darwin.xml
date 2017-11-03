@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="darwin">
+    <CLASSES />
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://$PROJECT_DIR$/../../argon2-jvm-master/src/main/resources/darwin" />
+    </NATIVE>
+    <SOURCES />
+  </library>
+</component>

@@ -43,11 +43,17 @@ public class LicenseFrame extends JFrame{
              String dd = db.getActKey(email);
              String tt = textField1.getText();
 
+             if(db.checkKey(tt)==true){
+
+             }else{
+                 System.out.println();
+             }
+
              try {
                  try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                         new FileOutputStream("conversionCount.txt"), "utf-8"))) {
+                         new FileOutputStream("data1.txt"), "utf-8"))) {
 
-                     if ("conversionCount.txt".isEmpty()) {          //file is empty, write out the total you currently have to it.
+                     if ("data1.txt".isEmpty()) {          //file is empty, write out the total you currently have to it.
                          writer.write("" + dd);
                      } else {
                          tt = ff.fRead();

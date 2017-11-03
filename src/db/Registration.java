@@ -3,6 +3,8 @@ package db;
 
 import License.Cryptography;
 import License.LicenseGen;
+import at.gadermaier.argon2.Argon2;
+import at.gadermaier.argon2.Argon2Factory;
 import view.LicenseFrame;
 
 import java.awt.EventQueue;
@@ -170,16 +172,29 @@ public class Registration {
 					connect.updateData(email,val);
 					System.out.println(val);
 					email1.sendmail(email,"Thank you for using PVpharm Converter ","Dear "+fname
-							+ "\n\nThank you for purchasing our product, you License key is "+val
-							+ "The license wil expire on "+ connect.getDate(email)
-							+ "for anyother enquires, please visit www.pvpharm.com or Email yun@PVpharm.com"
+							+ "\n\nThank you for purchasing our product, you License key is "+ "\n\n" +val
+							+ "\n\n" + "The license wil expire on "+ connect.getDate(email)
+							+ " For anyother enquires, please visit www.pvpharm.com or Email yun@PVpharm.com"
 							+ "\n\n\n"
 							+ "\n Yun \n  PVpharm Technology Team"
 					);
+
 					ff.mWrite(email);
 					ff.fWrite(email);
+					Argon2 argon = new Argon2();
+					char[] password = pass.toCharArray();
 
+					// Generate salt
+					String salt = argon.generateSalt();
+					connect.updateSalt(email,salt);
 
+					// Hash password - Builder pattern
+					String hash = Argon2Factory.create()
+							.setIterations(2)
+							.setMemory(14)
+							.setParallelism(1)
+							.hash(password, salt);
+					connect.updatePass(email,hash);
 
 				}else {
 					JOptionPane.showConfirmDialog(null, "Invalid input Details", "Registration Error", JOptionPane.ERROR_MESSAGE);

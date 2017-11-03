@@ -1,22 +1,39 @@
 package db;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
-public class Testing {
+class Testing {
 
-    private static String USER_NAME = "";  //  user name (just the part before "@pvpharm.com")
-    private static String PASSWORD = ""; //  password
+    private static String from;
+    private static String pass;
 
-    private static String from = USER_NAME;
-    private static String pass = PASSWORD;
+    private void getDbInfo(){
+        Properties pro = new Properties();
+        InputStream input = null;
+
+        try{
+            input = new FileInputStream("resources/dbconfig.properties");
+            pro.load(input);
+            from =pro.getProperty("DB_MAIL");
+            pass =pro.getProperty("DB_MPWD");
 
 
-    public static void sendmail(String RECIPIENT,  String subject, String body) {
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    void sendmail(String RECIPIENT, String subject, String body) {
+        getDbInfo();
         String[] to = { RECIPIENT };
         Properties props = System.getProperties();
-        String host = "";
+        String host = "smtp.pvpharm.com";
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.user", from);
@@ -36,8 +53,8 @@ public class Testing {
                 toAddress[i] = new InternetAddress(to[i]);
             }
 
-            for( int i = 0; i < toAddress.length; i++) {
-                message.addRecipient(Message.RecipientType.TO, toAddress[i]);
+            for (InternetAddress toAddres : toAddress) {
+                message.addRecipient(Message.RecipientType.TO, toAddres);
             }
 
             message.setSubject(subject);
@@ -46,6 +63,7 @@ public class Testing {
             transport.connect(host, from, pass);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
+            System.out.println("mail sent");
         }
         catch (AddressException ae) {
             ae.printStackTrace();

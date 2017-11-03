@@ -1,14 +1,15 @@
 package db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import at.gadermaier.argon2.Argon2;
+import at.gadermaier.argon2.Argon2Factory;
+
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
+import java.util.Properties;
 import javax.swing.JOptionPane;
 
 public class DBconnect {
@@ -16,14 +17,39 @@ public class DBconnect {
 	private Statement myStmt = null;
 	private PreparedStatement pStmt = null;
 	private ResultSet myRs = null;
-	
+
+	public String dbDriver;
+	public String dbHost;
+	public String dbUser;
+	public String dbPwd;
+
+
+	public void getDbInfo(){
+		Properties pro = new Properties();
+		InputStream input = null;
+
+		try{
+			input = new FileInputStream("resources/dbconfig.properties");
+			pro.load(input);
+			dbDriver =pro.getProperty("DB_DRIVER");
+			dbHost =pro.getProperty("DB_HOST");
+			dbUser =pro.getProperty("DB_USER");
+			dbPwd =pro.getProperty("DB_PWD");
+
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
 	//DB connection 
 	public DBconnect(){
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
 
-			//jdbc:mysql://address:port/yourdatabase
-			myConn = DriverManager.getConnection("");
+		try {
+			getDbInfo();
+			Class.forName(dbDriver);
+
+			myConn = DriverManager.getConnection(""+dbHost, ""+dbUser, ""+dbPwd);
 			System.out.println("connected to database");
 
 			myStmt = myConn.createStatement();
@@ -34,15 +60,76 @@ public class DBconnect {
 		}
 	}
 
+	//Result set Function
 
+
+
+	//Execute Statement function
 
 	// a bunch of setters
 	public void setActivate(String email){
 
+
+	}
+
+
+//updater
+	public void updateSalt(String email, String salt){
+		try {
+			String query = "update Membership "
+					+ " set Salt = '" + salt + "'"
+					+ " where Email = '" + email + "'";
+			myStmt.executeUpdate(query);
+			System.out.println("update compelete");
+		}catch(Exception ex) {
+			System.out.println(ex);
+		}
 	}
 
 
 	//a bunch of getters
+
+	public int getActStatus(String email){
+
+		try {
+			String query = "select Activation from Membership where email ='"+email+"' ";
+			myRs = myStmt.executeQuery(query);
+			while (myRs.next()) {
+				return myRs.getInt("Activation");
+			}
+		}catch(Exception ex){
+			System.out.println(ex);
+		}
+		return 0;
+	}
+	public int getKeyStatus(String key){
+
+		try {
+			String query = "select Activation from Membership where ActKey ='"+key+"' ";
+			myRs = myStmt.executeQuery(query);
+			while (myRs.next()) {
+				return myRs.getInt("Activation");
+			}
+		}catch(Exception ex){
+			System.out.println(ex);
+		}
+		return 0;
+	}
+
+	public String getSalt(String email){
+
+		try {
+			String query = "select Salt from Membership where email ='"+email+"' ";
+			myRs = myStmt.executeQuery(query);
+			while (myRs.next()) {
+				return myRs.getString("Salt");
+			}
+		}catch(Exception ex){
+			System.out.println(ex);
+		}
+		return null;
+	}
+
 
 	public String getActKey(String email) {
 		try {
@@ -56,12 +143,51 @@ public class DBconnect {
 		}
 		return null;
 	}
+
+
+	public Boolean checkKey(String key){
+		try {
+			String query = "select * from Membership where ActKey ='"+key+"' ";
+			myRs = myStmt.executeQuery(query);
+			while (myRs.next()) {
+				return true;
+			}
+		}catch(Exception ex){
+			System.out.println(ex);
+		}
+
+		return false;
+	}
+
+	public Boolean checkKeymail(String key, String email){
+		try {
+			String query = "select * from Membership where ActKey ='"+key+"' and Email ='"+email+"' ";
+			myRs = myStmt.executeQuery(query);
+			while (myRs.next()) {
+				return true;
+			}
+		}catch(Exception ex){
+			System.out.println(ex);
+		}
+		return false;
+	}
 	
 	public Boolean checkLogin(String email, String pass) {
+		char[] password = pass.toCharArray();
+
+		// Generate salt
+		String salt = getSalt(email);
+		// Hash password - Builder pattern
+		String hash = Argon2Factory.create()
+				.setIterations(2)
+				.setMemory(14)
+				.setParallelism(1)
+				.hash(password, salt);
+
 		try {
 		        if (email != null && pass != null) {
 	
-		        	 String sql = "Select * from Membership Where email='" + email + "' and PassHash='" + pass + "'";
+		        	 String sql = "Select * from Membership Where email='" + email + "' and PassHash='" + hash + "'";
 		             myRs = myStmt.executeQuery(sql);
 		             if (myRs.next()) {
 		            	 	return true;
@@ -115,6 +241,17 @@ public class DBconnect {
 		}
 	}
 
+	public void updatePass(String email,String pass){
+		try {
+			String query = "update Membership "
+					+ " set PassHash = '" + pass + "'"
+					+ " where Email = '" + email + "'";
+			myStmt.executeUpdate(query);
+			System.out.println("update compelete");
+		}catch(Exception ex) {
+			System.out.println(ex);
+		}
+	}
 
 	public Boolean loggedIn(){
 	    return false;
@@ -209,6 +346,7 @@ public class DBconnect {
         return null;
 
     }
+
 
 
 	//Prepared statement to prevent SQL injection

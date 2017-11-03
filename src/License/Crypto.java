@@ -7,6 +7,7 @@ import java.security.InvalidKeyException;
 import javax.swing.JOptionPane;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -25,6 +26,8 @@ public class Crypto {
         int ctLength;
 
 
+
+        // MD5 Encryption & Decryption - activation
 
     private static byte[] sharedvector = {
             0x01, 0x02, 0x03, 0x05, 0x07, 0x0B, 0x0D, 0x11
@@ -106,6 +109,7 @@ public class Crypto {
 
     }
 
+    //SHA one way hashing
 
 
 

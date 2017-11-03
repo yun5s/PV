@@ -33,8 +33,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
 
-        DBconnect connect = new DBconnect();
-        Boolean log = connect.loggedIn();
         /*below I have the code where only one instance of this application can be opened on desktop at the same time
          * this avoids multiple instances being open each time you click on the application.
          */
