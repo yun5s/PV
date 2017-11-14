@@ -73,6 +73,7 @@ public class View extends JFrame{
     private JFrame frame;
     private Controller controller;
     private int previousCount;
+    private int currentCount;
 
     Filewr ff = new Filewr();
 
@@ -97,11 +98,11 @@ public class View extends JFrame{
 
         model.monthlyCleanse();         //clean the conversion count at start of each month.
 
-        controller.openCalendarFile();
-        controller.readCalendarFile();
-        controller.closeFileX();
+       // controller.openCalendarFile();
+      //  controller.readCalendarFile();
+        //controller.closeFileX();
 
-        previousCount = controller.getCalendarInfo();       //count of conversions that have happened so far.
+        previousCount = Integer.parseInt(model.getCount());       //count of conversions that have happened so far.
 
         System.out.println("previous count is..."+ previousCount);
 
@@ -263,31 +264,18 @@ public class View extends JFrame{
                     if (!(backwardsICSR.isSelected() || forwardsICSR.isSelected() || backwardsACK.isSelected() || forwardsACK.isSelected())) {
 
                         JOptionPane.showMessageDialog(null, "Please select your conversion type");
-
-
                         //also the input files must be selected, and the selected output place must exist.
-
-
                     } else if ((model.getInputFiles() == null) || (model.getfolderFilePaths() == null)) {
 
                         JOptionPane.showMessageDialog(null, "Please select your input and output files");
 
                     } else {
-
+                        int a = model.getNumberOfInputFiles();
+                        currentCount = Integer.parseInt(model.getCount())+a;
                         //now you can convert.
                         try {
-                            readInputFiles();
                             convertClicked++;
-
-                            //calling these methods, make sure the conversion count is kept accurate.
-                            model.writeToConversionsFile(previousCount);
-                            controller.openCalendarFile();
-                            controller.readCalendarFile();
-                            controller.closeFileX();
-
-                            count = String.valueOf(controller.getCalendarInfo());
-
-
+                            model.writeCount(currentCount);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
@@ -424,23 +412,37 @@ public class View extends JFrame{
         transformsImageButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+               // controller.openCalendarFile();
+                //controller.readCalendarFile();
+                //count = String.valueOf(controller.getCalendarInfo());
 
-                JOptionPane.showMessageDialog(null, "Files transformed this month:   "+ count);
+                JOptionPane.showMessageDialog(null, "Files transformed this month:   "+ model.getCount());
 
             }
         });
         loginButton.addActionListener(new ActionListener() {
+
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                Login log = new Login();
+                try {
+                    model.resetCount();
+                    System.out.println("pre4 is " +previousCount);
+                    System.out.println("reseted, count is "+ model.getCount());
+
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+
+               /* Login log = new Login();s
                 log.frame.setVisible(true);
                 log.frame.setLocationRelativeTo(null);
                 log.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 //TODO*
                 // if correct, remove log , add "welcome - user" , else
-                if(log.getLog()){
+              /*  if(log.getLog()){
                     loginButton.setVisible(false);
-                }
+                }*/
             }
         });
     }

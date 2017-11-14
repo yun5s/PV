@@ -56,12 +56,12 @@ public class Main {
 
         //Everything is run from here.
 
-        Splash splash = new Splash();
 
         //load splash screen first.
         //checking for data file, if not exist load main
         //load login screen - if successful, go to main
 
+        Splash splash = new Splash();
 
         Model model = new Model();
         Controller controller = new Controller(model);

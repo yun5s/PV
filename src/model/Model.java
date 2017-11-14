@@ -20,7 +20,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.Properties;
 
 
 /**
@@ -46,6 +48,10 @@ public class Model {
         convertedFiles = new ArrayList<File>();             //initialise arraylist
     }
 
+
+
+
+    /*---------------------------------------------------------file choser------------------------------------------------------------------------------*/
     /**
      * This method is called when the input button is pressed, It allows the user to open up the file chooser,
      * locate the input file/files they want , and then select them for conversion.
@@ -167,11 +173,62 @@ public class Model {
      *
      * @throws IOException
      */
+
+
+    public void writeCount(int i) throws IOException {
+        Properties prop = new Properties();
+        OutputStream output = null;
+
+       // int I = convertedFiles.size();
+        //int total =0;
+        //int newCount = i + I;                       //if not empty, add the total you have now to the existing total.
+
+        try {
+            output = new FileOutputStream("resources/convertCounter.properties");
+
+            prop.setProperty("COUNT", Integer.toString(i));
+            prop.store(output, null);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }finally {
+            if (output != null) {
+                try {
+                    output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    }
+
+
+    String mycount;
+
+    public String getCount(){
+        Properties pro = new Properties();
+        InputStream input = null;
+
+        try{
+            input = new FileInputStream("resources/convertCounter.properties");
+            pro.load(input);
+
+            mycount = pro.getProperty("COUNT");
+            input.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+       return mycount;
+    }
+
+
     public void writeToConversionsFile(int i) throws IOException {
 
         int I = convertedFiles.size();
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream("conversionCount.txt"), "utf-8"))) {
+                new FileOutputStream("src/ConversionCount/conversionCount.txt"), "utf-8"))) {
 
             if ("conversionCount.txt".isEmpty()) {          //file is empty, write out the total you currently have to it.
                 writer.write("" + I);
@@ -182,6 +239,32 @@ public class Model {
             }
         }
     }
+
+
+    public void resetCount() throws IOException {
+        Properties prop = new Properties();
+        OutputStream output = null;
+
+        try {
+            output = new FileOutputStream("resources/convertCounter.properties");
+
+            prop.setProperty("COUNT", "0");
+            prop.store(output, null);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (output != null) {
+                try {
+                    output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    }
+
 
 
     /**
@@ -210,6 +293,8 @@ public class Model {
 
         }
     }
+
+
 
 
 /*
@@ -462,6 +547,8 @@ getter methods below
             reader.close();
         }
     }
+
+        /*-------------------------------------------------------- user data ------------------------------------------------------------------------------*/
 
 
 

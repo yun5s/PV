@@ -1,6 +1,10 @@
 package controller;
 
 import model.Model;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -33,9 +37,11 @@ public class Controller{
         }
 
 
-        public void readCalendarFile(){                         //read the next line with the scanner
+
+    public void readCalendarFile(){                         //read the next line with the scanner
 
             try {
+
                 while (x.hasNext()) {                           //keep reading if there is a next line
                     calendarInfo = x.nextInt();
                 }
@@ -46,7 +52,8 @@ public class Controller{
 
 
         public int getCalendarInfo(){
-            return calendarInfo;
+           // System.out.println(calendarInfo);
+        return calendarInfo;
         }
 
 

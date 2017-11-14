@@ -34,7 +34,7 @@ public class Registration {
 	private JPasswordField passwordField;
 
 	Filewr ff = new Filewr();
-	Testing email1 = new Testing();
+	Mailing email1 = new Mailing();
 	Cryptography crypto = new Cryptography();
 	/**
 	 *

@@ -1,5 +1,7 @@
 package db;
 
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,20 +9,23 @@ import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
-class Testing {
+class Mailing {
 
     private static String from;
     private static String pass;
 
     private void getDbInfo(){
-        Properties pro = new Properties();
-        InputStream input = null;
+
 
         try{
-            input = new FileInputStream("resources/dbconfig.properties");
+            Properties pro = new Properties();
+            InputStream input = null;
+            input = new FileInputStream("resources/config.properties");
             pro.load(input);
-            from =pro.getProperty("DB_MAIL");
-            pass =pro.getProperty("DB_MPWD");
+            StandardPBEStringEncryptor decryptor = new StandardPBEStringEncryptor();
+            decryptor.setPassword("mySecretPassword");
+            from =decryptor.decrypt(pro.getProperty("DB_EMAIL"));
+            pass =decryptor.decrypt(pro.getProperty("DB_EPWD"));
 
 
         }catch(Exception e){
