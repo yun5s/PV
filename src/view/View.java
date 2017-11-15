@@ -274,6 +274,7 @@ public class View extends JFrame{
                         currentCount = Integer.parseInt(model.getCount())+a;
                         //now you can convert.
                         try {
+                            readInputFiles();
                             convertClicked++;
                             model.writeCount(currentCount);
                         } catch (IOException e1) {
