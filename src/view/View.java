@@ -218,7 +218,7 @@ public class View extends JFrame{
 
             //TODO*****
 
-                if(i ==0 && j ==0) {
+             /*   if(i ==0 && j ==0) {
 
                     if(i ==0 ) {
 
@@ -260,7 +260,7 @@ public class View extends JFrame{
                         i=1;
                 }else{
 
-                    //First at least one of the radio buttons must be selected.
+                   */ //First at least one of the radio buttons must be selected.
                     if (!(backwardsICSR.isSelected() || forwardsICSR.isSelected() || backwardsACK.isSelected() || forwardsACK.isSelected())) {
 
                         JOptionPane.showMessageDialog(null, "Please select your conversion type");
@@ -283,7 +283,7 @@ public class View extends JFrame{
 
                     }
                 }
-            }
+
 
         });
 
@@ -672,7 +672,6 @@ public class View extends JFrame{
 
         successCheck = false;
 
-
         for (File file : model.getInputFiles()) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 
@@ -682,8 +681,8 @@ public class View extends JFrame{
             while ((line = reader.readLine()) != null) {
 
                 //check this specific line, because then it is a backwards acknowledgement file.
-
-                if (line.contains("<MCCI_IN200101UV01 ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 multicacheschemas/MCCI_IN200101UV01.xsd\" xmlns=\"urn:hl7-org:v3\" xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:mif=\"urn:hl7-org:v3/mif\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">")) {
+                // R3 ack
+                if (line.contains("<MCCI_IN200101UV01 ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 multicacheschemas/MCCI_IN200101UV01.xsd\" xmlns=\"urn:hl7-org:v3\" xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:mif=\"urn:hl7-org:v3/mif\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">")||line.contains("ichicsrack11xml.dtd")) {
 
                     //but if that button isnt selected
                     if (!backwardsACK.isSelected()) {
@@ -720,8 +719,8 @@ public class View extends JFrame{
 
 
                 // The exact same way has been done for the other 3 types of files.
-
-                else if (line.contains("ich-icsrack-v1_1.dtd")) {
+                //ACk R2
+                else if (line.contains("ich-icsrack-v1_1.dtd")||line.contains("ichicsrack11xml.dtd")) {
                     if (!forwardsACK.isSelected()) {
 
                         JOptionPane.showMessageDialog(null, "<html>Your input file   " + file.getName() +
@@ -749,7 +748,8 @@ public class View extends JFrame{
 
                     }
 
-                } else if (line.contains("ich-icsr-v2-1.dtd")) {
+                    //R2 ICSR
+                } else if (line.contains("ich-icsr-v2-1.dtd")||line.contains("icsr21xml.dtd")) {
                     if (!forwardsICSR.isSelected()) {
                         JOptionPane.showMessageDialog(null, "<html>Your input file   " + file.getName() +
                                 "   is an ICSR file in R2 format" +
@@ -775,7 +775,9 @@ public class View extends JFrame{
 
 
                     }
-                } else if (line.contains("<MCCI_IN200100UV01 ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 multicacheschemas/MCCI_IN200100UV01.xsd\" xmlns=\"urn:hl7-org:v3\" xmlns:mif=\"urn:hl7-org:v3/mif\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">")) {
+
+                    //R3 ICSR
+                } else if (line.contains("<MCCI_IN200100UV01 ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 multicacheschemas/MCCI_IN200100UV01.xsd\" xmlns=\"urn:hl7-org:v3\" xmlns:mif=\"urn:hl7-org:v3/mif\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">")||line.contains("http://eudravigilance.ema.europa.eu/XSD/multicacheschemas/MCCI_IN200100UV01.xsd")) {
                     if (!backwardsICSR.isSelected()) {
                         JOptionPane.showMessageDialog(null, "<html>Your input file   " + file.getName() +
                                 "   is an ISCR file in R3 format" +
@@ -811,12 +813,12 @@ public class View extends JFrame{
 
             //if the transformation was a success, delete the incorrect (blank files) conversions.
 
-        if(successCheck==true){
+        if(successCheck==true) {
 
-             model.deletingWrongConversions();
+            model.deletingWrongConversions();
 
 
-             // reset everything
+            // reset everything
 
             progressBar.setValue(100);
             JOptionPane.showMessageDialog(null, "Conversion is successful!");
@@ -825,6 +827,9 @@ public class View extends JFrame{
             yourSelectedInputFile.setText("");
             radioGroup.clearSelection();
             break;
+        }else{
+            System.out.println("conversion failed");
+
             }
 
             if(noticeCheck == true){

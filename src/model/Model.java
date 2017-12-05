@@ -331,7 +331,7 @@ getter methods below
             MUST make sure to use "Model.class.getResource()" because the application is exported as a JAR.
              */
             TransformerFactory factory = TransformerFactory.newInstance();
-            Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/conversionXSLs/downgrade-icsr.xsl")));
+            Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/xslt/downgrade-icsr.xsl")));
             Transformer transformer = factory.newTransformer(xslt);
 
             Source text = new StreamSource(new File(getChosenInputFile()));
@@ -350,7 +350,7 @@ getter methods below
                 doing the exact same as above with slight differences.
                  */
                 TransformerFactory factory = TransformerFactory.newInstance();
-                Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/conversionXSLs/downgrade-icsr.xsl")));
+                Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/xslt/downgrade-icsr.xsl")));
                 Transformer transformer = factory.newTransformer(xslt);
 
                 //using the iterator this time, for several paths.
@@ -371,7 +371,7 @@ getter methods below
         if(inputFiles.size()==1) {
 
             TransformerFactory factory = TransformerFactory.newInstance();
-            Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/conversionXSLs/downgrade-ack.xsl")));
+            Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/xslt/downgrade-ack.xsl")));
             Transformer transformer = factory.newTransformer(xslt);
 
 
@@ -386,7 +386,7 @@ getter methods below
 
 
                 TransformerFactory factory = TransformerFactory.newInstance();
-                Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/conversionXSLs/downgrade-ack.xsl")));
+                Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/xslt/downgrade-ack.xsl")));
                 Transformer transformer = factory.newTransformer(xslt);
 
 
@@ -417,7 +417,7 @@ getter methods below
             Document doc = db.parse(new FileInputStream(getChosenInputFile()));
 
             TransformerFactory factory = TransformerFactory.newInstance();
-            Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/conversionXSLs/upgrade-icsr.xsl")));
+            Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/xslt/upgrade-icsr.xsl")));
 
             Transformer transformer = factory.newTransformer(xslt);
 
@@ -436,7 +436,7 @@ getter methods below
                 Document doc = db.parse(new FileInputStream(file));             //parse in the input files in document builder.
 
                 TransformerFactory factory = TransformerFactory.newInstance();
-                Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/conversionXSLs/upgrade-icsr.xsl")));
+                Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/xslt/upgrade-icsr.xsl")));
 
 
                 Transformer transformer = factory.newTransformer(xslt);
@@ -463,7 +463,7 @@ getter methods below
             Document doc = db.parse(new FileInputStream(getChosenInputFile()));
 
             TransformerFactory factory = TransformerFactory.newInstance();
-            Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/conversionXSLs/upgrade-ack.xsl")));
+            Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/xslt/upgrade-ack.xsl")));
             Transformer transformer = factory.newTransformer(xslt);
 
             transformer.transform(
@@ -478,11 +478,11 @@ getter methods below
 
                 System.out.println("this is chosen input..." + file.getName());
 
-                ignoreDOCTYPE();
+                //ignoreDOCTYPE();
                 Document doc = db.parse(new FileInputStream(file));
 
                 TransformerFactory factory = TransformerFactory.newInstance();
-                Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/conversionXSLs/upgrade-ack.xsl")));
+                Source xslt = new StreamSource(String.valueOf(Model.class.getResource("/xslt/upgrade-ack.xsl")));
 
 
 

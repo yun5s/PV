@@ -5,9 +5,7 @@ import License.Cryptography;
 import License.LicenseGen;
 import at.gadermaier.argon2.Argon2;
 import at.gadermaier.argon2.Argon2Factory;
-import view.LicenseFrame;
 
-import java.awt.EventQueue;
 //import java.awt.Window;
 
 import javax.swing.JFrame;
@@ -20,7 +18,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.io.File;
 
 public class Registration {
 	DBconnect connect = new DBconnect();
@@ -171,14 +168,14 @@ public class Registration {
 					val = generate.createLicenseKey(val,fname,type);
 					connect.updateData(email,val);
 					System.out.println(val);
-					email1.sendmail(email,"Thank you for using PVpharm Converter ","Dear "+fname
+					/*email1.sendmail(email,"Thank you for using PVpharm Converter ","Dear "+fname
 							+ "\n\nThank you for purchasing our product, you License key is "+ "\n\n" +val
 							+ "\n\n" + "The license wil expire on "+ connect.getDate(email)
 							+ " For anyother enquires, please visit www.pvpharm.com or Email yun@PVpharm.com"
 							+ "\n\n\n"
 							+ "\n Yun \n  PVpharm Technology Team"
 					);
-
+*/
 					ff.mWrite(email);
 					ff.fWrite(email);
 					Argon2 argon = new Argon2();

@@ -27,6 +27,13 @@ public class DBconnect {
 	public String dbPwd;
 
 	//DB connection
+
+    public Connection getConnection() throws ClassNotFoundException, SQLException{
+        Class.forName(dbDriver);
+        return DriverManager.getConnection(dbHost, dbUser, dbPwd);
+    }
+
+
 	public DBconnect(){
 
 		try {
@@ -79,7 +86,9 @@ public class DBconnect {
         }
         return 0;
     }
-
+    public static void hi(){
+        System.out.println("hello you ");
+    }
     // get the activation key
     public String getActKey(String email) {
         try {
