@@ -1,6 +1,7 @@
 package model;
 
 import com.sun.codemodel.internal.fmt.JTextFile;
+import main.Main;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -15,6 +16,8 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.lang.reflect.Array;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.channels.FileLock;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -40,6 +43,7 @@ public class Model {
     private Iterator<String> pathsIterator;
     private ArrayList<File> outputFiles;
     private boolean fileExists;
+    private static String myName;
 
 
 
@@ -143,6 +147,9 @@ public class Model {
         System.out.println("folderFile Paths....."+folderFilePaths);
 
     }
+    public void removeUnconvertedFiles(){
+
+    }
 
 
 
@@ -184,14 +191,19 @@ public class Model {
         //int newCount = i + I;                       //if not empty, add the total you have now to the existing total.
 
         try {
-            output = new FileOutputStream("resources/convertCounter.properties");
+            URL url = this.getClass().getResource("resources/convertCounter.properties");
+            File fileObject = new File(url.toURI());
+             output = new FileOutputStream(fileObject);
+
 
             prop.setProperty("COUNT", Integer.toString(i));
             prop.store(output, null);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }finally {
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } finally {
             if (output != null) {
                 try {
                     output.close();
@@ -207,15 +219,22 @@ public class Model {
     String mycount;
 
     public String getCount(){
-        Properties pro = new Properties();
-        InputStream input = null;
+        //InputStream input = null;
 
         try{
-            input = new FileInputStream("resources/convertCounter.properties");
-            pro.load(input);
+            //input =  Model.class.getResourceAsStream("/resources/convertCounter.properties");
+            //input = new FileInputStream("resources/convertCounter.properties");
 
-            mycount = pro.getProperty("COUNT");
-            input.close();
+
+            String resourceName = "convertCounter.properties"; // could also be a constant
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            Properties props = new Properties();
+            try(InputStream resourceStream = loader.getResourceAsStream(resourceName)) {
+                props.load(resourceStream);
+            }
+            //pro.load(input);
+
+            mycount = props.getProperty("COUNT");
 
         }catch(Exception e){
             e.printStackTrace();
@@ -226,18 +245,95 @@ public class Model {
 
     public void writeToConversionsFile(int i) throws IOException {
 
+
         int I = convertedFiles.size();
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream("src/ConversionCount/conversionCount.txt"), "utf-8"))) {
+            BufferedWriter bw = new BufferedWriter(writer);
 
             if ("conversionCount.txt".isEmpty()) {          //file is empty, write out the total you currently have to it.
-                writer.write("" + I);
+                bw.write("" + I);
+                bw.close();
             } else{
-
                 int newCount = i + I;                       //if not empty, add the total you have now to the existing total.
-                writer.write(""+ newCount);
+                bw.write(""+ newCount);
+                bw.close();
             }
         }
+    }
+
+
+
+    public void reset2() {
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream("src/ConversionCount/conversionCount.txt"), "utf-8"))) {
+            BufferedWriter bw = new BufferedWriter(writer);
+
+            bw.write("0");
+            bw.flush();
+            bw.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+    public static String getUsername() {
+        System.out.println(myName);
+        return myName;
+    }
+    public static void setUsername(String username1) {
+        myName = username1;
+        System.out.println("set");
+
+        System.out.println(username1);
+        System.out.println(myName);
+    }
+
+    public static void createFolder(String username)  {
+        final File folder = new File(System.getProperty("user.home"), "PVpharmC");
+        if(!folder.exists() && !folder.mkdirs()) {
+            //failed to create the folder, probably exit
+            throw new RuntimeException("Failed to create save directory.");
+        }
+
+        final File myFile = new File(folder, "Data" + ".txt");
+        try {
+            final PrintWriter pw = new PrintWriter(myFile);
+            pw.println (username);
+            pw.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean checkExists() {
+        String directory = (System.getProperty("user.home") + "/PVpharmC");
+        String file = "Data";
+        File dir = new File(directory);
+        File[] dir_contents = dir.listFiles();
+        String temp = file + ".txt";
+        boolean check = new File(directory, temp).exists();
+        System.out.println(check);  // -->always says false
+
+    return check;
+    }
+
+    public String getUser(){
+        try {
+            String Directory = System.getProperty("user.home")+"/PVpharmC";
+            File file = new File(Directory+"/Data.txt");
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String st;
+            while((st=br.readLine()) != null){
+                System.out.println(st);
+                return st;
+            }
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        return null;
     }
 
 
@@ -247,6 +343,7 @@ public class Model {
 
         try {
             output = new FileOutputStream("resources/convertCounter.properties");
+
 
             prop.setProperty("COUNT", "0");
             prop.store(output, null);

@@ -3,6 +3,7 @@ package License;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
+import db.Login;
 
 public class LicenseGen {
 
@@ -16,8 +17,8 @@ public class LicenseGen {
 
     private String group(String s) {
         String result = "";
-        for (int i=0; i < s.length(); i++) {
-            if (i%6==0 && i > 0) {
+        for (int i = 0; i < s.length(); i++) {
+            if (i % 6 == 0 && i > 0) {
                 result += '-';
             }
             result += s.charAt(i);

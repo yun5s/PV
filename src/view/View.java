@@ -22,8 +22,10 @@ import db.DBconnect;
 import db.Filewr;
 import db.Login;
 import db.Registration;
+import jdk.nashorn.internal.scripts.JO;
 import model.Model;
 import org.xml.sax.SAXException;
+import sun.security.pkcs11.Secmod;
 
 /**
  * Created by MaiwandMaidanwal on 20/07/2017.
@@ -206,61 +208,33 @@ public class View extends JFrame{
         });
 
 
-        /**
+        /*
          * there are a few conditions which I have set, before the actual conversion happens.
          */
         convertButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DBconnect db = new DBconnect();
-                int i = db.getActStatus(ff.mRead());//get value from database, checks for the data file here. if found, use the data for validation
-                int j = db.getKeyStatus(ff.fRead());
+                //TODO*****
+            if(!Model.checkExists()) {
 
-            //TODO*****
+                try {
+                    Login window = new Login();
+                    window.frame.setVisible(true);
+                    String avc = model.getUsername();
 
-             /*   if(i ==0 && j ==0) {
+                    System.out.println("username is " + avc);
+                    System.out.println("pre4 is " + previousCount);
+                    System.out.println("reseted, count is " + model.getCount());
 
-                    if(i ==0 ) {
-
-                        JTextField xField = new JTextField(5);
-                        JTextField yField = new JTextField(5);
-
-                        JPanel myPanel = new JPanel();
-                        myPanel.add(new JLabel("To activate the product, please enter the activation key"));
-                        myPanel.add(xField);
-                        myPanel.add(Box.createHorizontalStrut(15)); // a spacer
-                        myPanel.add(new JLabel("Please verify your email:"));
-                        myPanel.add(yField);
-
-                        int result = JOptionPane.showConfirmDialog(null, myPanel,
-                                "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
-                        String key = xField.getText();
-                        String email = yField.getText();
-
-                        System.out.println(key);
-                        System.out.println(email);
-
-
-
-                        if (db.checkKeymail(key, email) == true) {
-                            i = 1;
-                            JOptionPane.showMessageDialog(frame,
-                                    "Verified.",
-                                    "Verification",
-                                    JOptionPane.INFORMATION_MESSAGE);
-                            ff.kWrite(key);
-                        } else {
-                            JOptionPane.showMessageDialog(frame,
-                                    "Invalid key or email address!",
-                                    "Verification",
-                                    JOptionPane.INFORMATION_MESSAGE);
-                        }
-                    }
-
-                        i=1;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }else {
+                if(!db.checkUser(model.getUser())){
+                    JOptionPane.showMessageDialog(null,"Invalid Usernae or Password, please contact support");
                 }else{
 
-                   */ //First at least one of the radio buttons must be selected.
                     if (!(backwardsICSR.isSelected() || forwardsICSR.isSelected() || backwardsACK.isSelected() || forwardsACK.isSelected())) {
 
                         JOptionPane.showMessageDialog(null, "Please select your conversion type");
@@ -271,18 +245,35 @@ public class View extends JFrame{
 
                     } else {
                         int a = model.getNumberOfInputFiles();
-                        currentCount = Integer.parseInt(model.getCount())+a;
-                        //now you can convert.
-                        try {
-                            readInputFiles();
-                            convertClicked++;
-                            model.writeCount(currentCount);
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
+                        System.out.println(a);
+                        currentCount = db.getCount(model.getUser()) + a;
+
+                        if (currentCount <= db.getLimit(model.getUser())) {
+                            //now you can convert.
+                            try {
+                                readInputFiles();
+                                db.sendCount(currentCount, model.getUser());
+
+                                convertClicked++;
+
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        } else {
+                            System.out.println("not enough conversion attempts");
+                            try {
+                                model.deletingWrongConversions();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
                         }
+                    }
+                            //currentCount = db.getCount(model.getUser()) - a;
+                            //db.sendCount(currentCount, model.getUsername());
 
                     }
                 }
+            }
 
 
         });
@@ -367,13 +358,13 @@ public class View extends JFrame{
 
         // must use this way for getting an image, so that it also loads with ought issue in JAR
 
-        try {
+        /*try {
             URL resource = frame.getClass().getResource("/GUI_images/pvpharmIcon.png");
             BufferedImage image = ImageIO.read(resource);
             frame.setIconImage(image);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
         frame.setContentPane(getPanel1());
 
@@ -390,23 +381,26 @@ public class View extends JFrame{
 
         /**
          * Open up the JFrame for asking user for their license key.
+         *      DBconnect db = new DBconnect();
+         String ss = JOptionPane.showInputDialog(frame, "To activate the product, please enter the activation key");
+         if (db.checkKey(ss) == true) {
+         JOptionPane.showMessageDialog(frame,
+         "Verified.",
+         "Verification",
+         JOptionPane.INFORMATION_MESSAGE);
+         } else {
+         JOptionPane.showMessageDialog(frame,
+         "Invalid!.",
+         "Verification",
+         JOptionPane.INFORMATION_MESSAGE);
+         }
          */
         keyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DBconnect db = new DBconnect();
-                String ss = JOptionPane.showInputDialog(frame, "To activate the product, please enter the activation key");
-                if (db.checkKey(ss) == true) {
-                    JOptionPane.showMessageDialog(frame,
-                            "Verified.",
-                            "Verification",
-                            JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(frame,
-                            "Invalid!.",
-                            "Verification",
-                            JOptionPane.INFORMATION_MESSAGE);
-                }
+                int t = db.getLimit(model.getUser());
+                System.out.println(t);
             }
 
         });
@@ -416,37 +410,37 @@ public class View extends JFrame{
                // controller.openCalendarFile();
                 //controller.readCalendarFile();
                 //count = String.valueOf(controller.getCalendarInfo());
-
-                JOptionPane.showMessageDialog(null, "Files transformed this month:   "+ model.getCount());
+                DBconnect db = new DBconnect();
+                JOptionPane.showMessageDialog(null, "Files transformed this month:   "+ db.getCount(model.getUser()));
 
             }
         });
         loginButton.addActionListener(new ActionListener() {
 
-
+            DBconnect db = new DBconnect();
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    model.resetCount();
-                    System.out.println("pre4 is " +previousCount);
-                    System.out.println("reseted, count is "+ model.getCount());
+                //check if file exists , else try login window
+                if( !db.checkUser(model.getUser())) {
 
-                } catch (IOException e1) {
-                    e1.printStackTrace();
+                    try {
+                        Login window = new Login();
+                        window.frame.setVisible(true);
+                        String avc = model.getUsername();
+                        model.createFolder(avc);
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }else{
+                   model.getUser();
+                   JOptionPane.showMessageDialog(null,"You have already Logged in");
                 }
 
-               /* Login log = new Login();s
-                log.frame.setVisible(true);
-                log.frame.setLocationRelativeTo(null);
-                log.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                //TODO*
-                // if correct, remove log , add "welcome - user" , else
-              /*  if(log.getLog()){
-                    loginButton.setVisible(false);
-                }*/
             }
         });
     }
+
 
 
 
@@ -884,7 +878,7 @@ public class View extends JFrame{
                     // If the convert button hasnt even been clicked and the user is exiting...
                     //or if the convert button has been clicked, but the conversion has failed... then do this
 
-                    if (getConvertClicked() == 0 && !(model.getfolderFilePaths() == null) || getConvertClicked() > 0 && getSuccessCheck()==false) {
+                  /*if (getConvertClicked() == 0 && !(model.getfolderFilePaths() == null) || getConvertClicked() > 0 && getSuccessCheck()==false) {
 
 
                         for (File file : model.getOutputFiles()) {
@@ -908,7 +902,8 @@ public class View extends JFrame{
 
                         }
 
-                    }
+                    }*/
+
                     System.exit(0);
 
                 }

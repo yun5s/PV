@@ -1,6 +1,7 @@
 
 package db;
 
+import model.Model;
 import view.View;
 
 import java.awt.EventQueue;
@@ -18,11 +19,13 @@ public class Login {
 	public JFrame frame;
 	private JTextField userField;
 	private JPasswordField passwordField;
+	private  String username;
 	/**
 	 * Launch the application.
 	 */
 	//DBconnect connect1 = new DBconnect();
 	public DBconnect connect =new DBconnect();
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -62,39 +65,41 @@ public class Login {
 		frame.setBounds(200, 200, 450, 300);
 	//	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		JLabel logining_in = new JLabel("Please Login");
+
+		JLabel logining_in = new JLabel("Please Login First");
 		logining_in.setBounds(173, 30, 94, 16);
 		frame.getContentPane().add(logining_in);
-		
+
 		JLabel txtUsername = new JLabel("Email:");
 		txtUsername.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		txtUsername.setBounds(67, 91, 81, 16);
 		frame.getContentPane().add(txtUsername);
-		
+
 		JLabel txtPassword = new JLabel("Password:");
 		txtPassword.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		txtPassword.setBounds(67, 131, 81, 16);
 		frame.getContentPane().add(txtPassword);
-		
+
 		userField = new JTextField();
 		userField.setBounds(173, 85, 134, 28);
 		frame.getContentPane().add(userField);
 		userField.setColumns(10);
-		
+
 		passwordField = new JPasswordField();
 		passwordField.setBounds(174, 125, 133, 28);
 		frame.getContentPane().add(passwordField);
-		
+
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				@SuppressWarnings("deprecation")
 				String password = passwordField.getText();
-				String username = userField.getText();
+                username = userField.getText();
+                Model.setUsername(username);
+                Model.createFolder(username);
 
 
-				String regex = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$";
+                String regex = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(username);
 				if (!matcher.matches()) {
@@ -166,5 +171,6 @@ public class Login {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(6, 193, 438, 12);
 		frame.getContentPane().add(separator);
+
 	}
 }

@@ -53,12 +53,12 @@ public class DBconnect {
 
     // connection
     public void getDbInfo(){
+        String resourceName = "config.properties"; // could also be a constant
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
         Properties pro = new Properties();
-        InputStream input = null;
+        try(InputStream resourceStream = loader.getResourceAsStream(resourceName)) {
+            pro.load(resourceStream);
 
-        try{
-            input = new FileInputStream("resources/config.properties");
-            pro.load(input);
             StandardPBEStringEncryptor decryptor = new StandardPBEStringEncryptor();
             decryptor.setPassword("mySecretPassword");
 
@@ -135,7 +135,7 @@ public class DBconnect {
     public String getValues(String email){
         try {
             try {
-                String query ="select FirstName,LastName,Email,ActDate, PayType,ActKey from Membership where Email='"+email+"'";
+                String query ="select FirstName,LastName,Email,ActDate,ActKey from Membership where Email='"+email+"'";
                 myRs = myStmt.executeQuery(query);
                 while (myRs.next()) {
                     String value =
@@ -143,7 +143,6 @@ public class DBconnect {
                                     myRs.getString("LastName")+
                                     myRs.getString("Email")+
                                     myRs.getString("ActDate")+
-                                    myRs.getString("PayType")+
                                     myRs.getString("ActKey");
                     return value;
                 }
@@ -169,32 +168,75 @@ public class DBconnect {
         return null;
     }
 
+    public String getCurrent(String email){
+        try {
+            String query = "select ID from Membership where email ='"+email+"' ";
+            myRs = myStmt.executeQuery(query);
+            while (myRs.next()) {
+                return myRs.getString("ID");
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    public int getLimit(String email){
+        try {
+            String query = "select ConvLimit from Membership where email ='"+email+"' ";
+            myRs = myStmt.executeQuery(query);
+            while (myRs.next()) {
+                return myRs.getInt("ConvLimit");
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        return 0;
+    }
+    public int getCount(String email){
+        try {
+            String query = "select CurrenCount from Membership where email ='"+email+"' ";
+            myRs = myStmt.executeQuery(query);
+            while (myRs.next()) {
+                return myRs.getInt("CurrenCount");
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        return 0;
+
+    }
 
     //----------------------------------<SETTER>------------------------------------------------------------->
 
+
+
     //Prepared statement to prevent SQL injection
     //set data into the database
-    public void register(String fName,String lName, String email, String pHash,String type,int days) {
+    public void register(String fName,String lName, String email, String pHash,int days) {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Calendar current = new GregorianCalendar();
         Calendar late = new GregorianCalendar();
         late.add(Calendar.DAY_OF_MONTH,days);
 
+
+        //set current count = 0;
+        //set limite = 0;s
 //TODO remove the activation key, set to null
         try {
             String query = "insert into Membership " +
-                    " (FirstName,LastName,Email,PassHash,PayType,ActKey,ActDate,ExpiryDate,Activation)"+
-                    " values(?, ?, ?, ?, ?, 0,? ,?,?)";
+                    " (FirstName,LastName,Email,PassHash,AmountType,ActKey,ActDate,Activation,Salt,ConvLimit)"+
+                    " values(?, ?, ?, ?, 0, 0,?,?,0,5)";
             pStmt =  myConn.prepareStatement(query);
             pStmt.setString(1,fName);
             pStmt.setString(2,lName);
             pStmt.setString(3,email);
             pStmt.setString(4,pHash);
-            pStmt.setString(5,type);
-            pStmt.setString(6,formatter.format(current.getTime()));// TODO need to remove for author change
-            pStmt.setDate(7,new java.sql.Date(late.getTimeInMillis()));
-            pStmt.setBoolean(8, true);
+            pStmt.setString(5,formatter.format(current.getTime()));// TODO need to remove for author change
+            //pStmt.setDate(6,new java.sql.Date(late.getTimeInMillis()));
+            pStmt.setBoolean(6, true);
+
             pStmt.execute();
             System.out.println("prep compelete");
         }catch(Exception ex) {
@@ -204,6 +246,21 @@ public class DBconnect {
 
     //----------------------------------<UPDATES>------------------------------------------------------------->
 
+
+
+//update count
+    public void sendCount(int count, String username) {
+        try {
+            String query = "update  Membership set CurrenCount = '"+count+"' where email ='"+username+ "' ";
+            myStmt.executeUpdate(query);
+
+            System.out.println("count"+count +" send  compelete");
+
+        }catch (Exception ex){
+            System.out.println(ex);
+
+        }
+    }
     // TODO check the DATE and Converted first, if reached limite, call this function
     public void markExpired (String email){
         try {
@@ -239,6 +296,15 @@ public class DBconnect {
         }
     }
     //----------------------------------<CHECKERS>------------------------------------------------------------->
+
+
+    public Boolean checkRemaining(String email){
+        if(getCount(email)>getLimit(email)){
+            System.out.println("more ");
+            return false;
+        }
+        return true;
+    }
 
     public Boolean checkKey(String key){
         try {
@@ -303,9 +369,12 @@ public class DBconnect {
                 String sql = "Select * from Membership Where email='" + email + "'";
                 myRs = myStmt.executeQuery(sql);
                 if (myRs.next()) {
-                    JOptionPane.showMessageDialog(null, "Email already exist");
                     return true;
+
                 } else {
+                    System.out.println("false?");
+
+                    return false;
                 }
             }
         }catch(Exception ex){

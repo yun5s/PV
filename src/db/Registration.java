@@ -163,7 +163,7 @@ public class Registration {
 					JOptionPane.showMessageDialog(null, "Submitted!");
 					frame.dispose();
 
-					connect.register(fname,sname,email,pass,type,days);
+					connect.register(fname,sname,email,pass,days);
 					String val = connect.getValues(email);
 					val = generate.createLicenseKey(val,fname,type);
 					connect.updateData(email,val);
