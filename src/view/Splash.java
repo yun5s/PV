@@ -52,7 +52,7 @@ public class Splash {
         for (int i = 1; i <= 30; i++)
         {
             int j = i * 3;
-            splashText("Checking Key...");
+            splashText("Setting up...");
             splashProgress(j);
             try
             {

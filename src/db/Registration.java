@@ -1,23 +1,16 @@
 package db;
 
 
-import License.Cryptography;
 import License.LicenseGen;
+import License.PassGen;
 import at.gadermaier.argon2.Argon2;
 import at.gadermaier.argon2.Argon2Factory;
 
-//import java.awt.Window;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+//import java.awt.Window;
 
 public class Registration {
 	DBconnect connect = new DBconnect();
@@ -29,15 +22,16 @@ public class Registration {
 	private JTextField emailField;
 	//private JTextField userField;
 	private JPasswordField passwordField;
+	private JTextField amountField;
+	private JTextField companyField;
 
-	Filewr ff = new Filewr();
+
+
 	Mailing email1 = new Mailing();
-	Cryptography crypto = new Cryptography();
 	/**
 	 *
 	 * Launch the application.
 	 */
-
 
 	/**
 	 * Create the application.
@@ -55,7 +49,7 @@ public class Registration {
 
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(200, 200, 450, 300);
+		frame.setBounds(200, 200, 650, 220);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -64,49 +58,83 @@ public class Registration {
 		frame.getContentPane().add(lblRegistration);
 		
 		JLabel lblFirstname = new JLabel("Firstname:");
-		lblFirstname.setBounds(24, 47, 78, 16);
+		lblFirstname.setBounds(24, 40, 78, 16);
 		frame.getContentPane().add(lblFirstname);
 		
 		JLabel lblSurname = new JLabel("Surname: ");
-		lblSurname.setBounds(24, 75, 78, 16);
+		lblSurname.setBounds(24, 70, 78, 16);
 		frame.getContentPane().add(lblSurname);
-		
-		
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(24, 198, 78, 16);
-		frame.getContentPane().add(lblPassword);
-		
+
 		JLabel lblEmailAddress = new JLabel("Email Address:");
-		lblEmailAddress.setBounds(24, 110, 93, 16);
+		lblEmailAddress.setBounds(24, 100, 93, 16);
 		frame.getContentPane().add(lblEmailAddress);
-		
+
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setBounds(24, 130, 78, 16);
+		frame.getContentPane().add(lblPassword);
+
+
+		JLabel amount = new JLabel("Limit Amount:");
+		amount.setBounds(285, 70, 93, 16);
+
+		frame.getContentPane().add(amount);
+
+		JLabel company = new JLabel("Company:");
+		company.setBounds(285, 40, 93, 16);
+		frame.getContentPane().add(company);
+
 		firstnameField = new JTextField();
-		firstnameField.setBounds(139, 41, 134, 28);
+		firstnameField.setBounds(140, 40, 134, 28);
 		frame.getContentPane().add(firstnameField);
 		firstnameField.setColumns(10);
 
 		
 		surnameField = new JTextField();
-		surnameField.setBounds(139, 75, 134, 28);
+		surnameField.setBounds(140, 70, 134, 28);
 		frame.getContentPane().add(surnameField);
 		surnameField.setColumns(10);
 
 		
 		emailField = new JTextField();
-		emailField.setBounds(139, 104, 134, 28);
+		emailField.setBounds(140, 100, 134, 28);
 		frame.getContentPane().add(emailField);
 		emailField.setColumns(10);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(139, 192, 134, 28);
-		frame.getContentPane().add(passwordField);
 
+		PassGen passwordGenerator = new PassGen.PasswordGeneratorBuilder()
+				.useDigits(true)
+				.useLower(true)
+				.useUpper(true)
+				.build();
+		String password = passwordGenerator.generate(8);
+
+        JTextField pass=new JTextField(password);
+        pass.setEditable(false);
+        pass.setBounds(140, 130, 140, 16);
+        pass.setBackground(null);
+        pass.setBorder(null);
+		frame.getContentPane().add(pass);
+
+
+		/*passwordField = new JPasswordField();
+		passwordField.setBounds(140, 130, 134, 28);
+		frame.getContentPane().add(passwordField);
+		*/
+
+		amountField = new JTextField();
+		amountField.setBounds(425, 70, 134, 28);
+		frame.getContentPane().add(amountField);
+		amountField.setColumns(10);
+
+		companyField = new JTextField();
+		companyField.setBounds(425, 40, 134, 28);
+		frame.getContentPane().add(companyField);
+		companyField.setColumns(10);
 
 		JLabel lblSubscriptionType = new JLabel("Subscription Type");
 		lblSubscriptionType.setBounds(285, 6, 124, 16);
 		frame.getContentPane().add(lblSubscriptionType);
-		
-		JRadioButton rdbtnTrial = new JRadioButton("Trial-7 days");
+
+		/*JRadioButton rdbtnTrial = new JRadioButton("Trial-7 days");
 		rdbtnTrial.setBounds(285, 43, 141, 23);
 		frame.getContentPane().add(rdbtnTrial);
 		
@@ -133,7 +161,9 @@ public class Registration {
 		group.add(rdbtnTrial);
 		group.add(rdbtnMonthly);
 		group.add(rdbtnAnually);
-		
+		*/
+
+
 		JButton btnSubmit = new JButton("Submit");
 		
 		btnSubmit.addActionListener(new ActionListener() {
@@ -141,29 +171,21 @@ public class Registration {
 				String fname = firstnameField.getText();
 				String sname = surnameField.getText();
 				String email = emailField.getText();
+				String company = companyField.getText();
+
 				@SuppressWarnings("deprecation")
-				String pass = passwordField.getText(); // get string from text field
+				String pass = password; // get string from text field
+				int amount= Integer.parseInt(amountField.getText());
+
 				String type = "";
 				int days = 0;
-				
-				if(rdbtnTrial.isSelected()) {
-					type = "T";
-					days = 7;
-				}
-				if(rdbtnMonthly.isSelected()) {
-					type = "M";
-					days = 30;
-				}
-				if(rdbtnAnually.isSelected()) {
-					type = "Y";
-					days = 360;
-				}
+
 				;
 				if(connect.checkUser(email)==false) {
 					JOptionPane.showMessageDialog(null, "Submitted!");
 					frame.dispose();
 
-					connect.register(fname,sname,email,pass,days);
+					connect.register(fname,sname,email,company,pass,days,amount);
 					String val = connect.getValues(email);
 					val = generate.createLicenseKey(val,fname,type);
 					connect.updateData(email,val);
@@ -176,8 +198,6 @@ public class Registration {
 							+ "\n Yun \n  PVpharm Technology Team"
 					);
 */
-					ff.mWrite(email);
-					ff.fWrite(email);
 					Argon2 argon = new Argon2();
 					char[] password = pass.toCharArray();
 
@@ -202,7 +222,7 @@ public class Registration {
 				}				
 			}
 		});
-		btnSubmit.setBounds(309, 243, 117, 29);
+		btnSubmit.setBounds(309, 160, 117, 29);
 		frame.getContentPane().add(btnSubmit);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -212,7 +232,7 @@ public class Registration {
 				frame.dispose();
 			}
 		});
-		btnCancel.setBounds(19, 243, 117, 29);
+		btnCancel.setBounds(19, 160, 117, 29);
 		frame.getContentPane().add(btnCancel);
 	}
 }

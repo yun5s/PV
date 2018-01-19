@@ -30,6 +30,7 @@ import java.util.Properties;
 
 /**
  * Created by MaiwandMaidanwal on 24/07/2017.
+ * Revised and Updated by Yunpeng Xia on 12/12/2017
  */
 public class Model {
 
@@ -391,9 +392,6 @@ public class Model {
         }
     }
 
-
-
-
 /*
 getter methods below
  */
@@ -644,13 +642,6 @@ getter methods below
             reader.close();
         }
     }
-
-        /*-------------------------------------------------------- user data ------------------------------------------------------------------------------*/
-
-
-
-
-
 
 
 }

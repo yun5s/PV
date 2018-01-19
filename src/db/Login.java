@@ -31,6 +31,7 @@ public class Login {
 			public void run() {
 				try {
 					Login window = new Login();
+                    window.frame.setLocationRelativeTo(null);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,10 +64,11 @@ public class Login {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(200, 200, 450, 300);
+
 	//	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JLabel logining_in = new JLabel("Please Login First");
+		JLabel logining_in = new JLabel("Please Login ");
 		logining_in.setBounds(173, 30, 94, 16);
 		frame.getContentPane().add(logining_in);
 
@@ -81,12 +83,12 @@ public class Login {
 		frame.getContentPane().add(txtPassword);
 
 		userField = new JTextField();
-		userField.setBounds(173, 85, 134, 28);
+		userField.setBounds(173, 85, 210, 28);
 		frame.getContentPane().add(userField);
 		userField.setColumns(10);
 
 		passwordField = new JPasswordField();
-		passwordField.setBounds(174, 125, 133, 28);
+		passwordField.setBounds(174, 125, 210, 28);
 		frame.getContentPane().add(passwordField);
 
 		JButton btnLogin = new JButton("Login");
@@ -106,29 +108,7 @@ public class Login {
 					JOptionPane.showMessageDialog(null,"Email not valid ");
 
 				}
-				//------------------------------------------------------------
-				//disable/ enable login button
-		/*		userField.getDocument().addDocumentListener(new DocumentListener() {
-					  public void changedUpdate(DocumentEvent e) {
-					    changed();
-					  }
-					  public void removeUpdate(DocumentEvent e) {
-					    changed();
-					  }
-					  public void insertUpdate(DocumentEvent e) {
-					    changed();
-					  }
 
-					  public void changed() {
-					     if (userField.getText().equals("")){
-					       btnLogin.setEnabled(false);
-					     }
-					     else {
-					       btnLogin.setEnabled(true);
-					    }
-
-					  }
-					});*/
 				//------------------------------------------------------------
 				if(connect.checkLogin(username,password)== true) {
 					JOptionPane.showMessageDialog(null, "You have logged in!");
@@ -145,7 +125,7 @@ public class Login {
 
 		btnLogin.setBounds(173, 165, 117, 29);
 		frame.getContentPane().add(btnLogin);
-		
+
 		JButton btnReset = new JButton("Clear");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -153,6 +133,7 @@ public class Login {
 				passwordField.setText(null);
 			}
 		});
+
 		btnReset.setBounds(269, 217, 117, 29);
 		frame.getContentPane().add(btnReset);
 		
