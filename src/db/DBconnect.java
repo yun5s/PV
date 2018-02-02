@@ -79,7 +79,7 @@ public class DBconnect {
             String query = "select Activation from Membership where email =?";
             pStmt =  myConn.prepareStatement(query);
             pStmt.setString(1,email);
-            pStmt.execute();
+            myRs = pStmt.executeQuery();
             while (myRs.next()) {
                 return myRs.getInt("Activation");
             }
@@ -95,7 +95,7 @@ public class DBconnect {
             String query = "select ActKey from Membership where email =?";
             pStmt =  myConn.prepareStatement(query);
             pStmt.setString(1,email);
-            pStmt.execute();
+            myRs = pStmt.executeQuery();
             while (myRs.next()) {
                 return myRs.getString("ActKey");
             }
@@ -111,7 +111,7 @@ public class DBconnect {
             String query = "select Activation from Membership where ActKey =?";
             pStmt =  myConn.prepareStatement(query);
             pStmt.setString(1,key);
-            pStmt.execute();
+            myRs = pStmt.executeQuery();
             while (myRs.next()) {
                 return myRs.getInt("Activation");
             }
@@ -127,7 +127,7 @@ public class DBconnect {
             String query = "select Salt from Membership where email =?";
             pStmt =  myConn.prepareStatement(query);
             pStmt.setString(1,email);
-            pStmt.execute();
+            myRs = pStmt.executeQuery();
             while (myRs.next()) {
                 return myRs.getString("Salt");
             }
@@ -142,7 +142,7 @@ public class DBconnect {
             String query ="select FirstName,LastName,Email,ActDate,ActKey from Membership where Email=?";
             pStmt =  myConn.prepareStatement(query);
             pStmt.setString(1,email);
-            pStmt.execute();
+            myRs = pStmt.executeQuery();
             while (myRs.next()) {
                 String value =
                         myRs.getString("FirstName")+
@@ -163,7 +163,7 @@ public class DBconnect {
             String query = "select ID from Membership where email =?";
             pStmt =  myConn.prepareStatement(query);
             pStmt.setString(1,email);
-            pStmt.execute();
+            myRs = pStmt.executeQuery();
             while (myRs.next()) {
                 return myRs.getString("ID");
             }
@@ -178,7 +178,7 @@ public class DBconnect {
             String query = "select ID from Membership where email =?";
             pStmt =  myConn.prepareStatement(query);
             pStmt.setString(1,email);
-            pStmt.execute();
+            myRs = pStmt.executeQuery();
             while (myRs.next()) {
                 return myRs.getString("ID");
             }
@@ -193,7 +193,7 @@ public class DBconnect {
             String query = "select ConvLimit from Membership where email =? ";
             pStmt =  myConn.prepareStatement(query);
             pStmt.setString(1,email);
-            pStmt.execute();
+            myRs = pStmt.executeQuery();
             while (myRs.next()) {
                 return myRs.getInt("ConvLimit");
             }
@@ -207,7 +207,7 @@ public class DBconnect {
             String query = "select CurrenCount from Membership where email =?";
             pStmt =  myConn.prepareStatement(query);
             pStmt.setString(1,email);
-            pStmt.execute();
+            myRs = pStmt.executeQuery();
             while (myRs.next()) {
                 return myRs.getInt("CurrenCount");
             }
@@ -254,6 +254,7 @@ public class DBconnect {
         }
     }
 
+    // email checking
     //----------------------------------<UPDATES>------------------------------------------------------------->
 
 
@@ -478,7 +479,8 @@ public class DBconnect {
                 pStmt =  myConn.prepareStatement(query);
                 pStmt.setString(1,email);
                 pStmt.setString(2,pass);
-                pStmt.executeUpdate();                if (myRs.next()) {
+                pStmt.executeUpdate();
+                if (myRs.next()) {
                     return true;
                 } else {
                     System.out.println("Email or password is not valid");
@@ -526,10 +528,13 @@ public class DBconnect {
 	public void updateData(String email, String act){
 		try {
 			String query = "update Membership "
-						+ " set ActKey = '" + act + "'"
-						+ " where Email = '" + email + "'";
-			myStmt.executeUpdate(query);
-			System.out.println("Activation Key Updated");
+						+ " set ActKey = ?"
+						+ " where Email = ?";
+            pStmt =  myConn.prepareStatement(query);
+            pStmt.setString(1,act);
+            pStmt.setString(2,email);
+            pStmt.executeUpdate();
+            System.out.println("Activation Key Updated");
 		}catch(Exception ex) {
 			System.out.println(ex);
 		}
@@ -538,10 +543,13 @@ public class DBconnect {
 	public void updateAct(String email, String act){
 		try {
 			String query = "update Membership "
-					+ " set ActKey = '" + act + "'"
-					+ " where Email = '" + email + "'";
-			myStmt.executeUpdate(query);
-			System.out.println("update compelete");
+					+ " set ActKey =?"
+					+ " where Email =?";
+            pStmt =  myConn.prepareStatement(query);
+            pStmt.setString(1,act);
+            pStmt.setString(2,email);
+            pStmt.executeUpdate();
+            System.out.println("update compelete");
 		}catch(Exception ex) {
 			System.out.println(ex);
 		}
@@ -550,10 +558,13 @@ public class DBconnect {
 	public void updatePass(String email,String pass){
 		try {
 			String query = "update Membership "
-					+ " set PassHash = '" + pass + "'"
-					+ " where Email = '" + email + "'";
-			myStmt.executeUpdate(query);
-			System.out.println("update compelete");
+					+ " set PassHash = ?"
+					+ " where Email = ?";
+            pStmt =  myConn.prepareStatement(query);
+            pStmt.setString(1,pass);
+            pStmt.setString(2,email);
+            pStmt.executeUpdate();
+            System.out.println("update compelete");
 		}catch(Exception ex) {
 			System.out.println(ex);
 		}
