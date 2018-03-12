@@ -1,37 +1,46 @@
 package Test;
 
+import model.Model;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.File;
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
 public class ModelTest {
 
+    private Model model;
     @Before
     public void setUp() throws Exception {
         //array of files
         //location
         //user
         //database connection
+
     }
 
     @After
     public void tearDown() throws Exception {
-    }
-
-    @Test
-    public void pickInputFile() {
-        //test for null value
-        //test true
-        //test for invalid value
 
     }
 
     @Test
-    public void pickFolder() {
+    public void pickInputFile() throws Exception {
+
+        model.pickInputFile();
+
+    }
+
+    @Test
+    public void pickFolder() throws Exception {
+        model.pickFolder();
         //test for null value
         //test true
         //test for invalid value
@@ -39,6 +48,8 @@ public class ModelTest {
 
     @Test
     public void getfileExists() {
+
+        model.getfileExists();
         //test for true
         //test for null
         //test for invalid
@@ -46,6 +57,7 @@ public class ModelTest {
 
     @Test
     public void getNumberOfInputFiles() {
+        model.getfileExists();
         //test for true
         //test for null
         //test for invalid
@@ -53,6 +65,8 @@ public class ModelTest {
 
     @Test
     public void getFileToSave() {
+
+        model.getFileToSave();
         //test for true
         //test for null
         //test for invalid
@@ -60,6 +74,10 @@ public class ModelTest {
 
     @Test
     public void getOutputFiles() {
+
+
+        model.getOutputFiles();
+
         //test for true
         //test for null
         //test for invalid
@@ -67,7 +85,9 @@ public class ModelTest {
     }
 
     @Test
-    public void writeCount() {
+    public void writeCount() throws IOException {
+
+        model.writeCount(1);
         //test for true
         //test for null
         //test for invalid
@@ -79,6 +99,7 @@ public class ModelTest {
 
     @Test
     public void getCount() {
+        model.getCount();
         //test for true
         //test for null
         //test for invalid
@@ -86,8 +107,9 @@ public class ModelTest {
         //test for possible inserts
     }
 
-    @Test
+    @Ignore
     public void writeToConversionsFile() {
+
         //test for true
         //test for null
         //test for invalid
@@ -95,27 +117,27 @@ public class ModelTest {
         //test for possible inserts
     }
 
-    @Test
+    @Ignore
     public void reset2() {
         //test for rest
         //test not callable if different ID
         //test to get the
     }
 
-    @Test
+    @Ignore
     public void getUsername() {
         //test not null
         //test get file
     }
 
-    @Test
+    @Ignore
     public void setUsername() {
-
 
     }
 
     @Test
     public void createFolder() {
+        model.createFolder("666");
         //test creating location
         //location unknown to others
     }
@@ -137,10 +159,11 @@ public class ModelTest {
     @Test
     public void getUser() {
         //getting user from the txt file
+        model.getUser();
 
     }
 
-    @Test
+    @Ignore
     public void resetCount() {
         //reset count from
     }
@@ -152,36 +175,42 @@ public class ModelTest {
         //check for exception
 
         //get value ? string
-
+        model.getChosenInputFile();
 
     }
 
     @Test
     public void getInputFiles() {
         //get the inputed files
+        model.getInputFiles();
     }
 
     @Test
     public void getfolderFilePaths() {
+        model.getfolderFilePaths();
 
     }
 
 
     @Test
-    public void transformerDownICSR() {
+    public void transformerDownICSR() throws ParserConfigurationException, TransformerException, SAXException, IOException {
+        model.transformerDownICSR();
         //test the file is not
     }
 
     @Test
-    public void transformerDownAck() {
+    public void transformerDownAck() throws ParserConfigurationException, TransformerException, SAXException, IOException {
+        model.transformerDownAck();
     }
 
     @Test
-    public void transformerUpICSR() {
+    public void transformerUpICSR() throws ParserConfigurationException, TransformerException, SAXException, IOException {
+        model.transformerUpICSR();
     }
 
     @Test
-    public void transformerUpAck() {
+    public void transformerUpAck() throws ParserConfigurationException, TransformerException, SAXException, IOException {
+        model.transformerUpAck();
     }
 
     @Test
@@ -189,6 +218,7 @@ public class ModelTest {
     }
 
     @Test
-    public void deletingWrongConversions() {
+    public void deletingWrongConversions() throws IOException {
+        model.deletingWrongConversions();
     }
 }
