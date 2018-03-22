@@ -11,14 +11,65 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
 public class ModelTest {
 
     private Model model;
+    private ArrayList<String> folderFilePaths;
+    private ArrayList<File> inputFiles;
+    private ArrayList<File> convertedFiles;
+    private Iterator<String> pathsIterator;
+    private ArrayList<File> outputFiles;
+
+    private File filetosave;
+
+
+    private ArrayList<File> inputFilesAckR2, inputFilesAckR3, inputFilesICSRR2,inputFilesICSRR3;
+
+
     @Before
     public void setUp() throws Exception {
+        convertedFiles= new ArrayList<File>();
+        inputFiles = new ArrayList<File>();
+
+
+        inputFilesAckR2 = new ArrayList<File>();
+        inputFilesAckR3 = new ArrayList<File>();
+        inputFilesICSRR2 = new ArrayList<File>();
+        inputFilesICSRR3 = new ArrayList<File>();
+
+        folderFilePaths = new ArrayList<String>();
+        outputFiles = new ArrayList<File>();
+        String selecteddestination = "Test/sampleFiles";
+
+        File ackR2 = new File("Test/sampleFiles/ack2-01.xml");
+        File ackR21 = new File ("Test/sampleFiles/ack2-02.xml");
+        File ackR3 = new File ("Test/sampleFiles/ack3-01.xml");
+        File ackR31 = new File ("Test/sampleFiles/ack3-02.xml");
+        File ICSRR2 = new File ("Test/sampleFiles/utr2-01.xml");
+        File ICSRR21 = new File ("Test/sampleFiles/utr2-02.xml");
+        File ICSRR3 = new File ("Test/sampleFiles/utr3-03.xml");
+        File ICSRR31 = new File ("Test/sampleFiles/utr3-04.xml");
+
+
+       inputFilesAckR2.add(ackR2);
+       inputFilesAckR2.add(ackR21);
+
+       inputFilesAckR3.add(ackR3);
+       inputFilesAckR3.add(ackR31);
+
+        inputFilesICSRR2.add(ICSRR2);
+        inputFilesICSRR2.add(ICSRR21);
+
+        inputFilesICSRR3.add(ICSRR3);
+        inputFilesICSRR3.add(ICSRR31);
+
+        //set which files to test
+        inputFiles= inputFilesICSRR3;
         //array of files
         //location
         //user
@@ -168,18 +219,19 @@ public class ModelTest {
         //reset count from
     }
 
-    @Test
-    public void getChosenInputFile() {
+
+    public String getChosenInputFile() {
+
+        return String.valueOf(inputFilesAckR2);
         //get the selected file
         //test for not null
         //check for exception
 
         //get value ? string
-        model.getChosenInputFile();
 
     }
 
-    @Test
+    @Ignore
     public void getInputFiles() {
         //get the inputed files
         model.getInputFiles();
@@ -194,7 +246,12 @@ public class ModelTest {
 
     @Test
     public void transformerDownICSR() throws ParserConfigurationException, TransformerException, SAXException, IOException {
-        model.transformerDownICSR();
+        //TOdo
+       // model.transformerDownICSR(ArrayList<Files> inputFiles,ArrayList<E> pathsIterator);
+
+        getChosenInputFile();
+        getFileToSave();
+
         //test the file is not
     }
 

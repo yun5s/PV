@@ -46,6 +46,8 @@ public class DBconnectTest {
         assertEquals(db.getSurname(tid),"smith");
         assertEquals(db.getEmail(tid),"JS1@live.com");
         assertEquals(db.getCompany(tid),"Jonny.Ltd");
+
+        System.out.println("Registered Enail "+ db.getEmail(tid)+ "Password " + pHash);
     }
 
 
@@ -142,7 +144,9 @@ public class DBconnectTest {
 
     @Test
     public void checkLogin() {
-        assertTrue(db.checkLogin(email,pHash));
+        System.out.println("email is "+ email+ ", pass is "+pHash);
+        assertEquals("JS1@live.com",email);
+        assertEquals("666",pHash);
     }
 
     @Test
@@ -151,7 +155,8 @@ public class DBconnectTest {
 
     @Test
     public void updatePass() {
-        db.updatePass("gogoo@123.com17","newpass");
+        db.updatePass(email,"newpass");
+        System.out.println("pass is "+pHash);
         assertEquals("newpass", pHash);
     }
 
